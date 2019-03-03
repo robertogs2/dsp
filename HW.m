@@ -1,7 +1,7 @@
 1;
 
 x = [2,1,1,3];
-xi = -3;
+xi = -1;
 
 [xp,xpi]=par_component(x, xi);
 
@@ -13,15 +13,16 @@ function [xp, xpi] = par_component(x, xi)
     rf = -xi;
     xr = fliplr(x);
     
-    delta = xf-rf %xf+xi
+    delta = xf-rf; %xf+xi
     
-    if delta >= 0
-        xfilled = horzcat(zeros(1,delta),x);%Most common case: left zeros 
-        xrfilled = horzcat(xr,zeros(1,delta));%Most common case: right zeros
-    else
-        xfilled = horzcat(x, zeros(1,abs(delta)));%Less common case, anticausal signal
-        xrfilled = horzcat(zeros(1,abs(delta)), xr);%
-    end
-    xp = (xfilled+xrfilled)/2
+    %If delta>=0, signal is "righter" than its inversion, else it not.
+    %then we need to add zeros to the left, and right to the inverted, else
+    %we need to do it the other way around
+    %Zeros with negative values don't fill anything, we can use 'em as switches
+    
+    xfilled = horzcat(zeros(1,delta),x,zeros(1,-delta));%Most common case: left zeros 
+    xrfilled = horzcat(zeros(1,-delta),xr,zeros(1,delta));%Most common case: right zeros
+
+    xp = (xfilled+xrfilled)/2;
     xpi = min(xi, ri);
 end
