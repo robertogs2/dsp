@@ -95,16 +95,16 @@ function [x_par, x_impar, n_comp] = componentes(x, x_pos)
 
         %chequea si el indice n, existe en el vector original de posiciones
         if ismember(n,x_pos) 
-            id1 = x_pos==n;%encuentra el indice donde se encontraba n en el vector de posicion original
-            x1 = x(id1); %si es así, toma el valor mapeado a ese índice
+            id1 = x_pos==n;%encuentra el indice de n en el vector original de posiciones
+            x1 = x(id1); %si es asi, toma el valor mapeado a ese indice
         else 
             x1 = 0; %sino no tome en cuenta para ese valor
         end
 
         %chequea si el indice n, existe en el vector negado de posiciones
         if ismember(n,x_pos_inv) 
-            id2 = x_pos_inv==n;%encuentra el indice donde se encontraba n en el vector de posicion negado
-            x2 = x(id2); %si es así, toma el valor mapeado a ese índice
+            id2 = x_pos_inv==n;%encuentra el indice de n en el vector negado de posiciones
+            x2 = x(id2); %si es asi, toma el valor mapeado a ese indice
         else 
             x2 = 0; %sino no tome en cuenta para ese valor
         end
