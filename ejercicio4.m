@@ -17,12 +17,10 @@ xi = -5;
 plotear(x,n+xi);
 
 %%%Ejemplo 2
-xi = 0;
 plotear(n,n);
 
 %%%Ejemplo 2
 x = [6 7 2 9 10 -6 -3 8];
-
 plotear(x,x);
 
 %Grafica la señal de entrada, su componente par e impar y la suma de ambas
@@ -93,19 +91,19 @@ function [x_par, x_impar, n_comp] = componentes(x, x_pos)
     x_par = zeros(1,k);%rellena la memoria para el vector par
     x_impar = zeros(1,k);%rellena la memoria para el vector impar
     for i=1:k%para cada posicion del vector con indices de las componentes
-        n = n_comp(i)%busca la posicion
+        n = n_comp(i);%busca la posicion
 
         %chequea si el indice n, existe en el vector original de posiciones
         if ismember(n,x_pos) 
-            id1 = find(x_pos==n);%indice donde se encontraba en vector de posicion original
+            id1 = find(x_pos==n);%encuentra el indice donde se encontraba n en el vector de posicion original
             x1 = x(id1); %si es así, toma el valor mapeado a ese índice
         else 
-            x1 = 0; 
+            x1 = 0; %sino no tome en cuenta para ese valor
         end;
 
         %chequea si el indice n, existe en el vector negado de posiciones
         if ismember(n,x_pos_inv) 
-            id2 = find(x_pos_inv==n);%indice donde se encontraba en vector de posicion negado
+            id2 = find(x_pos_inv==n);%encuentra el indice donde se encontraba n en el vector de posicion negado
             x2 = x(id2); %si es así, toma el valor mapeado a ese índice
         else 
             x2 = 0; %sino no tome en cuenta para ese valor
