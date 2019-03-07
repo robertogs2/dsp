@@ -1,11 +1,13 @@
 1;
 %%%Ejemplo 1
-n=0:100
+n=0:100;
 x=exp(sin(5*n)).*cos(5*pi/3*n)
 xi = -5;
 plotear(x,xi);
 
 %%%Ejemplo 2
+xi = 0;
+plotear(n,xi);
 
 function graficar = plotear(x, xi)
     n = xi:xi+length(x)-1;%n para vector entrada
