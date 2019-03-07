@@ -1,3 +1,14 @@
+% Instituto Tecnológico de Costa Rica 
+% Escuela de Ingeniería Electrónica
+% Procesamiento Digital de Señales
+% Tarea 1
+% Ejercicio 5
+
+% Integrantes: 
+%   Alejandro Calvo
+%   Allan Gutiérrez
+%   Roberto Gutiérrez
+
 1;
 
 
