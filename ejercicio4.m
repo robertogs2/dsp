@@ -10,7 +10,7 @@ xi = 0;
 plotear(n,n);
 
 %%%Ejemplo 2
-x = [6 8 2 9 10 -6 -3 8];
+x = [6 7 2 9 10 -6 -3 8];
 
 plotear(x,x);
 
