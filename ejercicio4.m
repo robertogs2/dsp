@@ -1,18 +1,21 @@
 1;
 %%%Ejemplo 1
 n=0:100;
-x=exp(sin(5*n)).*cos(5*pi/3*n)
+x=exp(sin(5*n)).*cos(5*pi/3*n);
 xi = -5;
-plotear(x,xi);
+plotear(x,n+xi);
 
 %%%Ejemplo 2
 xi = 0;
-plotear(n,xi);
+plotear(n,n);
 
-function graficar = plotear(x, xi)
-    n = xi:xi+length(x)-1;%n para vector entrada
-    [x_par,x_par_inicio,x_impar]=componentes(x, xi);%calcula componente par e impar
-    n_par = x_par_inicio:x_par_inicio+length(x_par)-1; %n para vector par e impar
+%%%Ejemplo 2
+x = [6 8 2 9 10 -6 -3 8];
+
+plotear(x,x);
+
+function graficar = plotear(x, x_pos)
+    [x_par,x_impar,x_comp_inicio,x_comp_fin,n_comp]=componentes(x, x_pos);%calcula componente par e impar
 
     %Calcula limites en eje vertical para el plot
     xlim = max(abs(x));
@@ -20,7 +23,7 @@ function graficar = plotear(x, xi)
     xmin = -xlim-1;
 
     %Calcula limites para eje horizontal en el plot, de manera que se centren en 0 las graficas
-    nlim = max(abs(x_par_inicio), abs(x_par_inicio+length(x_par)));
+    nlim = max(abs(x_comp_inicio), abs(x_comp_fin));
     nmin = -nlim-1;
     nmax = nlim+1;
 
@@ -28,52 +31,62 @@ function graficar = plotear(x, xi)
     figure;
     %plot x(n)
     subplot(4,1,1);
-    stem(n,x,'r','fill');
+    stem(x_pos,x,'r','fill');
     legend('x(n)');
     axis([nmin nmax xmin xmax]);
     grid on;
 
     %plot componente par
     subplot(4,1,2)
-    stem(n_par,x_par,'g','fill');
+    stem(n_comp,x_par,'g','fill');
     legend('x_{p}(x)');
     axis([nmin nmax xmin xmax]);
     grid on;
 
     %plot componente impar
     subplot(4,1,3)
-    stem(n_par,x_impar,'b','fill');
+    stem(n_comp,x_impar,'b','fill');
     legend('x_{i}(x)');
     axis([nmin nmax xmin xmax]);
     grid on;
 
     %plot xi+xp
     subplot(4,1,4);
-    stem(n_par,x_par+x_impar,'k','fill');
+    stem(n_comp,x_par+x_impar,'k','fill');
     legend('x_{i}(n)+x_{p}(n)');
     axis([nmin nmax xmin xmax]);
     grid on;
 end
 
-%Calcula componentes par e impar de un vector en x_par y x_impar, además 
-%de que posición inicial tiene el primer valor en x_par_inicio
 
-function [x_par, x_par_inicio, x_impar] = componentes(x, xi)
-    xf = xi + length(x) - 1; %Indice final del vector entrada
-    ri = -xf; %Indice inicial del vector invertido en n, es el final negado
-    rf = -xi; %Indice final del vector invertido en n, es el inicio negado
-    xr = fliplr(x); %Vector de entrada invertido
-    
-    dist = xf-rf; %Determina la distancia que hay entre las señales para alinearlas
-    
-    %Si dist>0, hay que ponerle ceros al vector entrada en la izquierda 
-    %y al invertido a la derecha para alinear, y viceversa. 0 los deja igual
-    %zeros negativos generan vector nulo
-    
-    xfilled = horzcat(zeros(1,dist),x,zeros(1,-dist));%Most common case: left zeros 
-    xrfilled = horzcat(zeros(1,-dist),xr,zeros(1,dist));%Most common case: right zeros
+function [x_par, x_impar, x_comp_inicio, x_comp_fin, ns] = componentes(x, x_pos)
+    x_pos_inv = -x_pos;%indices negativos
+    ns = union(x_pos, x_pos_inv);%une indices negativos y positivos sin duplicarlos
+    k = length(ns);%tamaño de la cantidad de indices para las funciones par e impar
+    x_par = zeros(1,k);%rellena la memoria para el vector par
+    x_impar = zeros(1,k);%rellena la memoria para el vector impar
+    for i=1:k%para cada posicion del vector par/impar
+        n = ns(i)%busca la posicion
 
-    x_par = (xfilled+xrfilled)/2;
-    x_impar = (xfilled-xrfilled)/2;
-    x_par_inicio = min(xi, ri);
+        %chequea si el indice n, existe en el vector original de posiciones
+        if ismember(n,x_pos) 
+            id1 = find(x_pos==n);%indice donde se encontraba en vector de posicion original
+            x1 = x(id1); %si es así, toma el valor mapeado a ese índice
+        else 
+            x1 = 0; 
+        end;
+
+        %chequea si el indice n, existe en el vector negado de posiciones
+        if ismember(n,x_pos_inv) 
+            id2 = find(x_pos_inv==n);%indice donde se encontraba en vector de posicion negado
+            x2 = x(id2); %si es así, toma el valor mapeado a ese índice
+        else 
+            x2 = 0; %sino no tome en cuenta para ese valor
+        end;
+
+        x_par(i)=(x1+x2)/2;%suma par
+        x_impar(i)=(x1-x2)/2;%suma impar
+    end
+    x_comp_inicio=min(ns);%indice inicial es el indice mas bajo de toda la señal
+    x_comp_fin=max(ns);%indice final es el indice mas alto de toda la señal
 end
