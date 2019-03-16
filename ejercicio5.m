@@ -21,7 +21,7 @@ ti = 0; %Tiempo inicial
 tf = 10e-03; %Tiempo final
 
 [ts, ys_a, ns, ys_d] = muestreo(A,F0,zeta,ti,tf,Ts);
-graph(ts, ys_a, ns, ys_d, Ts);
+graficar(ts, ys_a, ns, ys_d, Ts);
 
 %Obtiene los vectores tanto de variable dependiente e independiente para una
 %senal senoidal analogica y su correspondiente muestrada a una frecuencia dada
@@ -40,8 +40,8 @@ graph(ts, ys_a, ns, ys_d, Ts);
 
 function [ts, ys_a, ns, ys_d] = muestreo(A,F0,zeta,ti,tf,Ts)
     %Senal analogica
-    samples_inside = 100; %puntos entre muestreo, ejemplo hay 100 puntos entres Ts y 2Ts
-    ts = ti:Ts/samples_inside:tf; %Vector de ts, Ts/samples_inside retorna el tamaño de paso
+    analog_samples = 100; %puntos entre muestreo, ejemplo hay 1000 puntos entres ti y tf
+    ts = ti:Ts/analog_samples:tf; %Vector de ts, Ts/analog_samples retorna el tamaño de paso, con respecto al per�odo de muestreo discreto
     ys_a = A*sin(2*pi*F0*ts+zeta);%Calcula los puntos para la señal analógica
     
     f = F0*Ts;%Determina f=F0/Fs para normalizar la frecuencia
@@ -62,11 +62,11 @@ end
 %ys_d: Vector de valores verticales para la senal muestrada
 %Ts: periodo de muestreo
 
-function a = graph(ts, ys_a, ns, ys_d, Ts)
+function a = graficar(ts, ys_a, ns, ys_d, Ts)
     figure (1);
-    p1 = plot(ts,ys_a);
+    p1 = plot(ts,ys_a);%Plots analogic wave
     hold on;
-    p2 = stem(Ts*ns,ys_d,'r','fill');%Multiply by Ts, cause we can't graph in time with that
+    p2 = stem(Ts*ns,ys_d,'r','fill');%Plots the dicrete signal, we can't graph discrete values in time, we can have each n*Ts
     hold off;
     grid on;
     legend("Continuo", "Discreto");
