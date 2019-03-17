@@ -1,23 +1,43 @@
+% Instituto Tecnol√≥gico de Costa Rica 
+% Escuela de Ingenier√≠a Electr√≥nica
+% Procesamiento Digital de Se√±ales
+% Tarea 1
+% Ejercicio 3
+
+% Integrantes: 
+%   Alejandro Calvo
+%   Allan Guti√©rrez
+%   Roberto Guti√©rrez
+
 1;
 
+%Vector de 0 a 100 discreto
 n = 0:100;
 
+%FunciÛn x1
 xn1 = cos(pi*n/2);
+%Tiene periodo 4
 np1 = 0:4:100;
 xnp1 = cos(pi*np1/2);
 
+%FunciÛn x2
 xn2 = sin(pi*n/8);
+%Tiene periodo 16
 np2 = 0:16:100;
 xnp2 = sin(pi*np2/8);
 
+%FunciÛn x3
 xn3 = cos(pi*n/4 + pi/3);
+%Tiene periodo 8
 np3 = 0:8:100;
 xnp3 = cos(pi*np3/4 + pi/3);
 
+%FunciÛn x4 no es periÛdica
 xn4 = cos(2*n/pi);
 
-yn1 = cos(pi*np2/2) + sin(pi*np2/8);
-yn2 = cos(pi*np2/2) + sin(pi*np2/8) - cos(pi*np2/4 + pi/3);
+%Funciones para resaltar los periodos
+yn1 = cos(pi*np2/2) + sin(pi*np2/8); %Periodo 16
+yn2 = cos(pi*np2/2) + sin(pi*np2/8) - cos(pi*np2/4 + pi/3); %Periodo 16
 
 figure
 subplot(4,1,1);

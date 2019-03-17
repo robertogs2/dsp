@@ -1,27 +1,43 @@
+% Instituto TecnolÃ³gico de Costa Rica 
+% Escuela de IngenierÃ­a ElectrÃ³nica
+% Procesamiento Digital de SeÃ±ales
+% Tarea 1
+% Ejercicio 2
+
+% Integrantes: 
+%   Alejandro Calvo
+%   Allan GutiÃ©rrez
+%   Roberto GutiÃ©rrez
+
 1;
 
-xt = @(t) exp(cos(40*pi*t/9));
-xtp = 0:0.45:2;
-ytp = feval(xt,xtp);
+%Función continua
+t = @(t) exp(cos(40*pi*t/9));
 
-xn = @(n) exp(cos(40*pi*n/9));
+%Función para poner los puntos en los que es periódica
+tp = 0:0.45:2;
+xtp = exp(cos(40*pi*tp/9));
+
+%Función discreta
 n = 0:36;
-yn = feval(xn,n);
-xnp = 0:9:36;
-ynp = feval(xn,xnp);
+xn = exp(cos(40*pi*n/9));
 
+%Función para poner los puntos en los que es periódica
+np = 0:9:36;
+xnp = exp(cos(40*pi*np/9));
 
+%Plot te las funciones
 figure
 subplot(2,1,1);
-fplot(xt,[0,2],'b');
+fplot(t,[0,2],'b','linewidth',2);
 hold on;
-scatter(xtp,ytp,'*');
+scatter(tp,xtp,'*','linewidth',2);
 hold off;
 axis auto;
 
 subplot(2,1,2);
-stem(n,yn,'r');
+stem(n,xn,'r','linewidth',2);
 hold on;
-scatter(xnp,ynp,'x','b');
+scatter(np,xnp,'x','b','linewidth',2);
 hold off;
 axis auto;
