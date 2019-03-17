@@ -29,15 +29,15 @@ xnp = exp(cos(40*pi*np/9));
 %Plot te las funciones
 figure
 subplot(2,1,1);
-fplot(t,[0,2],'b');
+fplot(t,[0,2],'b','linewidth',2);
 hold on;
-scatter(tp,xtp,'*');
+scatter(tp,xtp,'*','linewidth',2);
 hold off;
 axis auto;
 
 subplot(2,1,2);
-stem(n,xn,'r');
+stem(n,xn,'r','linewidth',2);
 hold on;
-scatter(np,xnp,'x','b');
+scatter(np,xnp,'x','b','linewidth',2);
 hold off;
 axis auto;
