@@ -10,6 +10,8 @@
 %   Allan Gutiérrez
 %   Roberto Gutiérrez
 
+%Correr funcion como ejercicio6(frecuencia)
+
 %Hace sonar las ondas de una frecuencia fundamental de la forma f*k < fmax,
 %donde fmax es la frecuencia máxima de sonido que escucha el humano, k es
 %un entero, y f es la frecuencia fundamental.
