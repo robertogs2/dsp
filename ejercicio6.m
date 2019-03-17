@@ -11,24 +11,26 @@
 
 
 function armonicos = ejercicio6 (frecuencia)
-
+    % Inicialización del código con comandos de gráficas y tipo de formato
+    % en números
     close all
     grid on
     hold on 
     format long
     
-    Fs = 44100;
-    duracion = 2;
-    Ts = 1/Fs;
-    min = 20;
-    max = 22000;
-    tiempo = 0:Ts:duracion;
+    % Inicialización de constantes 
+    Fs = 44100;      %Frecuencia de muestreo
+    duracion = 5;    %Duración de los pitidos
+    Ts = 1/Fs;       %Periodo de muestreo
+    min = 20;        %Minimo del espectro audible
+    max = 22000;     %Máximo del espectro audible
+    tiempo = 0:Ts:duracion;     %Inicialicación del vector tiempo
     
+    % iniciar variables para determinar cantidad de pitidos
     cantidad = max/frecuencia;
-    
     redondeo = round(cantidad);
    
-    
+    % Establecimiento de número de pitidos a un entero
     if redondeo > cantidad
         cantidad = redondeo-1;
     else
@@ -36,33 +38,28 @@ function armonicos = ejercicio6 (frecuencia)
         
     end
     
-    
-    can = cantidad;
-    indice = 1;
-    
-    
-    T = 1/frecuencia;
-    senal = [];
-    senalTotal = [];
-    ejeGraficaTotal = 0:Ts/10:((duracion*can)/frecuencia);
+    % Inicio de constantes del while para graficar y generar la señal
+    % acumulada
+    indice = 1;  %Contador
+      
+    T = 1/frecuencia;  %Periodo de la frecuencia fundamental
+    senal = [];        %señal acumulada
+    formatX = 'Frecuencia: %d'; %nombre del eje x parametrizado    
     
     while cantidad+1>indice
-        senal = [senal sin(2*pi*frecuencia*indice.*tiempo)];
-        ejeGrafica = 0:Ts/10:1/(frecuencia);
-        senalGrafica = sin(2*pi*frecuencia*indice.*ejeGrafica);
-        subplot(can,1,indice)
-        plot(ejeGrafica,senalGrafica)
-        axis ([0 T -1.5 1.5])
-        %senalTotal = [senalTotal sin(2*pi*frecuencia*indice.*ejeGraficaTotal)];
-        senalTotal = [senalTotal senalGrafica];
+        senal = [senal sin(2*pi*frecuencia*indice.*tiempo)];    %Incluye los datos nuevos en el vector señal
+        argumentoEjeX = indice*frecuencia;                      %Valor de frecuencia a colocar en el eje X
+        ejeGrafica = 0:Ts/10:1/(frecuencia);                    %Inicialización del eje a graficar
+        senalGrafica = sin(2*pi*frecuencia*indice.*ejeGrafica); %Señal a graficar
+        subplot(cantidad,1,indice)                              %Graficación de múltiples señales
+        str_x = sprintf(formatX,argumentoEjeX);                 %Creación del string para colocar en el eje X
+        plot(ejeGrafica,senalGrafica,'color',rand(1,3))         %Graficación de la señal
+        axis ([0 T -1.5 1.5])           %Márgenes del eje
+        xlabel (str_x)                  % Nombrar eje X
         
-        %cantidad = cantidad - 1;
-        indice = indice + 1;
+        indice = indice + 1;            %Incrementa contador
     end
-    sound(senal,Fs);
-    pause(duracion*can);
-    
-    
-    %plot(ejeGraficaTotal,senalTotal)
+    sound(senal,Fs);                    %Inicia el sonido de la señal acumulada
+    pause(duracion*cantidad);           %Establece el tiempo de sonido de la señal
     
 end
