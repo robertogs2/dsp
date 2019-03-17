@@ -2,7 +2,7 @@
 % Escuela de Ingeniería Electrónica
 % Procesamiento Digital de Señales
 % Tarea 1
-% Ejercicio 5
+% Ejercicio 3
 
 % Integrantes: 
 %   Alejandro Calvo
