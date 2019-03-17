@@ -5,9 +5,9 @@
 % Ejercicio 2
 % Marzo de 2019
 % Integrantes: 
-%   Alejandro Calvo
-%   Allan Gutiérrez
-%   Roberto Gutiérrez
+%   Alejandro Calvo 2016138114
+%   Allan Gutiérrez 2016253395
+%   Roberto Gutiérrez 2016134351
 
 1;
 
