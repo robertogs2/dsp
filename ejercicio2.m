@@ -3,7 +3,7 @@
 % Procesamiento Digital de Señales
 % Tarea 1
 % Ejercicio 2
-
+% Marzo de 2019
 % Integrantes: 
 %   Alejandro Calvo
 %   Allan Gutiérrez

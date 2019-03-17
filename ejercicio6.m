@@ -4,12 +4,17 @@
 % Procesamiento Digital de Señales
 % Tarea 1
 % Ejercicio 6
-
+% Marzo de 2019
 % Integrantes: 
 %   Alejandro Calvo
 %   Allan Gutiérrez
 %   Roberto Gutiérrez
 
+%Hace sonar las ondas de una frecuencia fundamental de la forma f*k < fmax,
+%donde fmax es la frecuencia máxima de sonido que escucha el humano, k es
+%un entero, y f es la frecuencia fundamental.
+%Entradas:
+%frecuencia: frecuencia fundamental
 
 function armonicos = ejercicio6 (frecuencia)
     % Inicialización del código con comandos de gráficas y tipo de formato
