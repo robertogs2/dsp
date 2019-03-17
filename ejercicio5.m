@@ -9,8 +9,8 @@
 %   Allan Gutiérrez
 %   Roberto Gutiérrez
 
+%Ejemplo para ejercicio 5
 1;
-
 
 F0 = 500; %Frecuencia señal continua
 zeta = 1; %Fase señal continua y discreta
@@ -22,6 +22,11 @@ tf = 10e-03; %Tiempo final
 
 [ts, ys_a, ns, ys_d] = muestreo(A,F0,zeta,ti,tf,Ts);
 graficar(ts, ys_a, ns, ys_d, Ts);
+
+
+
+%FUNCION EJERCICIO 5%
+
 
 %Obtiene los vectores tanto de variable dependiente e independiente para una
 %senal senoidal analogica y su correspondiente muestrada a una frecuencia dada
