@@ -1,13 +1,13 @@
-% Instituto TecnolÃ³gico de Costa Rica 
-% Escuela de IngenierÃ­a ElectrÃ³nica
-% Procesamiento Digital de SeÃ±ales
+% Instituto Tecnológico de Costa Rica 
+% Escuela de Ingeniería Electrónica
+% Procesamiento Digital de Señales
 % Tarea 1
 % Ejercicio 2
 % Marzo de 2019
 % Integrantes: 
 %   Alejandro Calvo
-%   Allan GutiÃ©rrez
-%   Roberto GutiÃ©rrez
+%   Allan Gutiérrez
+%   Roberto Gutiérrez
 
 1;
 

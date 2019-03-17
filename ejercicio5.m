@@ -1,13 +1,13 @@
-% Instituto TecnolÃ³gico de Costa Rica 
-% Escuela de IngenierÃ­a ElectrÃ³nica
-% Procesamiento Digital de SeÃ±ales
+% Instituto Tecnológico de Costa Rica 
+% Escuela de Ingeniería Electrónica
+% Procesamiento Digital de Señales
 % Tarea 1
 % Ejercicio 5
 % Marzo de 2019
 % Integrantes: 
 %   Alejandro Calvo
-%   Allan GutiÃ©rrez
-%   Roberto GutiÃ©rrez
+%   Allan Gutiérrez
+%   Roberto Gutiérrez
 
 %Ejemplo para ejercicio 5
 1;
@@ -46,13 +46,13 @@ graficar(ts, ys_a, ns, ys_d, Ts);
 function [ts, ys_a, ns, ys_d] = muestreo(A,F0,zeta,ti,tf,Ts)
     %Senal analogica
     analog_samples = 100; %puntos entre muestreo, ejemplo hay 1000 puntos entres ti y tf
-    ts = ti:Ts/analog_samples:tf; %Vector de ts, Ts/analog_samples retorna el tamaÃ±o de paso, con respecto al período de muestreo discreto
+    ts = ti:Ts/analog_samples:tf; %Vector de ts, Ts/analog_samples retorna el tamaño de paso, con respecto al período de muestreo discreto
     ys_a = A*sin(2*pi*F0*ts+zeta);%Calcula los puntos para la seÃ±al analÃ³gica
     
     f = F0*Ts;%Determina f=F0/Fs para normalizar la frecuencia
-    ni = fix(ti/Ts); %Se intenta forzar ni*Ts=ti, para obtener el ni que se acerque mÃ¡s al tiempo inicial
-    nf = fix(tf/Ts); %Se intenta forzar nf*Ts=tf, para obtener el nf que se acerque mÃ¡s al tiempo final
-    %fix redondea al mÃ¡s cercano a 0, si es negativo es el ceil, si es positivo es el floor
+    ni = fix(ti/Ts); %Se intenta forzar ni*Ts=ti, para obtener el ni que se acerque más al tiempo inicial
+    nf = fix(tf/Ts); %Se intenta forzar nf*Ts=tf, para obtener el nf que se acerque más al tiempo final
+    %fix redondea al más cercano a 0, si es negativo es el ceil, si es positivo es el floor
 
     ns = ni:1:nf;%vector para todos los ns del muestreo
     ys_d = A*sin(2*pi*f*ns+zeta);%Evalua los puntos discretos en la funcion normalizada para valores discretos
