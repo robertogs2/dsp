@@ -28,8 +28,8 @@ function [n,y] = f(a, D, variance, limit)
     for i = n                                   %Para cada índice de posicion
         index_x = find(p == i);                 %Busca el índice en el vector de posiciones de x
         y(i+1)=vn(i+1);                         %Pone el ruido de Gauss
-        if(~isempty(index_x))                   %Si el indice encontrado existe
-            y(i+1)=y(i+1)+ax(index_x(1));       %Suma el valor de baker para ese índice
+        if(~isempty(index_x))                   %Si el indice 
+            y(i+1)=y(i+1)+ax(index_x(1));
         end
     end
 end

@@ -10,64 +10,44 @@
 %   Allan Gutiérrez
 %   Roberto Gutiérrez
 
+function [y,yn] = Correlacion(x,muestraX,h,muestraH,graf)
 
-
-function [correlacion,inicioCorr] = Correlacion(x,muestraX,h,muestraH)
-
-    %Inicio de la muestra x
-    for i=1:1:length(muestraX)
-       if muestraX(i)==0
-           inicioX=i;
-           break;
-       end
-    end
-        
-    % Rotacion de la funcion
-    
-    
-    aux = [];
-    sizeA = length(muestraX);
-    for i=0:1:sizeA-1
-        aux = [aux -muestraX(sizeA-i)]; 
-    end
-    
-    muestraX = aux;
-    
-    aux = [];
-    sizeA = length(x);
-    
-    for i=0:1:sizeA-1
-        aux = [aux x(sizeA-i)]; 
-    end
-    
-    
-    %****************
+    muestraHFlip = flip(-muestraH);
+    hFlip = flip(h);
     
     %Llamado a la funcion de convolucion
+    [y,yn] = Convolucion(x,muestraX,hFlip,muestraHFlip,graf);
     
-    [limX2 limX1 limY2 limY1] = Convolucion(aux,muestraX,h,muestraH);
+    %--------------------Graficacion-------------------------------
     
-    %****************
-    
-    %Cambio de nombre en la función resultante
-    subplot(3,1,3)
+    if (graf==1)
+       horizontalMax    =max(union(abs(muestraX),abs(muestraH)));
+       horizontalMax    =max(union(horizontalMax, abs(yn)));
+       verticalMax      =max(union(abs(x), abs(h)));
+       verticalMax      =max(union(verticalMax, abs(y)));
+       ejes = [-horizontalMax-1, horizontalMax+1, -verticalMax-1, verticalMax+1];
        
-       grid on
-       xlabel("Correlacion")
-    
-    %****************
-    
-    %Cambio en la gráfica de entrada
-    
-    
-    
-    xEntrada = -(inicioX-1):1:length(x)-inicioX;
-
-    subplot(3,1,1)
-       stem(xEntrada,x,'fill','-.b');
-       axis ([limX2 limX1 limY2 limY1])
+       subplot(3,1,1)
+       stem(muestraX,x,'fill','-.b');
+       legend('x(n)');
+       axis (ejes)
        grid on
        xlabel("Entrada")
-    
+
+       subplot(3,1,2)
+       stem(muestraH,h,'fill','-.r');
+       legend('y(n)');
+       axis (ejes)
+       grid on
+       xlabel("Sistema")
+
+       subplot(3,1,3)
+       stem(yn,y,'fill','-.g');
+       legend('r_{xy}(n)');
+       axis (ejes)
+       grid on
+       xlabel("Correlacion")
+       
+    end
 
 end

@@ -10,44 +10,50 @@
 %   Allan Gutiérrez
 %   Roberto Gutiérrez
 
-
-
-function [limX2,limX1,limY2,limY1] = Convolucion(x,muestraX,h,muestraH)
+function [y,yn] = Convolucion(x,muestraX,h,muestraH, graf)
     
     % Inicializacion de formatos
     close all
     format long
     %****************
     
+    %Variables para gráfica
+    xn = 0;
+    hn = 0;
+    xg = x;
+    hg = h;
+    if(graf == 1)
+        xn = muestraX;
+        hn = muestraH;
+    end
     
     %Busqueda del cero en la secuencia
     
-    for i=1:1:length(muestraX)
-       if muestraX(i)==0
-           muestraX=i;
-           break;
-       end
+    zero_x = find(muestraX == 0);
+    if(~isempty(zero_x)) %Si tiene cero 
+        muestraX = zero_x(1);
+    else
+        if (muestraX(1) > 0) %Agregar ceros a izquierda
+            x = [zeros(muestraX(1)) x];
+        else
+            x = [x zeros(-muestraX(end))];
+        end
+        muestraX = 1;
     end
     
-    for i=1:1:length(muestraH)
-       if muestraH(i)==0
-           muestraH=i;
-           break;
-       end
+    zero_h = find(muestraH == 0);
+    if(~isempty(zero_h)) 
+        muestraH = zero_h(1);
+     else
+        if (muestraH(1) > 0) %Agregar ceros a izquierda
+            h = [zeros(muestraH(1)) h];
+        else
+            h = [h zeros(-muestraH(end))];
+        end
+        muestraH = 1;
     end
-    
-    %****************
-    
-    % Definición de constante para graficar
-    xgraph = muestraX;
-    hgraph = muestraH;
-    
-    %****************
     
     % Inicializacion de tamaños
-    sizeA = 0;
-    sizeB = 0;
-   
     sizeA = length(x);  %toma tamaño del vector X de entrada
     sizeB = length(h);  %toma tamaño del vector H de entrada
    
@@ -59,7 +65,6 @@ function [limX2,limX1,limY2,limY1] = Convolucion(x,muestraX,h,muestraH)
         opB = h;
         inicioA = muestraX;
         inicioB = muestraH;
-        
     else 
         opA = h;
         opB = x;
@@ -74,18 +79,13 @@ function [limX2,limX1,limY2,limY1] = Convolucion(x,muestraX,h,muestraH)
     
     % Rotacion de la funcion
     aux = [];
-    
-    
     for i=0:1:sizeA-1
         aux = [aux opA(sizeA-i)];
-        
         if sizeA-i == inicioA
             inicioA = length(aux);
         end
     end
-    
     opA = aux;
-    
     %****************
     
     % Definicion de variables si ambas entradas son causales
@@ -93,9 +93,8 @@ function [limX2,limX1,limY2,limY1] = Convolucion(x,muestraX,h,muestraH)
     if inicioA==1 && inicioB==1
             inicioConv = 1;
     end
-    
-    
     %****************
+    
     % Inicializacion de variables
     convolucion = [];   %vector de salida de convolución
     sumaConv = 0;       %Acumulado para las muestras de la convolucion
@@ -148,82 +147,42 @@ function [limX2,limX1,limY2,limY1] = Convolucion(x,muestraX,h,muestraH)
         end
         
     end
+    y = convolucion;
+    yn = -(inicioConv-1):1:sizeA-inicioConv;
     
     %****************
     
     %--------------------Graficacion-------------------------------
     
-    %Límites el eje horizontal de la gráfica
-    inicioGraficaIzq = 0;
-    inicioGraficaDer = 0;
-    
-    
-    inicioGraficaIzq = -max([inicioConv xgraph hgraph]);
-    inicioGraficaDer = -min([inicioConv xgraph hgraph]);
-
-    xConv = -(inicioConv-1):1:sizeA-inicioConv;     %Dimensiones del vector de convolucion para graficar
-    xEntrada = -(xgraph-1):1:length(x)-xgraph;        %Dimensiones del vector de entrada para graficar
-    xRespuesta = -(hgraph-1):1:length(h)-hgraph;      %Dimensiones del vector de sistema para graficar
-    
-    
-    limX1 = sizeA+inicioGraficaDer+1;
-    limX2 = inicioGraficaIzq-1;
-    %****************
-    
-    %Límites el eje vertical de la gráfica
-
-    limY1 = 0;
-    limY2 = 0;
-    
-    limY1 = 1 + max([max(convolucion) max(opA) max(opB)]);
-    limY2 = -1 + min([min(convolucion) min(opA) min(opB)]);
-    
-    
-    %****************
-
-    
-    %Graficación de convolucion y correlacion   
-  
-    if orden==0
+    if (graf==1)
+       horizontalMax    =max(union(abs(xn),abs(hn)));
+       horizontalMax    =max(union(horizontalMax, abs(yn)));
+       verticalMax      =max(union(abs(xg), abs(hg)));
+       verticalMax      =max(union(verticalMax, abs(y)));
+       ejes = [-horizontalMax-1, horizontalMax+1, -verticalMax-1, verticalMax+1];
+       
        subplot(3,1,1)
-       stem(xEntrada,x,'fill','-.b');
-       axis ([limX2 limX1 limY2 limY1])
+       stem(xn,xg,'fill','-.b');
+       axis (ejes)
+       legend('x(n)');
        grid on
        xlabel("Entrada")
-       
+
        subplot(3,1,2)
-       stem(xRespuesta,h,'fill','-.r');
-       axis ([limX2 limX1 limY2 limY1])
+       stem(hn,hg,'fill','-.r');
+       axis (ejes)
+       legend('h(n)');
        grid on
        xlabel("Sistema")
-       
+
        subplot(3,1,3)
-       stem(xConv,convolucion,'fill','-.g');
-       axis ([limX2 limX1 limY2 limY1])
+       stem(yn,y,'fill','-.g');
+       axis (ejes)
+       legend('y(n)');
        grid on
        xlabel("Convolucion")
        
-    else
-       subplot(3,1,1)
-       stem(xRespuesta,h,'fill','-.b');
-       axis ([limX2 limX1 limY2 limY1])
-       grid on
-       xlabel("Entrada")
-       
-       subplot(3,1,2)
-       stem(xEntrada,x,'fill','-.r');
-       axis ([limX2 limX1 limY2 limY1])
-       grid on
-       xlabel("Sistema")
-       
-       subplot(3,1,3)
-       stem(xConv,convolucion,'fill','-.g');
-       axis ([limX2 limX1 limY2 limY1])
-       grid on
-       xlabel("Convolucion")
-
     end
-
 end
 
 
