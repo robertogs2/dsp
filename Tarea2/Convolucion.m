@@ -13,45 +13,48 @@
 function [y,yn] = Convolucion(x,muestraX,h,muestraH, graf)
     
     % Inicializacion de formatos
-    close all
+    %close all
     format long
     %****************
     
     %Variables para gráfica
     xn = 0;
     hn = 0;
-    xg = x;
-    hg = h;
-    if(graf == 1)
-        xn = muestraX;
-        hn = muestraH;
-    end
+    xn = muestraX;
+    hn = muestraH;
     
-    %Busqueda del cero en la secuencia
-    
+    %Busqueda del cero en la secuencia, si no se encuntra se completan los
+    %límites
     zero_x = find(muestraX == 0);
     if(~isempty(zero_x)) %Si tiene cero 
         muestraX = zero_x(1);
     else
         if (muestraX(1) > 0) %Agregar ceros a izquierda
-            x = [zeros(muestraX(1)) x];
+             x = [zeros(1, muestraX(1)) x];
+             xn = [0:muestraX(1)-1 xn]
         else
-            x = [x zeros(-muestraX(end))];
+             x = [x zeros(1, -muestraX(end))];
+             xn = [xn muestraX(end)+1:0]
         end
         muestraX = 1;
     end
-    
     zero_h = find(muestraH == 0);
     if(~isempty(zero_h)) 
         muestraH = zero_h(1);
      else
         if (muestraH(1) > 0) %Agregar ceros a izquierda
-            h = [zeros(muestraH(1)) h];
+            h = [zeros(1, muestraH(1)) h];
+            hn = [0:muestraH(1)-1 hn]
         else
-            h = [h zeros(-muestraH(end))];
+             h = [h zeros(1, -muestraH(end))];
+             hn = [hn muestraH(end)+1:0 ]
         end
         muestraH = 1;
     end
+    
+    %Save new graph variables
+    xg = x;
+    hg = h;
     
     % Inicializacion de tamaños
     sizeA = length(x);  %toma tamaño del vector X de entrada
@@ -147,9 +150,8 @@ function [y,yn] = Convolucion(x,muestraX,h,muestraH, graf)
         end
         
     end
+    yn = (xn(1)+hn(1)):(xn(end)+hn(end)); %li+ki a lf+kf
     y = convolucion;
-    yn = -(inicioConv-1):1:sizeA-inicioConv;
-    
     %****************
     
     %--------------------Graficacion-------------------------------
