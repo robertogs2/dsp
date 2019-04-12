@@ -181,7 +181,6 @@ function [y,yn] = Convolucion(x,muestraX,h,muestraH, graf)
        legend('y(n)');
        grid on
        xlabel("Convolucion")
-       
     end
 end
 

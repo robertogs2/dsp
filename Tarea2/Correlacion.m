@@ -16,7 +16,7 @@ function [y,yn] = Correlacion(x,muestraX,h,muestraH,graf)
     hFlip = flip(h);
     
     %Llamado a la funcion de convolucion
-    [y,yn] = Convolucion(x,muestraX,hFlip,muestraHFlip,graf);
+    [y,yn] = Convolucion(x,muestraX,hFlip,muestraHFlip,0);
     
     %--------------------Graficacion-------------------------------
     
