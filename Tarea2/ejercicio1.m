@@ -12,12 +12,16 @@
 
 format long;
 
+%Funcion para resolver la ecuacion y = b^(1/a) con un
+%algoritmo iterativo implementado como un sistema en tiempo discreto
 function y = Raiz(a,b)
-    precision = 0.00000001;
-    yp = 0;
-    y = 1;
+    precision = 0.00000001;		%Precision del valor de salida
+    yp = 0;						%Valor anterior de y: y(n-1)
+    y = 1;						%Valor actual de y: y(n)
+
+    %Iterar hasta llegar a la precision deseada
     while abs(yp-y) >= precision
-        yp = y;
-        y = ((a-1)*y^a+b)/(a*y^(a-1));
+        yp = y;								%Guardar el y anterior
+        y = ((a-1)*y^a+b)/(a*y^(a-1));		%Calcular el y actual por Newton-Raphson
     end
 end
