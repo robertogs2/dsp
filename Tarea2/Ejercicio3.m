@@ -35,14 +35,14 @@ function r      = gaussian_noise(variance, mean, n)
 end
 %Calcula el valor de la función y(n)=ax(n-D)+v(n)
 function [y,n]  = gen_y(a, D, variance, limit, x)
-    p       =0:length(x)-1;                     %Vector con posiciones originales de x
-    p       =p+D;                               %Vector con posiciones desplazadas de x
+    xn       =0:length(x)-1;                    %Vector con posiciones originales de x
+    xn       =xn+D;                             %Vector con posiciones desplazadas de x
     ax      =a*x;                               %Escalamiento de x
     vn      =gaussian_noise(variance,0,limit+1);%Ruido gaussiano
     y       =zeros(1,limit+1);                  %Alocamiento de espacio para y
     n       =0:limit;                           %Posiciones de la salida final
     for i = n                                   %Para cada índice de posicion
-        index_x = find(p == i);                 %Busca el índice en el vector de posiciones p
+        index_x = find(xn == i);                %Busca el índice en el vector de posiciones xn
         y(i+1)=vn(i+1);                         %Pone el ruido de Gauss
         if(~isempty(index_x))                   %Si el indice encontrado existe
             y(i+1)=y(i+1)+ax(index_x(1));       %Suma el valor de x para ese índice
@@ -104,9 +104,9 @@ function [x,xn] = sequence(limit)
     x = zeros(1, limit);                    %espacio para la secuencia
     xn = 0:limit-1;                         %posiciones de la secuencia
     for i=xn
-        x(i+1)=2*secuencia(end)-1; %-1 si 0, 1 si 1, toma el ultimo valor en la salida
-        nuevo = mod(secuencia(end)+secuencia(1), 2); %calcula nuevo elemento
-        secuencia(end) = []; %remueve ultimo elemento
-        secuencia = [nuevo secuencia];
+        x(i+1)=2*secuencia(end)-1;                      %-1 si 0, 1 si 1, toma el ultimo valor en la salida
+        nuevo = mod(secuencia(end)+secuencia(1), 2);    %calcula nuevo elemento
+        secuencia(end) = [];                            %remueve ultimo elemento
+        secuencia = [nuevo secuencia];                  %concatena el nuevo elemento con los primeros del anterior vector
     end
 end
