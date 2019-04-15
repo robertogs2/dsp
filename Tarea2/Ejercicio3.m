@@ -30,6 +30,7 @@ gen_y_graph(0.9, 20, 0.01, 199, x);             %Punto b para varianza 0.01 con 
 corr_xy_graph(0.9, 20, 0.01, 199, x, 59);       %Punto c para varianza 0.01 con Baker de 127 puntos
 
 %Genera ruido gaussiano con una varianza, una media y una cantidad n
+%Saca generando la raíz cuadrada de la varianza por numeros aleatorios entre 0 y 1, y sumandole la media
 function r      = gaussian_noise(variance, mean, n)
     r = sqrt(variance)*randn(n) + mean;
 end
