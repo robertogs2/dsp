@@ -1,0 +1,22 @@
+F = 10000;          %Wave frequency
+Fs = 44100;         %Sampling frequency
+Ts = 1/Fs;          %Sampling period
+f = F/Fs;           %Normalized frequency
+w0 = 2*pi*f;        %Normalized radial frequency
+a1 = 2*cos(w0);     %Equation first scale
+A=1;                %Amplitude
+t = 2;              
+y_1=0;
+y_2=-A*sin(w0); %To not apply impulse
+
+m = floor(t/Ts);
+n = 0:m;
+y = zeros(1, m);
+
+for i = n
+    y(i+1) = a1*y_1-y_2;
+    y_2=y_1;
+    y_1=y(i+1);
+end
+
+sound(y, Fs);
