@@ -30,7 +30,7 @@
 
 #include "processor.h"
 #include "controlvolume.h"
-
+#include "oscillator.h"
 class dspSystem : public processor {
 public:
   /**
@@ -94,6 +94,8 @@ protected:
    */
   controlVolume* cv_;
 
+
+  oscillator* osc_;
   
 };
 

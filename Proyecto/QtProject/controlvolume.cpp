@@ -51,7 +51,6 @@ controlVolume::~controlVolume(){
  */
 
 void controlVolume::filter(int blockSize, int volumeGain, float *in, float *out){
-	std::cout << blockSize << std::endl;
     for (int n=0; n<blockSize;++n){
         out[n]=(volumeGain)*in[n]*0.02;
     }

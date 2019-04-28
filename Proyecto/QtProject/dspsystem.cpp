@@ -40,12 +40,14 @@
 
 
 dspSystem::dspSystem()
-  :sampleRate_(0),bufferSize_(0),cv_(0){
+  :sampleRate_(0),bufferSize_(0),cv_(0),osc_(0){
 }
 
 dspSystem::~dspSystem() {
     delete cv_;
     cv_;
+    delete osc_;
+    osc_;
 }
 
 
@@ -70,6 +72,9 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
   delete cv_;
   cv_=new controlVolume();
 
+  delete osc_;
+  osc_ = new oscillator();
+  osc_->init(sampleRate_, bufferSize_, 1, 150);
   return true;
 }
 
@@ -82,7 +87,16 @@ bool dspSystem::process(float* in,float* out) {
   float* tmpIn = in;
   float* tmpOut = out;
 
-  cv_->filter(bufferSize_,volumeGain_,tmpIn,tmpOut);
+  // Signal with a frequency
+  osc_->generateSignal();
+  float* fsig=osc_->getSignal();
+  for(int i=0; i<bufferSize_;++i){
+    tmpOut[i]=fsig[i];
+  }
+
+  // Signal with a 
+  cv_->filter(bufferSize_,volumeGain_,tmpOut,tmpOut);
+
 
   return true;
 }
