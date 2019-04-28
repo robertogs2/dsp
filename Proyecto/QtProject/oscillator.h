@@ -1,3 +1,11 @@
+/**
+ * \file   oscillator.h
+ *         Implements a frequency oscillator
+ * \author Roberto Gutierrez-Sanchez
+ * \date   2019.27.04
+ *
+ */
+
 #ifndef OSCILLATOR_H
 #define OSCILLATOR_H
 
@@ -79,7 +87,7 @@ private:
   float y1_; 
   float y2_;
   bool active_;
-  
+
 };
 
 #endif // OSCILLATOR_H

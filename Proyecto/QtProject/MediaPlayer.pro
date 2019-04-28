@@ -28,6 +28,7 @@ HEADERS  += mainwindow.h \
             processor.h \
             dspsystem.h \
     controlvolume.h \
-    oscillator.h
+    oscillator.h \
+    constants.h
 
 FORMS    += mainwindow.ui
