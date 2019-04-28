@@ -144,7 +144,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../QtProject/processor.h \
 		../QtProject/dspsystem.h \
 		../QtProject/controlvolume.h \
-		../QtProject/oscillator.h ../QtProject/main.cpp \
+		../QtProject/oscillator.h \
+		../QtProject/constants.h ../QtProject/main.cpp \
 		../QtProject/mainwindow.cpp \
 		../QtProject/jack.cpp \
 		../QtProject/dspsystem.cpp \
@@ -341,7 +342,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../QtProject/mainwindow.h ../QtProject/jack.h ../QtProject/processor.h ../QtProject/dspsystem.h ../QtProject/controlvolume.h ../QtProject/oscillator.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../QtProject/mainwindow.h ../QtProject/jack.h ../QtProject/processor.h ../QtProject/dspsystem.h ../QtProject/controlvolume.h ../QtProject/oscillator.h ../QtProject/constants.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../QtProject/main.cpp ../QtProject/mainwindow.cpp ../QtProject/jack.cpp ../QtProject/dspsystem.cpp ../QtProject/controlvolume.cpp ../QtProject/oscillator.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../QtProject/mainwindow.ui $(DISTDIR)/
 
@@ -382,6 +383,7 @@ moc_mainwindow.cpp: ../QtProject/dspsystem.h \
 		../QtProject/processor.h \
 		../QtProject/controlvolume.h \
 		../QtProject/oscillator.h \
+		../QtProject/constants.h \
 		../QtProject/mainwindow.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
@@ -410,7 +412,8 @@ main.o: ../QtProject/main.cpp ../QtProject/mainwindow.h \
 		../QtProject/dspsystem.h \
 		../QtProject/processor.h \
 		../QtProject/controlvolume.h \
-		../QtProject/oscillator.h
+		../QtProject/oscillator.h \
+		../QtProject/constants.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../QtProject/main.cpp
 
 mainwindow.o: ../QtProject/mainwindow.cpp ../QtProject/mainwindow.h \
@@ -418,6 +421,7 @@ mainwindow.o: ../QtProject/mainwindow.cpp ../QtProject/mainwindow.h \
 		../QtProject/processor.h \
 		../QtProject/controlvolume.h \
 		../QtProject/oscillator.h \
+		../QtProject/constants.h \
 		../QtProject/ui_mainwindow.h \
 		../QtProject/jack.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../QtProject/mainwindow.cpp
@@ -429,7 +433,8 @@ jack.o: ../QtProject/jack.cpp ../QtProject/jack.h \
 dspsystem.o: ../QtProject/dspsystem.cpp ../QtProject/dspsystem.h \
 		../QtProject/processor.h \
 		../QtProject/controlvolume.h \
-		../QtProject/oscillator.h
+		../QtProject/oscillator.h \
+		../QtProject/constants.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dspsystem.o ../QtProject/dspsystem.cpp
 
 controlvolume.o: ../QtProject/controlvolume.cpp ../QtProject/controlvolume.h

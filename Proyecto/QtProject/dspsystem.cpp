@@ -52,11 +52,11 @@ dspSystem::~dspSystem() {
 
 
 void dspSystem::updateVolume(int value){
-   /*
+    /*
     * Updating volume value
     */
-   volumeGain_=value;
-
+    volumeGain_=value;
+    osc_->setFrequency(volumeGain_*constants::slope+constants::minFrequency);
 }
 
 /**
@@ -74,7 +74,7 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
 
   delete osc_;
   osc_ = new oscillator();
-  osc_->init(sampleRate_, bufferSize_, 1, 150);
+  osc_->init(sampleRate_, bufferSize_, 1, 20);
   return true;
 }
 
@@ -86,17 +86,14 @@ bool dspSystem::process(float* in,float* out) {
 
   float* tmpIn = in;
   float* tmpOut = out;
-
-  // Signal with a frequency
   osc_->generateSignal();
   float* fsig=osc_->getSignal();
   for(int i=0; i<bufferSize_;++i){
     tmpOut[i]=fsig[i];
   }
 
-  // Signal with a 
-  cv_->filter(bufferSize_,volumeGain_,tmpOut,tmpOut);
-
+  // Signal with a oscilation
+  cv_->filter(bufferSize_,constants::volume,tmpOut,tmpOut);
 
   return true;
 }
