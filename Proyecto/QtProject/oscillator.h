@@ -31,7 +31,14 @@ public:
 
     float* getSignal();
 
+    void setSampleRate(const int sampleRate);
+    void setBufferSize(const int bufferSize);
+    void setAmplitude(const float amplitude);
+    void setFrequency(const float frequency);
 
+    void updateVariables(const int sampleRate, const int bufferSize, const float amplitude, const float frequency);
+    void setActive(bool active);
+    bool getActive();
 protected:
 	/**
    * Sample rate
@@ -71,7 +78,8 @@ private:
   float a1_;
   float y1_; 
   float y2_;
-
+  bool active_;
+  
 };
 
 #endif // OSCILLATOR_H

@@ -30,7 +30,8 @@
 #include "ui_mainwindow.h"
 #include "jack.h"
 #include <string>
-
+#include <QAudioDeviceInfo>
+#include <QAudioOutput>
 
 #undef _DSP_DEBUG
 #define _DSP_DEBUG
