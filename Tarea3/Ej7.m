@@ -43,50 +43,24 @@ samples = 2000;
 ws = 0:2*pi/samples:pi;
 p = zeros(1, length(ws)-1);
 mw = zeros(1, length(ws)-1);
-mz = zeros(1, length(ws)-1);
 for i = 1:length(ws)
     p(i)=Pw(ws(i));
     mw(i)=Mw(ws(i));
-    mz(i)=Mwz(ws(i));
 end
 
 figure;
 F = ws.*Fs/(2*pi);
 plot(F, mw);
-title('Respuesta en magnitud')  
-xlabel('-3\pi < \omega < 3\pi') 
-ylabel('|H(\omega)|') 
+title('Respuesta en magnitud filtro ranura para 4 frecuencias')  
+xlabel('0 < F(Hz) < 10000') 
+ylabel('|H(F)|') 
 figure;
 plot(F, p);
-figure;
-plot(F, mz);
-
-function y = D(z)
-    y = 0;
-    global d;
-    global r;
-    for i=1:9
-        y = y+d(i)*((1/r)*z)^(-(i-1));
-    end
-end
-function y = N(z)
-    y = 0;
-    global d;
-    for i=1:9
-        y = y+d(i)*z^(-(i-1));
-    end
-end
-function y = Mz(z)
-    global Af;
-    y = abs(Af*N(z)/(D(z)));
-end
-function y = Mwz(w)
-    z = exp(1i*w);
-    y = abs(Mz(z));
-end
+title('Respuesta de fase filtro ranura para 4 frecuencias')  
+xlabel('0 < F(Hz) < 10000') 
+ylabel('\angleH(F)') 
 
 %Using actual magnitude response
-
 function y = Mwk(w, wk, Ak)
     global r;
     y=Ak*(sqrt(2-2*cos(w-wk))*sqrt(2-2*cos(w+wk)))/(sqrt(r*r-2*r*cos(w-wk)+1)*sqrt(r*r-2*r*cos(w+wk)+1));
@@ -98,7 +72,6 @@ function y = Mw(w)
 end
 
 % Phase response
-
 function y = Pwk(w, wk)
     global r;
     y= atan2(-sin(wk-w),(1-cos(wk-w)))+atan2(sin(wk+w),(1-cos(wk+w)));
