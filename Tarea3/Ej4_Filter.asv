@@ -8,12 +8,12 @@ a = -2*cos(w0);
 global r;
 r = 0.95;
 A =(1+a*r+r*r)/(2+a);
-ti = -0.3;
-tf = 0.3;
+ti = -0.1;
+tf = 1;
 mi = ti/Ts;
 mf = tf/Ts;
 m=50;
-s = 50; %stability
+s = 100; %stability
 n = mi-s:mf; 
 y_1 = 0;
 y_2 = 0;
@@ -35,17 +35,17 @@ end
 
 %Graficacion de las figuras
 figure;
-t = n(1+s)*Ts:0.0001:n(end)*Ts;
+t = n(s)*Ts:0.0001:n(end)*Ts;
 subplot(2,1,1)
 plot(t, arrayfun(@signal, t));
 hold on
-stem(n(1+s:end)*Ts, x(1+s:end));
+stem(n(s:end)*Ts, x(s:end));
 hold off
 
 subplot(2,1,2);
 plot(t, arrayfun(@signal2, t));
 hold on
-stem(n(1+s:end)*Ts, y(1+s:end));
+stem(n(s:end)*Ts, y(s:end));
 hold off
 
 function xn = signald(n)

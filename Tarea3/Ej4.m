@@ -1,10 +1,21 @@
-F = 60;
-Fs = 300;
-w0 = 2*pi*F/Fs;
-a = -2*cos(w0);
+% Instituto Tecnológico de Costa Rica 
+% Escuela de Ingeniería Electrónica
+% Procesamiento Digital de Señales
+% Tarea 3
+% Ejercicio 4
+% Mayo de 2019
+% Integrantes: 
+%   Alejandro Calvo 2016138114
+%   Allan Gutiérrez 2016253395
+%   Roberto Gutiérrez 2016134351
 
-global r;
-r = 0.99;
+F = 60; %Señal a filtrar
+Fs = 300; %Frecuencia de muestreo
+w0 = 2*pi*F/Fs; %Frecuencia	normalizada angular
+a = -2*cos(w0); %Constante para calculos
+
+global r; %Radio de los polos
+r = 0.97;
 A =(1+a*r+r*r)/(2+a);
 
 %Calculo de los puntos para las gráficas
