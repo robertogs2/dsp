@@ -24,6 +24,7 @@ for i = 1:length(ws) %Evalua en todas las frecuencias la respuesta de magnitud
 end
 ws = ws./pi; %Mapea la frecuencia en radianes en términos de pi
 
+figure
 amx=subplot(2,1,1);
 plot(ws, amw);
 title('Respuesta en magnitud filtro paso altos con a = -0.9')  
