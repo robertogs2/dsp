@@ -7,7 +7,7 @@ public:
     static const int maxFrequency = 22000;
     static const int volumeMaxGain = 50;
     static constexpr float slope = float(maxFrequency-minFrequency)/float(volumeMaxGain);
-    static const int volume = 1;
+    static const int volume = 5;
 };
 
 #endif // CONSTANTS_H

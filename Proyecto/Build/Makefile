@@ -55,13 +55,15 @@ SOURCES       = ../QtProject/main.cpp \
 		../QtProject/jack.cpp \
 		../QtProject/dspsystem.cpp \
 		../QtProject/controlvolume.cpp \
-		../QtProject/oscillator.cpp moc_mainwindow.cpp
+		../QtProject/oscillator.cpp \
+		../QtProject/doscillator.cpp moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		jack.o \
 		dspsystem.o \
 		controlvolume.o \
 		oscillator.o \
+		doscillator.o \
 		moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -145,12 +147,14 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../QtProject/dspsystem.h \
 		../QtProject/controlvolume.h \
 		../QtProject/oscillator.h \
-		../QtProject/constants.h ../QtProject/main.cpp \
+		../QtProject/constants.h \
+		../QtProject/doscillator.h ../QtProject/main.cpp \
 		../QtProject/mainwindow.cpp \
 		../QtProject/jack.cpp \
 		../QtProject/dspsystem.cpp \
 		../QtProject/controlvolume.cpp \
-		../QtProject/oscillator.cpp
+		../QtProject/oscillator.cpp \
+		../QtProject/doscillator.cpp
 QMAKE_TARGET  = MediaPlayer
 DESTDIR       = 
 TARGET        = MediaPlayer
@@ -342,8 +346,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../QtProject/mainwindow.h ../QtProject/jack.h ../QtProject/processor.h ../QtProject/dspsystem.h ../QtProject/controlvolume.h ../QtProject/oscillator.h ../QtProject/constants.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../QtProject/main.cpp ../QtProject/mainwindow.cpp ../QtProject/jack.cpp ../QtProject/dspsystem.cpp ../QtProject/controlvolume.cpp ../QtProject/oscillator.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../QtProject/mainwindow.h ../QtProject/jack.h ../QtProject/processor.h ../QtProject/dspsystem.h ../QtProject/controlvolume.h ../QtProject/oscillator.h ../QtProject/constants.h ../QtProject/doscillator.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../QtProject/main.cpp ../QtProject/mainwindow.cpp ../QtProject/jack.cpp ../QtProject/dspsystem.cpp ../QtProject/controlvolume.cpp ../QtProject/oscillator.cpp ../QtProject/doscillator.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../QtProject/mainwindow.ui $(DISTDIR)/
 
 
@@ -442,6 +446,9 @@ controlvolume.o: ../QtProject/controlvolume.cpp ../QtProject/controlvolume.h
 
 oscillator.o: ../QtProject/oscillator.cpp ../QtProject/oscillator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o oscillator.o ../QtProject/oscillator.cpp
+
+doscillator.o: ../QtProject/doscillator.cpp ../QtProject/doscillator.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o doscillator.o ../QtProject/doscillator.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

@@ -45,6 +45,7 @@ public:
     void setFrequency(const float frequency);
 
     void updateVariables(const int sampleRate, const int bufferSize, const float amplitude, const float frequency);
+    
     void setActive(bool active);
     bool getActive();
 protected:
