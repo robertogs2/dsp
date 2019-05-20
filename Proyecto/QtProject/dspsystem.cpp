@@ -45,9 +45,7 @@ dspSystem::dspSystem()
 
 dspSystem::~dspSystem() {
     delete cv_;
-    cv_;
     delete osc_;
-    osc_;
 }
 
 
@@ -56,7 +54,7 @@ void dspSystem::updateVolume(int value){
     * Updating volume value
     */
     volumeGain_=value;
-    osc_->setFrequency(volumeGain_*constants::slope+constants::minFrequency);
+    //osc_->setFrequency(volumeGain_*constants::slope+constants::minFrequency); // Linear frequency changing
 }
 
 /**
@@ -68,13 +66,18 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
   sampleRate_ = sampleRate;
   bufferSize_ = bufferSize;
   volumeGain_ = 0;
+  toneFrequencyZero_=450;
+  toneFrequencyOne_=455;
+  toneActive_=true;
 
   delete cv_;
   cv_=new controlVolume();
 
   delete osc_;
-  osc_ = new oscillator();
-  osc_->init(sampleRate_, bufferSize_, 1, 20);
+  osc_ = new doscillator();
+  osc_->init(sampleRate_, bufferSize_, 1, toneFrequencyZero_, 1, toneFrequencyOne_);
+  osc_->setActive(toneActive_);
+
   return true;
 }
 
@@ -86,6 +89,11 @@ bool dspSystem::process(float* in,float* out) {
 
   float* tmpIn = in;
   float* tmpOut = out;
+
+  if(toneActive_){
+    //Logic for times and frequencies to process
+  }
+
   osc_->generateSignal();
   float* fsig=osc_->getSignal();
   for(int i=0; i<bufferSize_;++i){
@@ -93,7 +101,7 @@ bool dspSystem::process(float* in,float* out) {
   }
 
   // Signal with a oscilation
-  cv_->filter(bufferSize_,constants::volume,tmpOut,tmpOut);
+  cv_->filter(bufferSize_,volumeGain_,tmpOut,tmpOut);
 
   return true;
 }

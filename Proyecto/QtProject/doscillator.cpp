@@ -1,7 +1,17 @@
 #include "doscillator.h"
 
-doscillator::doscillator(){
+doscillator::doscillator():
+    sampleRate_(0),
+    bufferSize_(0),
+    amplitudeZero_(0),
+    amplitudeOne_(0),
+    frequencyZero_(0),
+    frequencyOne_(0){
+}
 
+doscillator::~doscillator(){
+    //Should remove signal
+    delete signal_;
 }
 
 void doscillator::init(const int sampleRate, const int bufferSize, const float amplitudeZero, 
@@ -24,7 +34,7 @@ void doscillator::updateVariables(const int sampleRate, const int bufferSize,
 }
 
 void doscillator::calculateConstants(){
-	wZero_  = 2*M_PI*frequencyZero_/float(sampleRate_);
+	wZero_  =2*M_PI*frequencyZero_/float(sampleRate_);
 	y1Zero_ =0;
 	y2Zero_ =-amplitudeZero_*sin(wZero_);
 	a1Zero_ =2*cos(wZero_);
@@ -35,12 +45,12 @@ void doscillator::calculateConstants(){
 	a1One_ =2*cos(wOne_);
 }
 
-void oscillator::setSampleRate(const int sampleRate){
+void doscillator::setSampleRate(const int sampleRate){
 	sampleRate_=sampleRate;
 	calculateConstants();
 }
 
-void oscillator::setBufferSize(const int bufferSize){
+void doscillator::setBufferSize(const int bufferSize){
 	bufferSize_=bufferSize;
 	calculateConstants();
 }
@@ -58,20 +68,20 @@ void doscillator::setFrequency(const float frequency){
 	calculateConstants();
 }
 
-float* oscillator::getSignal(){
+float* doscillator::getSignal(){
 	return signal_;
 }
 
-void oscillator::setActive(bool active){
+void doscillator::setActive(bool active){
 	active_=active;
 }
 
-bool oscillator::getActive(){
+bool doscillator::getActive(){
 	return active_;
 }
 
 
-void oscillator::generateSignal(){
+void doscillator::generateSignal(){
 	float f0, f1;
 	for(int i = 0; i < bufferSize_; ++i){
 		f0 = active_ ? a1Zero_*y1Zero_-y2Zero_ : 0;
@@ -82,6 +92,7 @@ void oscillator::generateSignal(){
 		y2One_=y1One_;
 		y1One_=f1;
 
-		signal_[i]=(f1+f0) >> 1; //Average between both for tghe signal
+        signal_[i]=(f1+f0) / 2; //Average between both for the signal
+        //std::cout << signal_[i] << std::endl;
 	}
 }

@@ -25,8 +25,9 @@ public:
     void init(const int sampleRate, const int bufferSize, const float amplitudeZero, 
     			const float frequencyZero, const float amplitudeOne, const float frequencyOne);
 
-    void updateVariables(const float amplitudeZero, const float frequencyZero, 
-                          const float amplitudeOne, const float frequencyOne);
+    void updateVariables(const int sampleRate, const int bufferSize,
+                         const float amplitudeZero, const float frequencyZero,
+                         const float amplitudeOne, const float frequencyOne);
 
     /**
      * Calculates next batch of signal

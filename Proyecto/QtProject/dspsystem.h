@@ -30,8 +30,9 @@
 
 #include "processor.h"
 #include "controlvolume.h"
-#include "oscillator.h"
+#include "doscillator.h"
 #include "constants.h"
+#include "structs.h"
 
 class dspSystem : public processor {
 public:
@@ -72,6 +73,8 @@ public:
 
   void updateVolume(int value);
 
+  void makeSound();
+
 protected:
 
   /**
@@ -97,7 +100,14 @@ protected:
   controlVolume* cv_;
 
 
-  oscillator* osc_;
+  /**
+   * Oscilator variables
+   */
+
+  bool toneActive_;
+  float toneFrequencyZero_;
+  float toneFrequencyOne_;
+  doscillator* osc_;
   
 };
 
