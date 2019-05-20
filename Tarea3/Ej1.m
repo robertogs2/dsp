@@ -1,3 +1,14 @@
+% Instituto Tecnológico de Costa Rica 
+% Escuela de Ingeniería Electrónica
+% Procesamiento Digital de Señales
+% Tarea 3
+% Ejercicio 1
+% Mayo de 2019
+% Integrantes: 
+%   Alejandro Calvo 2016138114
+%   Allan Gutiérrez 2016253395
+%   Roberto Gutiérrez 2016134351
+
 w=-3*pi:0.001:3*pi; %Frecuencia a evaluar
 
 %Evalua el vector de frecuencias en cada uno de las funciones y retorna vectores con
