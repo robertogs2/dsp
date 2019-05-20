@@ -431,7 +431,7 @@ mainwindow.o: ../QtProject/mainwindow.cpp ../QtProject/mainwindow.h \
 		../QtProject/doscillator.h \
 		../QtProject/constants.h \
 		../QtProject/structs.h \
-		../QtProject/ui_mainwindow.h \
+		ui_mainwindow.h \
 		../QtProject/jack.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../QtProject/mainwindow.cpp
 
