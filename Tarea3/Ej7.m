@@ -1,3 +1,14 @@
+% Instituto Tecnológico de Costa Rica 
+% Escuela de Ingeniería Electrónica
+% Procesamiento Digital de Señales
+% Tarea 3
+% Ejercicio 7
+% Mayo de 2019
+% Integrantes: 
+%   Alejandro Calvo 2016138114
+%   Allan Gutiérrez 2016253395
+%   Roberto Gutiérrez 2016134351
+
 %Frecuencias a filtrar en dominio lineal
 F0 = 6667;
 F1 = 7778;

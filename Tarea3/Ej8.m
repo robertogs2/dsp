@@ -1,3 +1,14 @@
+% Instituto Tecnológico de Costa Rica 
+% Escuela de Ingeniería Electrónica
+% Procesamiento Digital de Señales
+% Tarea 3
+% Ejercicio 8
+% Mayo de 2019
+% Integrantes: 
+%   Alejandro Calvo 2016138114
+%   Allan Gutiérrez 2016253395
+%   Roberto Gutiérrez 2016134351
+
 %Frecuencia de Muestreo
 Fs = 44100;
 

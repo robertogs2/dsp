@@ -1,3 +1,15 @@
+% Instituto Tecnológico de Costa Rica 
+% Escuela de Ingeniería Electrónica
+% Procesamiento Digital de Señales
+% Tarea 3
+% Ejercicio 5
+% Mayo de 2019
+% Integrantes: 
+%   Alejandro Calvo 2016138114
+%   Allan Gutiérrez 2016253395
+%   Roberto Gutiérrez 2016134351
+
+
 %Constantes del filtro
 global a
 a = -0.9;

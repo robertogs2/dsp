@@ -1,3 +1,14 @@
+% Instituto Tecnológico de Costa Rica 
+% Escuela de Ingeniería Electrónica
+% Procesamiento Digital de Señales
+% Tarea 3
+% Ejercicio 6
+% Mayo de 2019
+% Integrantes: 
+%   Alejandro Calvo 2016138114
+%   Allan Gutiérrez 2016253395
+%   Roberto Gutiérrez 2016134351
+
 %w0 Frecuencia a generar
 function Ej6(w0)
 

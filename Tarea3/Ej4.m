@@ -2,7 +2,7 @@
 % Escuela de Ingeniería Electrónica
 % Procesamiento Digital de Señales
 % Tarea 3
-% Ejercicio 4
+% Ejercicio 4 graficas
 % Mayo de 2019
 % Integrantes: 
 %   Alejandro Calvo 2016138114
