@@ -94,10 +94,9 @@ void doscillator::generateSignal(){
 			y1One_=f1;
 
 	        signal_[i]=(f1+f0) / 2; //Average between both for the signal
-	        //std::cout << signal_[i] << std::endl;
 		}
 	}
-	else{
+    else{
 		for(int i = 0; i < bufferSize_; ++i){
 			signal_[i]=0;
 		}

@@ -32,7 +32,6 @@
 #include "controlvolume.h"
 #include "doscillator.h"
 #include "constants.h"
-#include "structs.h"
 
 class dspSystem : public processor {
 public:

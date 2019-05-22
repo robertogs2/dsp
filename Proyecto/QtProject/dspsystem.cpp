@@ -67,16 +67,14 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
   bufferSize_ = bufferSize;
 
   volumeGain_ = 0;
-  toneFrequencyZero_=450;
-  toneFrequencyOne_=455;
-  toneActive_=true;
+  toneActive_=false;
 
   delete cv_;
   cv_=new controlVolume();
 
   delete osc_;
   osc_ = new doscillator();
-  osc_->init(sampleRate_, bufferSize_, 1, toneFrequencyZero_, 1, toneFrequencyOne_);
+  osc_->init(sampleRate_, bufferSize_, 1, 0, 1, 0);
   osc_->setActive(toneActive_);
 
   return true;
@@ -131,12 +129,12 @@ int dspSystem::setSampleRate(const int sampleRate) {
 }
 
 void dspSystem::setFrequencies(const float tonef1, const float tonef2){
-  osc_.updateFrequencies(tonef1, tonef2);
+  osc_->setFrequency(tonef1, tonef2);
 }
 
 void dspSystem::setToneActive(bool toneActive){
-  osc_.setActive(toneActive);
+  osc_->setActive(toneActive);
 }
 bool dspSystem::getToneActive(){
-  return osc_.toneActive_;
+  return osc_->getActive();
 }

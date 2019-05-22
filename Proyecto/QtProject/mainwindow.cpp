@@ -113,11 +113,146 @@ void MainWindow::on_volumeSlider_valueChanged(int value){
 
 
 
-void MainWindow::on_button1_clicked(){
-  dsp_.setToneActive(true);
-  dsp_.setFrequencies(constants::sideFrequencies[0], constants::upperFrequencies[0]);
+void MainWindow::on_button1_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[0], constants::upperFrequencies[0]);
 }
 
 void MainWindow::on_button1_released(){
-  dsp_.setToneActive(false);
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_button2_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[0], constants::upperFrequencies[1]);
+}
+
+void MainWindow::on_button2_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_button3_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[0], constants::upperFrequencies[2]);
+}
+
+void MainWindow::on_button3_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_buttonA_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[0], constants::upperFrequencies[3]);
+}
+
+void MainWindow::on_buttonA_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_button4_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[1], constants::upperFrequencies[0]);
+}
+
+void MainWindow::on_button4_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_button5_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[1], constants::upperFrequencies[1]);
+}
+
+void MainWindow::on_button5_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_button6_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[1], constants::upperFrequencies[2]);
+}
+
+void MainWindow::on_button6_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_buttonB_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[1], constants::upperFrequencies[3]);
+}
+
+void MainWindow::on_buttonB_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_button7_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[2], constants::upperFrequencies[0]);
+}
+
+void MainWindow::on_button7_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_button8_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[2], constants::upperFrequencies[1]);
+}
+
+void MainWindow::on_button8_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_button9_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[2], constants::upperFrequencies[2]);
+}
+
+void MainWindow::on_button9_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_buttonC_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[2], constants::upperFrequencies[3]);
+}
+
+void MainWindow::on_buttonC_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_buttonS_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[3], constants::upperFrequencies[0]);
+}
+
+void MainWindow::on_buttonS_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_button0_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[3], constants::upperFrequencies[1]);
+}
+
+void MainWindow::on_button0_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_buttonN_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[3], constants::upperFrequencies[2]);
+}
+
+void MainWindow::on_buttonN_released(){
+  dsp_->setToneActive(false);
+}
+
+void MainWindow::on_buttonD_pressed(){
+  dsp_->setToneActive(true);
+  dsp_->setFrequencies(constants::sideFrequencies[3], constants::upperFrequencies[3]);
+}
+
+void MainWindow::on_buttonD_released(){
+  dsp_->setToneActive(false);
 }

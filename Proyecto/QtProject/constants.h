@@ -1,7 +1,6 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#include "structs.h"
 
 class constants{
 public:
