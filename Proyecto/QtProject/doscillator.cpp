@@ -83,16 +83,24 @@ bool doscillator::getActive(){
 
 void doscillator::generateSignal(){
 	float f0, f1;
-	for(int i = 0; i < bufferSize_; ++i){
-		f0 = active_ ? a1Zero_*y1Zero_-y2Zero_ : 0;
-		y2Zero_=y1Zero_;
-		y1Zero_=f0;
+	if(active_){
+		for(int i = 0; i < bufferSize_; ++i){
+			f0 = active_ ? a1Zero_*y1Zero_-y2Zero_ : 0;
+			y2Zero_=y1Zero_;
+			y1Zero_=f0;
 
-		f1 = active_ ? a1One_*y1One_-y2One_ : 0;
-		y2One_=y1One_;
-		y1One_=f1;
+			f1 = a1One_*y1One_-y2One_;
+			y2One_=y1One_;
+			y1One_=f1;
 
-        signal_[i]=(f1+f0) / 2; //Average between both for the signal
-        //std::cout << signal_[i] << std::endl;
+	        signal_[i]=(f1+f0) / 2; //Average between both for the signal
+	        //std::cout << signal_[i] << std::endl;
+		}
 	}
+	else{
+		for(int i = 0; i < bufferSize_; ++i){
+			signal_[i]=0;
+		}
+	}
+	
 }
