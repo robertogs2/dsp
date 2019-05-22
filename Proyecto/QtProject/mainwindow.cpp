@@ -112,30 +112,12 @@ void MainWindow::on_volumeSlider_valueChanged(int value){
 }
 
 
-/*void MainWindow::on_fileButton_clicked() {
-  selectedFiles_ =
-      QFileDialog::getOpenFileNames(this,
-                                   "Select one or more audio files to open",
-                                   //ui->fileEdit->text(),
-                                   "WAV Files (*.wav)");
 
-  if (!selectedFiles_.empty()) {
-    //ui->fileEdit->setText(*selectedFiles_.begin());
-
-    jack::stopFiles();
-    QStringList::iterator it;
-    for (it=selectedFiles_.begin();it!=selectedFiles_.end();++it) {
-      std::string tmp(qPrintable(*it));
-      jack::playAlso(tmp.c_str());
-    }
-  }
+void MainWindow::on_button1_clicked(){
+  dsp_.setToneActive(true);
+  dsp_.setFrequencies(constants::sideFrequencies[0], constants::upperFrequencies[0]);
 }
-*/
 
-/*void MainWindow::on_fileEdit_returnPressed() {
-  jack::stopFiles();
-  std::string tmp(qPrintable(ui->fileEdit->text()));
-  if (!tmp.empty()) {
-    jack::playAlso(tmp.c_str());
-  }
-}*/
+void MainWindow::on_button1_released(){
+  dsp_.setToneActive(false);
+}

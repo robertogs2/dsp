@@ -129,3 +129,14 @@ int dspSystem::setSampleRate(const int sampleRate) {
   sampleRate_=sampleRate;
   return 1;
 }
+
+void dspSystem::setFrequencies(const float tonef1, const float tonef2){
+  osc_.updateFrequencies(tonef1, tonef2);
+}
+
+void dspSystem::setToneActive(bool toneActive){
+  osc_.setActive(toneActive);
+}
+bool dspSystem::getToneActive(){
+  return osc_.toneActive_;
+}

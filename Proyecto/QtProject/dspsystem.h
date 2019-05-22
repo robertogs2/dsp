@@ -71,9 +71,20 @@ public:
    */
   virtual int setSampleRate(const int sampleRate);
 
+  /*
+   * Updates volume for the system
+   */
+
+
   void updateVolume(int value);
 
+
   void makeSound();
+
+  void setFrequencies(const float tonef1, const float tonef2);
+
+  void setToneActive(bool toneActive);
+  bool getToneActive();
 
 protected:
 
@@ -105,8 +116,6 @@ protected:
    */
 
   bool toneActive_;
-  float toneFrequencyZero_;
-  float toneFrequencyOne_;
   doscillator* osc_;
   
 };

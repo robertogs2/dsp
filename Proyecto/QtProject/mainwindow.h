@@ -33,6 +33,7 @@
 #include <QFileDialog>
 
 #include "dspsystem.h"
+#include "constants.h"
 
 namespace Ui {
 class MainWindow;
@@ -91,8 +92,6 @@ private:
 
      void update();
 };
-
-
 
 
 #endif // MAINWINDOW_H

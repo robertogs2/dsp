@@ -11,8 +11,8 @@ public:
     static constexpr float slope = float(maxFrequency-minFrequency)/float(volumeMaxGain);
     static const int volume = 20;
 
-    static constexpr float sideFrequencies[4] = {1,2,3,4};
-    static constexpr float upperFrequencies[4] = {5,6,7,8};
+    static constexpr float upperFrequencies[4] = {1209, 1336, 1477, 1633};
+    static constexpr float sideFrequencies[4] = {697, 770, 852, 941};
 
     
 };

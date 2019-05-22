@@ -31,7 +31,6 @@ HEADERS  += mainwindow.h \
     controlvolume.h \
     oscillator.h \
     constants.h \
-    doscillator.h \
-    structs.h
+    doscillator.h
 
 FORMS    += mainwindow.ui
