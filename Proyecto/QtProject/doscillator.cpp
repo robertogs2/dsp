@@ -62,9 +62,9 @@ void doscillator::setAmplitude(const float amplitude){
 	calculateConstants();
 }
 
-template<bool b>
-void doscillator::setFrequency(const float frequency){
-	b ? frequencyZero_ = frequency : frequencyOne_ = frequency;
+void doscillator::setFrequency(const float frequencyZero, const float frequencyOne){
+    frequencyZero_ = frequencyZero;
+    frequencyOne_ = frequencyOne;
 	calculateConstants();
 }
 

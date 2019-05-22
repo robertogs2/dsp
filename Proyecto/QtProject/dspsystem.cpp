@@ -65,6 +65,7 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
 
   sampleRate_ = sampleRate;
   bufferSize_ = bufferSize;
+
   volumeGain_ = 0;
   toneFrequencyZero_=450;
   toneFrequencyOne_=455;

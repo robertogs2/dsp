@@ -39,8 +39,8 @@ public:
     // b to choose between both
     template<bool b>
     void setAmplitude(const float amplitude);
-    template<bool b>
-    void setFrequency(const float frequency);
+
+    void setFrequency(const float frequencyZero, const float frequencyOne);
 
     void setBufferSize(const int bufferSize);
     void setSampleRate(const int sampleRate);
