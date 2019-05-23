@@ -53,6 +53,7 @@ public:
     QPushButton *buttonD;
     QPushButton *buttonC;
     QPushButton *button1;
+    QLabel *label;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -61,12 +62,12 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(516, 342);
+        MainWindow->resize(516, 568);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayoutWidget = new QWidget(centralWidget);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(20, 30, 51, 211));
+        horizontalLayoutWidget->setGeometry(QRect(30, 150, 51, 211));
         VolumeLayout = new QHBoxLayout(horizontalLayoutWidget);
         VolumeLayout->setSpacing(6);
         VolumeLayout->setContentsMargins(11, 11, 11, 11);
@@ -82,10 +83,10 @@ public:
 
         volume = new QLabel(centralWidget);
         volume->setObjectName(QStringLiteral("volume"));
-        volume->setGeometry(QRect(20, 250, 67, 17));
+        volume->setGeometry(QRect(30, 370, 67, 17));
         gridLayoutWidget = new QWidget(centralWidget);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(100, 20, 340, 251));
+        gridLayoutWidget->setGeometry(QRect(110, 140, 340, 251));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
@@ -1007,6 +1008,25 @@ public:
 
         gridLayout->addWidget(button1, 0, 0, 1, 1);
 
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(110, 60, 341, 51));
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
+        QFont font;
+        font.setFamily(QStringLiteral("MathJax_Typewriter"));
+        font.setPointSize(40);
+        font.setBold(false);
+        font.setWeight(50);
+        font.setStrikeOut(false);
+        font.setKerning(true);
+        label->setFont(font);
+        label->setFrameShape(QFrame::Box);
+        label->setFrameShadow(QFrame::Plain);
+        label->setLineWidth(3);
+        label->setMidLineWidth(0);
+        label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+        label->setWordWrap(false);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -1044,6 +1064,7 @@ public:
         buttonD->setText(QApplication::translate("MainWindow", "D", Q_NULLPTR));
         buttonC->setText(QApplication::translate("MainWindow", "C", Q_NULLPTR));
         button1->setText(QApplication::translate("MainWindow", "1", Q_NULLPTR));
+        label->setText(QApplication::translate("MainWindow", "*12345678", Q_NULLPTR));
     } // retranslateUi
 
 };

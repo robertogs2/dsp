@@ -124,6 +124,8 @@ private:
      void on_buttonD_released();
 
      void update();
+     void button_pressed(int i, int j);
+     void button_released(int i, int j);
 };
 
 

@@ -36,7 +36,7 @@ void utils::getFrequency(const char c, float& frequencyLeft, float& frequencyUp)
             frequencyUp = constants::upperFrequencies[1];
             break;
         }
-        case '3': case '6': case '9': case '*#': {
+        case '3': case '6': case '9': case '#': {
             frequencyUp = constants::upperFrequencies[2];
             break;
         }
@@ -48,4 +48,8 @@ void utils::getFrequency(const char c, float& frequencyLeft, float& frequencyUp)
                 break;
         }
     }
+}
+
+char utils::getChar(int i, int j){
+    return constants::digits[j+4*i];
 }

@@ -104,7 +104,7 @@ public:
   void setChainFlank(bool chainFlank);
   bool getChainFlank();
 
-
+  void addToChain(char c);
 protected:
 
   /**

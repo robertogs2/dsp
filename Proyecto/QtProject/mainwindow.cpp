@@ -101,7 +101,6 @@ void MainWindow::update() {
 
         dspChanged_=false;
     }
-    
 }
 
 
@@ -115,149 +114,148 @@ void MainWindow::on_volumeSlider_valueChanged(int value){
 
 
 void MainWindow::on_button1_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[0], constants::upperFrequencies[0]);
+  button_pressed(0,0);
 }
 
 void MainWindow::on_button1_released(){
-  dsp_->setToneActive(false);
+  button_released(0,0);
 }
 
 void MainWindow::on_button2_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[0], constants::upperFrequencies[1]);
+  button_pressed(0,1);
 }
 
 void MainWindow::on_button2_released(){
-  dsp_->setToneActive(false);
+  button_released(0,1);
 }
 
 void MainWindow::on_button3_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[0], constants::upperFrequencies[2]);
+  button_pressed(0,2);
 }
 
 void MainWindow::on_button3_released(){
-  dsp_->setToneActive(false);
+  button_released(0,2);
 }
 
 void MainWindow::on_buttonA_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[0], constants::upperFrequencies[3]);
+  button_pressed(0,3);
 }
 
 void MainWindow::on_buttonA_released(){
-  dsp_->setToneActive(false);
+  button_released(0,3);
 }
 
 void MainWindow::on_button4_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[1], constants::upperFrequencies[0]);
+  button_pressed(1,0);
 }
 
 void MainWindow::on_button4_released(){
-  dsp_->setToneActive(false);
+  button_released(1,0);
 }
 
 void MainWindow::on_button5_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[1], constants::upperFrequencies[1]);
+  button_pressed(1,1);
 }
 
 void MainWindow::on_button5_released(){
-  dsp_->setToneActive(false);
+  button_released(1,1);
 }
 
 void MainWindow::on_button6_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[1], constants::upperFrequencies[2]);
+  button_pressed(1,2);
 }
 
 void MainWindow::on_button6_released(){
-  dsp_->setToneActive(false);
+  button_released(1,2);
 }
 
 void MainWindow::on_buttonB_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[1], constants::upperFrequencies[3]);
+  button_pressed(1,3);
 }
 
 void MainWindow::on_buttonB_released(){
-  dsp_->setToneActive(false);
+  button_released(1,3);
 }
 
 void MainWindow::on_button7_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[2], constants::upperFrequencies[0]);
+  button_pressed(2,0);
 }
 
 void MainWindow::on_button7_released(){
-  dsp_->setToneActive(false);
+  button_released(2,0);
 }
 
 void MainWindow::on_button8_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[2], constants::upperFrequencies[1]);
+  button_pressed(2,1);
 }
 
 void MainWindow::on_button8_released(){
-  dsp_->setToneActive(false);
+  button_released(2,1);
 }
 
 void MainWindow::on_button9_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[2], constants::upperFrequencies[2]);
+  button_pressed(2,2);
 }
 
 void MainWindow::on_button9_released(){
-  dsp_->setToneActive(false);
+  button_released(2,2);
 }
 
 void MainWindow::on_buttonC_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[2], constants::upperFrequencies[3]);
+  button_pressed(2,3);
 }
 
 void MainWindow::on_buttonC_released(){
-  dsp_->setToneActive(false);
+  button_released(2,3);
 }
 
 void MainWindow::on_buttonS_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[3], constants::upperFrequencies[0]);
+  button_pressed(3,0);
 }
 
 void MainWindow::on_buttonS_released(){
-  dsp_->setToneActive(false);
+  button_released(3,0);
 }
 
 void MainWindow::on_button0_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[3], constants::upperFrequencies[1]);
+  button_pressed(3,1);
 }
 
 void MainWindow::on_button0_released(){
-  dsp_->setToneActive(false); 
+  button_released(3,1);
 }
 
 void MainWindow::on_buttonN_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[3], constants::upperFrequencies[2]);
+  button_pressed(3,2);
 }
 
 void MainWindow::on_buttonN_released(){
-  dsp_->setChainActive(true);
-  dsp_->setUChain("0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
-  dsp_->setChainFlank(true);
+  bool start = dsp_->getUChain().size() > 0;
+  dsp_->setChainActive(start);
+  //dsp_->setUChain("26557321");
+  dsp_->setChainFlank(start);
   dsp_->setPChain(0);
   // dsp_->setToneActive(false); // Comments as we need this to start playing the 
 }
 
 void MainWindow::on_buttonD_pressed(){
-  dsp_->setToneActive(true);
-  dsp_->setFrequencies(constants::sideFrequencies[3], constants::upperFrequencies[3]);
+  button_pressed(3,3);
 }
 
 void MainWindow::on_buttonD_released(){
+  button_released(3,3);
+}
+
+void MainWindow::button_pressed(int i, int j){
+  dsp_->setToneActive(true);
+  float f1 = constants::sideFrequencies[i];
+  float f2 = constants::upperFrequencies[j];
+  dsp_->setFrequencies(f1, f2);
+}
+
+void MainWindow::button_released(int i, int j){
   dsp_->setToneActive(false);
+  std::cout << dsp_->getUChain() << std::endl;
+  dsp_->addToChain(utils::getChar(i, j));
+  i=j;
 }

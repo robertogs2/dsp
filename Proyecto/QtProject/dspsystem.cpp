@@ -164,12 +164,8 @@ void dspSystem::setFrequencies(const float tonef1, const float tonef2){
   osc_->setFrequency(tonef1, tonef2);
 }
 
-void dspSystem::setToneActive(bool toneActive){
-  osc_->setActive(toneActive);
-}
-bool dspSystem::getToneActive(){
-  return osc_->getActive();
-}
+void dspSystem::setToneActive(bool toneActive){osc_->setActive(toneActive);}
+bool dspSystem::getToneActive(){return osc_->getActive();}
 
 void dspSystem::setUChain(std::string uChain){uChain_ = uChain;}
 std::string dspSystem::getUChain(){return uChain_;}
@@ -185,3 +181,7 @@ bool dspSystem::getChainActive(){return chainActive_;}
 
 void dspSystem::setChainFlank(bool chainFlank){chainFlank_=chainFlank;}
 bool dspSystem::getChainFlank(){return chainFlank_;}
+
+void dspSystem::addToChain(char c){
+  uChain_ += c;
+}
