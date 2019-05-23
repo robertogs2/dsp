@@ -32,6 +32,8 @@
 #include "controlvolume.h"
 #include "doscillator.h"
 #include "constants.h"
+#include "string.h"
+#include "utils.h"
 
 class dspSystem : public processor {
 public:
@@ -82,8 +84,26 @@ public:
 
   void setFrequencies(const float tonef1, const float tonef2);
 
+
+  // Sets directly to oscillator
   void setToneActive(bool toneActive);
   bool getToneActive();
+
+  void setUChain(std::string uChain);
+  std::string getUChain();
+
+  void setPChain(int p);
+  int getPChain();
+
+  void setK(int k);
+  int getK();
+
+  void setChainActive(bool chainActive);
+  bool getChainActive();
+
+  void setChainFlank(bool chainFlank);
+  bool getChainFlank();
+
 
 protected:
 
@@ -114,9 +134,13 @@ protected:
    * Oscilator variables
    */
 
-  bool toneActive_;
   doscillator* osc_;
   
+  std::string uChain_;
+  int p_;
+  int k_;
+  bool chainActive_, chainFlank_;
+
 };
 
 

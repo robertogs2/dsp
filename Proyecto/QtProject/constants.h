@@ -13,6 +13,7 @@ public:
     static constexpr float upperFrequencies[4] = {1209, 1336, 1477, 1633};
     static constexpr float sideFrequencies[4] = {697, 770, 852, 941};
 
+    static const int limit40 = 1763;
     
 };
 

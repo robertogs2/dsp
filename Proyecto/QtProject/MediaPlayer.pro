@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     dspsystem.cpp \
     controlvolume.cpp \
     oscillator.cpp \
-    doscillator.cpp
+    doscillator.cpp \
+    utils.cpp
 
 HEADERS  += mainwindow.h \
             jack.h \
@@ -31,6 +32,7 @@ HEADERS  += mainwindow.h \
     controlvolume.h \
     oscillator.h \
     constants.h \
-    doscillator.h
+    doscillator.h \
+    utils.h
 
 FORMS    += mainwindow.ui

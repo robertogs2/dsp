@@ -67,7 +67,6 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
   bufferSize_ = bufferSize;
 
   volumeGain_ = 0;
-  toneActive_=false;
 
   delete cv_;
   cv_=new controlVolume();
@@ -75,7 +74,7 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
   delete osc_;
   osc_ = new doscillator();
   osc_->init(sampleRate_, bufferSize_, 1, 0, 1, 0);
-  osc_->setActive(toneActive_);
+  osc_->setActive(false);
 
   return true;
 }
@@ -89,12 +88,45 @@ bool dspSystem::process(float* in,float* out) {
   float* tmpIn = in;
   float* tmpOut = out;
 
-  if(toneActive_){
-    //Logic for times and frequencies to process
-  }
-
+  // Generates oscillation
   osc_->generateSignal();
   float* fsig=osc_->getSignal();
+
+  if(chainActive_){//We need to reproduce a chain
+    int i = 0;
+    bool trigger = false;
+    for(; i < bufferSize_; ++i){
+      // Triggering code
+      trigger = k_ == constants::limit40;
+      if(trigger){ // Happens once every time there is a change
+        chainFlank_ = !chainFlank_;
+        if(chainFlank_){
+          osc_->setActive(true);
+          p_++; // Increase index for processing
+          if(p_ > uChain_.size()){ // Happens only when there is nothing more to process
+            setChainActive(false);
+            osc_->setActive(false);
+            break;
+          }
+          // Updates frequencies for the oscillator
+          float f1, f2;
+          utils::getFrequency(uChain_[p_], f1, f2);
+          osc_->setFrequency(f1, f2);
+          osc_->generateSignal();
+          fsig=osc_->getSignal();
+        } // end if chain flank
+        else{
+          osc_->setActive(false);
+        }
+        k_=0;
+      } // end if trigger
+      k_++;
+    } // end for
+    tmpOut[i] = fsig[i];
+    
+  }
+
+  //Copies the signal
   for(int i=0; i<bufferSize_;++i){
     tmpOut[i]=fsig[i];
   }
@@ -138,3 +170,18 @@ void dspSystem::setToneActive(bool toneActive){
 bool dspSystem::getToneActive(){
   return osc_->getActive();
 }
+
+void dspSystem::setUChain(std::string uChain){uChain_ = uChain;}
+std::string dspSystem::getUChain(){return uChain_;}
+
+void dspSystem::setPChain(int p){p_=p;}
+int dspSystem::getPChain(){return p_;}
+
+void dspSystem::setK(int k){k_=k;}
+int dspSystem::getK(){return k_;}
+
+void dspSystem::setChainActive(bool chainActive){chainActive_=chainActive;}
+bool dspSystem::getChainActive(){return chainActive_;}
+
+void dspSystem::setChainFlank(bool chainFlank){chainFlank_=chainFlank;}
+bool dspSystem::getChainFlank(){return chainFlank_;}

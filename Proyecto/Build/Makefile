@@ -35,7 +35,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = MediaPlayer1.0.0
-DISTDIR = /home/alejandro/Documents/GitHub/DSP/Proyecto/Build/.tmp/MediaPlayer1.0.0
+DISTDIR = /home/roberto/Documents/GitHub/DSP/Proyecto/Build/.tmp/MediaPlayer1.0.0
 LINK          = g++
 LFLAGS        = 
 LIBS          = $(SUBLIBS) -lfftw3f -ljack -lsndfile -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -56,7 +56,8 @@ SOURCES       = ../QtProject/main.cpp \
 		../QtProject/dspsystem.cpp \
 		../QtProject/controlvolume.cpp \
 		../QtProject/oscillator.cpp \
-		../QtProject/doscillator.cpp moc_mainwindow.cpp
+		../QtProject/doscillator.cpp \
+		../QtProject/utils.cpp moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		jack.o \
@@ -64,6 +65,7 @@ OBJECTS       = main.o \
 		controlvolume.o \
 		oscillator.o \
 		doscillator.o \
+		utils.o \
 		moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -95,6 +97,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_input_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_kms_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimedia.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri \
@@ -146,13 +150,15 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../QtProject/controlvolume.h \
 		../QtProject/oscillator.h \
 		../QtProject/constants.h \
-		../QtProject/doscillator.h ../QtProject/main.cpp \
+		../QtProject/doscillator.h \
+		../QtProject/utils.h ../QtProject/main.cpp \
 		../QtProject/mainwindow.cpp \
 		../QtProject/jack.cpp \
 		../QtProject/dspsystem.cpp \
 		../QtProject/controlvolume.cpp \
 		../QtProject/oscillator.cpp \
-		../QtProject/doscillator.cpp
+		../QtProject/doscillator.cpp \
+		../QtProject/utils.cpp
 QMAKE_TARGET  = MediaPlayer
 DESTDIR       = 
 TARGET        = MediaPlayer
@@ -194,6 +200,8 @@ Makefile: ../QtProject/MediaPlayer.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/lin
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_input_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_kms_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimedia.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri \
@@ -273,6 +281,8 @@ Makefile: ../QtProject/MediaPlayer.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/lin
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_input_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_kms_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimedia.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri:
@@ -336,8 +346,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../QtProject/mainwindow.h ../QtProject/jack.h ../QtProject/processor.h ../QtProject/dspsystem.h ../QtProject/controlvolume.h ../QtProject/oscillator.h ../QtProject/constants.h ../QtProject/doscillator.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../QtProject/main.cpp ../QtProject/mainwindow.cpp ../QtProject/jack.cpp ../QtProject/dspsystem.cpp ../QtProject/controlvolume.cpp ../QtProject/oscillator.cpp ../QtProject/doscillator.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../QtProject/mainwindow.h ../QtProject/jack.h ../QtProject/processor.h ../QtProject/dspsystem.h ../QtProject/controlvolume.h ../QtProject/oscillator.h ../QtProject/constants.h ../QtProject/doscillator.h ../QtProject/utils.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../QtProject/main.cpp ../QtProject/mainwindow.cpp ../QtProject/jack.cpp ../QtProject/dspsystem.cpp ../QtProject/controlvolume.cpp ../QtProject/oscillator.cpp ../QtProject/doscillator.cpp ../QtProject/utils.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../QtProject/mainwindow.ui $(DISTDIR)/
 
 
@@ -381,7 +391,7 @@ moc_mainwindow.cpp: ../QtProject/dspsystem.h \
 		../QtProject/mainwindow.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/alejandro/Documents/GitHub/DSP/Proyecto/QtProject -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../QtProject/mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/roberto/Documents/GitHub/DSP/Proyecto/QtProject -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../QtProject/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -440,6 +450,10 @@ oscillator.o: ../QtProject/oscillator.cpp ../QtProject/oscillator.h
 
 doscillator.o: ../QtProject/doscillator.cpp ../QtProject/doscillator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o doscillator.o ../QtProject/doscillator.cpp
+
+utils.o: ../QtProject/utils.cpp ../QtProject/utils.h \
+		../QtProject/constants.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o utils.o ../QtProject/utils.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

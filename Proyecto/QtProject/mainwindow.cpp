@@ -31,6 +31,7 @@
 #include "jack.h"
 #include "constants.h"
 #include <string>
+#include <iostream>
 
 #undef _DSP_DEBUG
 #define _DSP_DEBUG
@@ -236,7 +237,7 @@ void MainWindow::on_button0_pressed(){
 }
 
 void MainWindow::on_button0_released(){
-  dsp_->setToneActive(false);
+  dsp_->setToneActive(false); 
 }
 
 void MainWindow::on_buttonN_pressed(){
@@ -245,7 +246,11 @@ void MainWindow::on_buttonN_pressed(){
 }
 
 void MainWindow::on_buttonN_released(){
-  dsp_->setToneActive(false);
+  dsp_->setChainActive(true);
+  dsp_->setUChain("0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
+  dsp_->setChainFlank(true);
+  dsp_->setPChain(0);
+  // dsp_->setToneActive(false); // Comments as we need this to start playing the 
 }
 
 void MainWindow::on_buttonD_pressed(){
