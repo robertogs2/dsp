@@ -53,7 +53,7 @@ public:
     QPushButton *buttonD;
     QPushButton *buttonC;
     QPushButton *button1;
-    QLabel *label;
+    QLabel *labelDigits;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -1008,11 +1008,11 @@ public:
 
         gridLayout->addWidget(button1, 0, 0, 1, 1);
 
-        label = new QLabel(centralWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(110, 60, 341, 51));
-        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy);
+        labelDigits = new QLabel(centralWidget);
+        labelDigits->setObjectName(QStringLiteral("labelDigits"));
+        labelDigits->setGeometry(QRect(110, 60, 341, 51));
+        sizePolicy.setHeightForWidth(labelDigits->sizePolicy().hasHeightForWidth());
+        labelDigits->setSizePolicy(sizePolicy);
         QFont font;
         font.setFamily(QStringLiteral("MathJax_Typewriter"));
         font.setPointSize(40);
@@ -1020,13 +1020,13 @@ public:
         font.setWeight(50);
         font.setStrikeOut(false);
         font.setKerning(true);
-        label->setFont(font);
-        label->setFrameShape(QFrame::Box);
-        label->setFrameShadow(QFrame::Plain);
-        label->setLineWidth(3);
-        label->setMidLineWidth(0);
-        label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
-        label->setWordWrap(false);
+        labelDigits->setFont(font);
+        labelDigits->setFrameShape(QFrame::Box);
+        labelDigits->setFrameShadow(QFrame::Plain);
+        labelDigits->setLineWidth(3);
+        labelDigits->setMidLineWidth(0);
+        labelDigits->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+        labelDigits->setWordWrap(false);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -1064,7 +1064,7 @@ public:
         buttonD->setText(QApplication::translate("MainWindow", "D", Q_NULLPTR));
         buttonC->setText(QApplication::translate("MainWindow", "C", Q_NULLPTR));
         button1->setText(QApplication::translate("MainWindow", "1", Q_NULLPTR));
-        label->setText(QApplication::translate("MainWindow", "*12345678", Q_NULLPTR));
+        labelDigits->setText(QString());
     } // retranslateUi
 
 };

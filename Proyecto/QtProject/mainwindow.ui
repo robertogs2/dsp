@@ -6918,7 +6918,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="labelDigits">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -6956,7 +6956,7 @@
      <number>0</number>
     </property>
     <property name="text">
-     <string>*12345678</string>
+     <string/>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

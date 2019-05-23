@@ -106,6 +106,10 @@ bool dspSystem::process(float* in,float* out) {
           if(p_ > uChain_.size()){ // Happens only when there is nothing more to process
             setChainActive(false);
             osc_->setActive(false);
+            setUChain("");          //Resets the chain
+            std::cout << "finish" << std::endl;
+            //osc_->generateSignal();
+            //fsig=osc_->getSignal();
             break;
           }
           // Updates frequencies for the oscillator
@@ -123,8 +127,7 @@ bool dspSystem::process(float* in,float* out) {
       k_++;
     } // end for
     tmpOut[i] = fsig[i];
-    
-  }
+  } // end if chain
 
   //Copies the signal
   for(int i=0; i<bufferSize_;++i){

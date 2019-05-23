@@ -231,11 +231,13 @@ void MainWindow::on_buttonN_pressed(){
 
 void MainWindow::on_buttonN_released(){
   bool start = dsp_->getUChain().size() > 0;
-  dsp_->setChainActive(start);
-  //dsp_->setUChain("26557321");
-  dsp_->setChainFlank(start);
-  dsp_->setPChain(0);
-  // dsp_->setToneActive(false); // Comments as we need this to start playing the 
+  if(start){ // There is a chain to play
+    dsp_->setToneActive(true);
+    dsp_->setChainActive(true);
+    dsp_->setChainFlank(true);
+    dsp_->setPChain(0);
+    ui->labelDigits->setText("");
+  }
 }
 
 void MainWindow::on_buttonD_pressed(){
@@ -247,15 +249,18 @@ void MainWindow::on_buttonD_released(){
 }
 
 void MainWindow::button_pressed(int i, int j){
+
+  // Activates the oscillation while it is runnings
   dsp_->setToneActive(true);
   float f1 = constants::sideFrequencies[i];
   float f2 = constants::upperFrequencies[j];
   dsp_->setFrequencies(f1, f2);
+
+  // Adds to the chain as soon as it is pressed
+  dsp_->addToChain(utils::getChar(i, j));
+  ui->labelDigits->setText(QString::fromStdString(dsp_->getUChain()));
 }
 
 void MainWindow::button_released(int i, int j){
   dsp_->setToneActive(false);
-  std::cout << dsp_->getUChain() << std::endl;
-  dsp_->addToChain(utils::getChar(i, j));
-  i=j;
 }
