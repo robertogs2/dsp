@@ -33,6 +33,8 @@
 #include <QFileDialog>
 
 #include "dspsystem.h"
+#include "constants.h"
+#include "utils.h"
 
 namespace Ui {
 class MainWindow;
@@ -84,16 +86,47 @@ private:
      bool dspChanged_;
      
    private slots:
-     void on_fileEdit_returnPressed();
-     void on_fileButton_clicked();
+     //void on_fileEdit_returnPressed();
+     //void on_fileButton_clicked();
      void on_volumeSlider_valueChanged(int value);
 
+     void on_button1_pressed();
+     void on_button1_released();
+     void on_button2_pressed();
+     void on_button2_released();
+     void on_button3_pressed();
+     void on_button3_released();
+     void on_buttonA_pressed();
+     void on_buttonA_released();
+     void on_button4_pressed();
+     void on_button4_released();
+     void on_button5_pressed();
+     void on_button5_released();
+     void on_button6_pressed();
+     void on_button6_released();
+     void on_buttonB_pressed();
+     void on_buttonB_released();
+     void on_button7_pressed();
+     void on_button7_released();
+     void on_button8_pressed();
+     void on_button8_released();
+     void on_button9_pressed();
+     void on_buttonC_pressed();
+     void on_buttonC_released();
+     void on_button9_released();
+     void on_buttonS_pressed();
+     void on_buttonS_released();
+     void on_button0_pressed();
+     void on_button0_released();
+     void on_buttonN_pressed();
+     void on_buttonN_released();
+     void on_buttonD_pressed();
+     void on_buttonD_released();
 
      void update();
-
+     void button_pressed(int i, int j);
+     void button_released(int i, int j);
 };
-
-
 
 
 #endif // MAINWINDOW_H

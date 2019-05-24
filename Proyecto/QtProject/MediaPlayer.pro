@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui multimedia
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,7 +21,9 @@ SOURCES += main.cpp\
     jack.cpp \
     dspsystem.cpp \
     controlvolume.cpp \
-    oscillator.cpp
+    oscillator.cpp \
+    doscillator.cpp \
+    utils.cpp
 
 HEADERS  += mainwindow.h \
             jack.h \
@@ -29,6 +31,8 @@ HEADERS  += mainwindow.h \
             dspsystem.h \
     controlvolume.h \
     oscillator.h \
-    constants.h
+    constants.h \
+    doscillator.h \
+    utils.h
 
 FORMS    += mainwindow.ui
