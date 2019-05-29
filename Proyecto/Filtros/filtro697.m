@@ -1,0 +1,129 @@
+function filtro697()
+
+    %Frecuencia de Muestreo
+    Fs = 44100;
+    Ts = 1/Fs;
+    
+    t = 0:Ts:0.04;
+    
+    %x0 = sin(2*pi*852*t)+sin(2*pi*1209*t); %7
+    %x1 = sin(2*pi*697*t)+sin(2*pi*1633*t); %A
+    %x2 = sin(2*pi*941*t)+sin(2*pi*1477*t); %#
+    %x3 = sin(2*pi*697*t)+sin(2*pi*1336*t); %2
+    %x4 = sin(2*pi*770*t)+sin(2*pi*1209*t); %4
+    
+    x0 = sin(2*pi*697*t)+sin(2*pi*1633*t); %A
+    x1 = 0*t;
+    x2 = sin(2*pi*941*t)+sin(2*pi*1477*t); %#
+    x3 = 0*t;
+    x4 = sin(2*pi*697*t)+sin(2*pi*1336*t); %2
+    x5 = 0*t;
+    x6 = sin(2*pi*697*t)+sin(2*pi*1633*t); %A
+    x7 = 0*t;
+    x8 = sin(2*pi*770*t)+sin(2*pi*1209*t); %4
+    x9 = 0*t;
+    
+    x = horzcat(x0,x1);
+    x = horzcat(x,x2);
+    x = horzcat(x,x3);
+    x = horzcat(x,x4);
+    x = horzcat(x,x5);
+    x = horzcat(x,x6);
+    x = horzcat(x,x7);
+    x = horzcat(x,x8);
+    x = horzcat(x,x9);
+    
+    t = 0:Ts:0.04*10+9*Ts;
+    
+    %Tipo 1
+    %Constantes del filtro
+    gain = 0.001494834340342545819096953252369530674;
+    
+    b0 = 1;
+    b1 = 0;
+    b2 = -1;
+    a0 = 1;
+    a1 = -1.988317610643689725691274361452087759972;
+    a2 = 0.998417227816283170405142755043925717473;
+    
+    c0 = 1;
+    c1 = 0;
+    c2 = -1;
+    d0 = 1;
+    d1 = -1.988862765582029901167970820097252726555;
+    d2 = 0.998457206963950016920250618568388745189;
+    
+    
+    %{
+    %Tipo 2
+    %Constantes del filtro
+    gain = 0.25791386681028977134744195609528105706;
+    
+    b0 = 1;
+    b1 = -1.991587928200102108888813745579682290554;
+    b2 = 1;
+    a0 = 1;
+    a1 = -1.987055571411412646654071068041957914829;
+    a2 = 0.997190992485591620742013674316694959998;
+    
+    c0 = 1;
+    c1 = -1.988463488139719181901909905718639492989;
+    c2 = 1;
+    d0 = 1;
+    d1 = -1.987724190659003298264906334225088357925;
+    d2 = 0.997273206621153707196469895279733464122;
+    %}
+
+    y = zeros(1, length(x)-1); %Vector la salida filtro 1
+    z = zeros(1, length(x)-1); %Vector la salida filtro 2
+
+    %Condiciones iniciales
+    y1 = 0; %y(n-1)
+    y2 = 0;
+    x1 = 0;
+    x2 = 0;
+    z1 = 0;
+    z2 = 0;
+    
+    %Aplicar el filtro del ejercicio 8
+    for i = 1:length(x)
+        y(i) = (gain*(b0*x(i)+b1*x1+b2*x2)-a1*y1-a2*y2)/a0;
+        y2 = y1;
+        y1 = y(i);
+        x2 = x1;
+        x1 = x(i);
+    end
+    
+    for i = 1:length(y)
+        z(i) = (gain*(c0*y(i)+c1*y1+c2*y2)-d1*z1-d2*z2)/d0;
+        z2 = z1;
+        z1 = z(i);
+        y2 = y1;
+        y1 = y(i);
+    end
+    
+    %x = x.^2;
+    %y = y.^2;
+    z = z.^2;
+    
+    %for i = 1:length(x)
+    %    x(i) = x(i)+xep;
+    %    xep = x(i);
+    %end
+    
+    zp = 0;
+    for i = 1:length(z)
+        z(i) = z(i)+zp;
+        zp = z(i);
+    end
+    
+    figure;
+    subplot(3,1,1);
+    plot(t,x);
+    
+    subplot(3,1,2);
+    plot(t,y);
+    
+    subplot(3,1,3);
+    plot(t,z);
+end

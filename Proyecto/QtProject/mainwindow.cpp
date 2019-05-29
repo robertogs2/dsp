@@ -31,6 +31,7 @@
 #include "jack.h"
 #include "constants.h"
 #include <string>
+#include <iostream>
 
 #undef _DSP_DEBUG
 #define _DSP_DEBUG
@@ -76,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent) :
       if ((*it)=="-v" || (*it)=="--verbose") {
         verbose_=true;
       } else if ((*it).indexOf(".wav",0,Qt::CaseInsensitive)>0) {
-        ui->fileEdit->setText(*it);
+        //ui->fileEdit->setText(*it);
         std::string tmp(qPrintable(*it));
         jack::playAlso(tmp.c_str());
       }
@@ -100,7 +101,6 @@ void MainWindow::update() {
 
         dspChanged_=false;
     }
-    
 }
 
 
@@ -109,34 +109,158 @@ void MainWindow::on_volumeSlider_valueChanged(int value){
         dspChanged_=true;
     }
     dsp_->updateVolume(value);
-    ;
 }
 
 
-void MainWindow::on_fileButton_clicked() {
-  selectedFiles_ =
-      QFileDialog::getOpenFileNames(this,
-                                   "Select one or more audio files to open",
-                                   ui->fileEdit->text(),
-                                   "WAV Files (*.wav)");
 
-  if (!selectedFiles_.empty()) {
-    ui->fileEdit->setText(*selectedFiles_.begin());
+void MainWindow::on_button1_pressed(){
+  button_pressed(0,0);
+}
 
-    jack::stopFiles();
-    QStringList::iterator it;
-    for (it=selectedFiles_.begin();it!=selectedFiles_.end();++it) {
-      std::string tmp(qPrintable(*it));
-      jack::playAlso(tmp.c_str());
-    }
+void MainWindow::on_button1_released(){
+  button_released(0,0);
+}
+
+void MainWindow::on_button2_pressed(){
+  button_pressed(0,1);
+}
+
+void MainWindow::on_button2_released(){
+  button_released(0,1);
+}
+
+void MainWindow::on_button3_pressed(){
+  button_pressed(0,2);
+}
+
+void MainWindow::on_button3_released(){
+  button_released(0,2);
+}
+
+void MainWindow::on_buttonA_pressed(){
+  button_pressed(0,3);
+}
+
+void MainWindow::on_buttonA_released(){
+  button_released(0,3);
+}
+
+void MainWindow::on_button4_pressed(){
+  button_pressed(1,0);
+}
+
+void MainWindow::on_button4_released(){
+  button_released(1,0);
+}
+
+void MainWindow::on_button5_pressed(){
+  button_pressed(1,1);
+}
+
+void MainWindow::on_button5_released(){
+  button_released(1,1);
+}
+
+void MainWindow::on_button6_pressed(){
+  button_pressed(1,2);
+}
+
+void MainWindow::on_button6_released(){
+  button_released(1,2);
+}
+
+void MainWindow::on_buttonB_pressed(){
+  button_pressed(1,3);
+}
+
+void MainWindow::on_buttonB_released(){
+  button_released(1,3);
+}
+
+void MainWindow::on_button7_pressed(){
+  button_pressed(2,0);
+}
+
+void MainWindow::on_button7_released(){
+  button_released(2,0);
+}
+
+void MainWindow::on_button8_pressed(){
+  button_pressed(2,1);
+}
+
+void MainWindow::on_button8_released(){
+  button_released(2,1);
+}
+
+void MainWindow::on_button9_pressed(){
+  button_pressed(2,2);
+}
+
+void MainWindow::on_button9_released(){
+  button_released(2,2);
+}
+
+void MainWindow::on_buttonC_pressed(){
+  button_pressed(2,3);
+}
+
+void MainWindow::on_buttonC_released(){
+  button_released(2,3);
+}
+
+void MainWindow::on_buttonS_pressed(){
+  button_pressed(3,0);
+}
+
+void MainWindow::on_buttonS_released(){
+  button_released(3,0);
+}
+
+void MainWindow::on_button0_pressed(){
+  button_pressed(3,1);
+}
+
+void MainWindow::on_button0_released(){
+  button_released(3,1);
+}
+
+void MainWindow::on_buttonN_pressed(){
+  button_pressed(3,2);
+}
+
+void MainWindow::on_buttonN_released(){
+  bool start = dsp_->getUChain().size() > 0;
+  if(start){ // There is a chain to play
+    dsp_->setToneActive(true);
+    dsp_->setChainActive(true);
+    dsp_->setChainFlank(true);
+    dsp_->setPChain(0);
+    ui->labelDigits->setText("");
   }
 }
 
+void MainWindow::on_buttonD_pressed(){
+  button_pressed(3,3);
+}
 
-void MainWindow::on_fileEdit_returnPressed() {
-  jack::stopFiles();
-  std::string tmp(qPrintable(ui->fileEdit->text()));
-  if (!tmp.empty()) {
-    jack::playAlso(tmp.c_str());
-  }
+void MainWindow::on_buttonD_released(){
+  button_released(3,3);
+}
+
+void MainWindow::button_pressed(int i, int j){
+
+  // Activates the oscillation while it is runnings
+  dsp_->setToneActive(true);
+  float f1 = constants::sideFrequencies[i];
+  float f2 = constants::upperFrequencies[j];
+  dsp_->setFrequencies(f1, f2);
+
+  // Adds to the chain as soon as it is pressed
+  dsp_->addToChain(utils::getChar(i, j));
+  ui->labelDigits->setText(QString::fromStdString(dsp_->getUChain()));
+}
+
+void MainWindow::button_released(int i, int j){
+  dsp_->setToneActive(false);
 }

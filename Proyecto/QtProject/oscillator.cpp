@@ -9,6 +9,7 @@ oscillator::oscillator():
 
 oscillator::~oscillator(){
 	//Should remove signal
+	delete signal_;
 }
 
 void oscillator::init(const int sampleRate, const int bufferSize, const float amplitude, const float frequency){
@@ -26,7 +27,7 @@ void oscillator::calculateConstants(){
 
 void oscillator::generateSignal(){
 	for(int i = 0; i < bufferSize_; ++i){
-		signal_[i]=active_ ? a1_*y1_-y2_ : 0; //If oscilator is active then use it
+		signal_[i]=active_ ? a1_*y1_-y2_ : 0; //If oscillator is active then use it
 		y2_=y1_;
 		y1_=signal_[i];
 	}

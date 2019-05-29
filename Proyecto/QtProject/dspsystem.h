@@ -30,8 +30,10 @@
 
 #include "processor.h"
 #include "controlvolume.h"
-#include "oscillator.h"
+#include "doscillator.h"
 #include "constants.h"
+#include "string.h"
+#include "utils.h"
 
 class dspSystem : public processor {
 public:
@@ -70,8 +72,39 @@ public:
    */
   virtual int setSampleRate(const int sampleRate);
 
+  /*
+   * Updates volume for the system
+   */
+
+
   void updateVolume(int value);
 
+
+  void makeSound();
+
+  void setFrequencies(const float tonef1, const float tonef2);
+
+
+  // Sets directly to oscillator
+  void setToneActive(bool toneActive);
+  bool getToneActive();
+
+  void setUChain(std::string uChain);
+  std::string getUChain();
+
+  void setPChain(int p);
+  int getPChain();
+
+  void setK(int k);
+  int getK();
+
+  void setChainActive(bool chainActive);
+  bool getChainActive();
+
+  void setChainFlank(bool chainFlank);
+  bool getChainFlank();
+
+  void addToChain(char c);
 protected:
 
   /**
@@ -97,8 +130,17 @@ protected:
   controlVolume* cv_;
 
 
-  oscillator* osc_;
+  /**
+   * Oscilator variables
+   */
+
+  doscillator* osc_;
   
+  std::string uChain_;
+  int p_;
+  int k_;
+  bool chainActive_, chainFlank_;
+
 };
 
 
