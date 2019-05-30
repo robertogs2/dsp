@@ -17,7 +17,7 @@
  */
 
 /**
- * \file   freqFilter.h
+ * \file   processor.h
  *         Implements filtering in the frequency domain
  * \author Pablo Alvarado
  * \date   2010.12.12

@@ -1,0 +1,68 @@
+\hypertarget{classjack}{}\section{jack Class Reference}
+\label{classjack}\index{jack@{jack}}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classjack_adcd812fb47ff7c7081208fc7b5f65e89}{init} (\hyperlink{classprocessor}{processor} $\ast$proc)
+\item 
+static void \hyperlink{classjack_ac0c163234845cd6b171156395f28dd6f}{close} ()
+\item 
+static int \hyperlink{classjack_a2af30016c4bad33ebfc9ba7d2db4451a}{process} (jack\+\_\+default\+\_\+audio\+\_\+sample\+\_\+t $\ast$in, jack\+\_\+default\+\_\+audio\+\_\+sample\+\_\+t $\ast$out)
+\item 
+static bool \hyperlink{classjack_a4871a8263be867ba8ffbb5f81a19b547}{play} (const char $\ast$filename)
+\item 
+static bool \hyperlink{classjack_a59ee9050b7aaa73ca252606818dc767d}{play\+Also} (const char $\ast$filename)
+\item 
+static bool \hyperlink{classjack_a9b41aab061c8ce636b45c7e82212ed5c}{stop\+Files} ()
+\end{DoxyCompactItemize}
+\subsection*{Data used to play audio files}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classjack_aea7ef5bc7b78cf5edb3ba0b8a3ad87da}\label{classjack_aea7ef5bc7b78cf5edb3ba0b8a3ad87da}} 
+class {\bfseries file\+Thread}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classjack_ac0c163234845cd6b171156395f28dd6f}\label{classjack_ac0c163234845cd6b171156395f28dd6f}} 
+\index{jack@{jack}!close@{close}}
+\index{close@{close}!jack@{jack}}
+\subsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily void jack\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Close jack \mbox{\Hypertarget{classjack_adcd812fb47ff7c7081208fc7b5f65e89}\label{classjack_adcd812fb47ff7c7081208fc7b5f65e89}} 
+\index{jack@{jack}!init@{init}}
+\index{init@{init}!jack@{jack}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void jack\+::init (\begin{DoxyParamCaption}\item[{\hyperlink{classprocessor}{processor} $\ast$}]{proc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Initialization of jack \mbox{\Hypertarget{classjack_a4871a8263be867ba8ffbb5f81a19b547}\label{classjack_a4871a8263be867ba8ffbb5f81a19b547}} 
+\index{jack@{jack}!play@{play}}
+\index{play@{play}!jack@{jack}}
+\subsubsection{\texorpdfstring{play()}{play()}}
+{\footnotesize\ttfamily bool jack\+::play (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Start playing the given file, stopping everything else \mbox{\Hypertarget{classjack_a59ee9050b7aaa73ca252606818dc767d}\label{classjack_a59ee9050b7aaa73ca252606818dc767d}} 
+\index{jack@{jack}!play\+Also@{play\+Also}}
+\index{play\+Also@{play\+Also}!jack@{jack}}
+\subsubsection{\texorpdfstring{play\+Also()}{playAlso()}}
+{\footnotesize\ttfamily bool jack\+::play\+Also (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Insert the given filename into the list of files to play \mbox{\Hypertarget{classjack_a2af30016c4bad33ebfc9ba7d2db4451a}\label{classjack_a2af30016c4bad33ebfc9ba7d2db4451a}} 
+\index{jack@{jack}!process@{process}}
+\index{process@{process}!jack@{jack}}
+\subsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily static int jack\+::process (\begin{DoxyParamCaption}\item[{jack\+\_\+default\+\_\+audio\+\_\+sample\+\_\+t $\ast$}]{in,  }\item[{jack\+\_\+default\+\_\+audio\+\_\+sample\+\_\+t $\ast$}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Process the in buffer and leave the filtered info in the out buffer. \mbox{\Hypertarget{classjack_a9b41aab061c8ce636b45c7e82212ed5c}\label{classjack_a9b41aab061c8ce636b45c7e82212ed5c}} 
+\index{jack@{jack}!stop\+Files@{stop\+Files}}
+\index{stop\+Files@{stop\+Files}!jack@{jack}}
+\subsubsection{\texorpdfstring{stop\+Files()}{stopFiles()}}
+{\footnotesize\ttfamily bool jack\+::stop\+Files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Stop playing from files (the capture will continue from the mic 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{jack_8h}{jack.\+h}\item 
+\hyperlink{jack_8cpp}{jack.\+cpp}\end{DoxyCompactItemize}

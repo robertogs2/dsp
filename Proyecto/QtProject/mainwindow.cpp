@@ -264,3 +264,26 @@ void MainWindow::button_pressed(int i, int j){
 void MainWindow::button_released(int i, int j){
   dsp_->setToneActive(false);
 }
+
+void MainWindow::on_buttonAC_clicked(){
+    dsp_->setUChain("");
+    ui->labelDigits->setText("");
+}
+
+void MainWindow::on_buttonDel_clicked(){
+  std::string chain = dsp_->getUChain();
+  chain = chain.substr(0, chain.size()-1);
+  dsp_->setUChain(chain);
+  ui->labelDigits->setText(QString::fromStdString(chain));
+}
+
+void MainWindow::on_buttonDesc_clicked(){
+  bool h = dsp_->getHanging();
+  if(h){
+    ui->buttonDesc->setText(QString::fromStdString(constants::desc));
+  }
+  else{
+    ui->buttonDesc->setText(QString::fromStdString(constants::col));
+  }
+  dsp_->setHanging(!h);
+}

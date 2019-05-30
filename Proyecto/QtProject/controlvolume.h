@@ -17,7 +17,7 @@
  */
 
 /**
- * \file   controlVolume.h
+ * \file   controlvolume.h
  *         Implements control volumen in the time domain
  * \author Jose Miguel Barboza
  * \date   2017.31.05

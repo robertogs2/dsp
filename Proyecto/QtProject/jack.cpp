@@ -17,7 +17,7 @@
  */
 
 /**
- * \file   jack.h
+ * \file   jack.cpp
  *         Implements the sound subsystem
  * \author Pablo Alvarado
  * \date   2010.12.12

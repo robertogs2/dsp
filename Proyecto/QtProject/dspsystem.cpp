@@ -17,7 +17,7 @@
  */
 
 /**
- * \file   freqFilter.h
+ * \file   dspsystem.cpp
  *         Implements filtering in the frequency domain
  * \author Pablo Alvarado/Jose Miguel Barboza
  * \date   2010.12.12/2017.05.26
@@ -68,13 +68,18 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
 
   volumeGain_ = 0;
 
+  // Volume
   delete cv_;
   cv_=new controlVolume();
 
+  // Oscillator
   delete osc_;
   osc_ = new doscillator();
   osc_->init(sampleRate_, bufferSize_, 1, 0, 1, 0);
   osc_->setActive(false);
+
+  //System
+  hanging_=false;
 
   return true;
 }
@@ -184,6 +189,9 @@ bool dspSystem::getChainActive(){return chainActive_;}
 
 void dspSystem::setChainFlank(bool chainFlank){chainFlank_=chainFlank;}
 bool dspSystem::getChainFlank(){return chainFlank_;}
+
+void dspSystem::setHanging(bool hanging){hanging_=hanging;}
+bool dspSystem::getHanging(){return hanging_;}
 
 void dspSystem::addToChain(char c){
   uChain_ += c;

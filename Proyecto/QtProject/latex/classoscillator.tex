@@ -1,0 +1,119 @@
+\hypertarget{classoscillator}{}\section{oscillator Class Reference}
+\label{classoscillator}\index{oscillator@{oscillator}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classoscillator_aa262e2f748efad616dbdeee5862e5e95}{oscillator} ()
+\item 
+\hyperlink{classoscillator_a17b258423ca052f1d873c40bd726f38a}{$\sim$oscillator} ()
+\item 
+void \hyperlink{classoscillator_ae1011086527d1596f735bbf3d8fc2fa7}{init} (const int sample\+Rate, const int buffer\+Size, const float amplitude, const float frequency)
+\item 
+void \hyperlink{classoscillator_a96348895fa640d490c96be06988d300c}{generate\+Signal} ()
+\item 
+\mbox{\Hypertarget{classoscillator_a9e34b14ec87f1a9de3ec29a6bec909ac}\label{classoscillator_a9e34b14ec87f1a9de3ec29a6bec909ac}} 
+float $\ast$ {\bfseries get\+Signal} ()
+\item 
+\mbox{\Hypertarget{classoscillator_a618693fdafc6351c3e613e27e5382c83}\label{classoscillator_a618693fdafc6351c3e613e27e5382c83}} 
+void {\bfseries set\+Sample\+Rate} (const int sample\+Rate)
+\item 
+\mbox{\Hypertarget{classoscillator_a2d00a3a68699673dddd8c670010cb049}\label{classoscillator_a2d00a3a68699673dddd8c670010cb049}} 
+void {\bfseries set\+Buffer\+Size} (const int buffer\+Size)
+\item 
+\mbox{\Hypertarget{classoscillator_a1d8ba95ce320bf00800e7e7e1230ab8c}\label{classoscillator_a1d8ba95ce320bf00800e7e7e1230ab8c}} 
+void {\bfseries set\+Amplitude} (const float amplitude)
+\item 
+\mbox{\Hypertarget{classoscillator_a1dc2d0a2440711486a9215e34ee27828}\label{classoscillator_a1dc2d0a2440711486a9215e34ee27828}} 
+void {\bfseries set\+Frequency} (const float frequency)
+\item 
+\mbox{\Hypertarget{classoscillator_af6a6cf14f63b55dd691ee90bab9dd70c}\label{classoscillator_af6a6cf14f63b55dd691ee90bab9dd70c}} 
+void {\bfseries update\+Variables} (const int sample\+Rate, const int buffer\+Size, const float amplitude, const float frequency)
+\item 
+\mbox{\Hypertarget{classoscillator_afb2d5a8580910db635cb21af49e2e154}\label{classoscillator_afb2d5a8580910db635cb21af49e2e154}} 
+void {\bfseries set\+Active} (bool active)
+\item 
+\mbox{\Hypertarget{classoscillator_a0ff4b5cec0bbbe737c9656c189bcb599}\label{classoscillator_a0ff4b5cec0bbbe737c9656c189bcb599}} 
+bool {\bfseries get\+Active} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classoscillator_aa5a47eb31b518199eaebe930ecef6a24}{sample\+Rate\+\_\+}
+\item 
+int \hyperlink{classoscillator_ab5c1b6a45c5d7026d91db8cbdd1e24ee}{buffer\+Size\+\_\+}
+\item 
+float \hyperlink{classoscillator_a5671a761666b50a469a4121ef0e0e864}{amplitude\+\_\+}
+\item 
+float \hyperlink{classoscillator_acf622297ac31e0013eff3fe230a5d9c9}{frequency\+\_\+}
+\item 
+float $\ast$ \hyperlink{classoscillator_ab8f77116d390662aa2e6ce1fa2acc54f}{signal\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classoscillator_aa262e2f748efad616dbdeee5862e5e95}\label{classoscillator_aa262e2f748efad616dbdeee5862e5e95}} 
+\index{oscillator@{oscillator}!oscillator@{oscillator}}
+\index{oscillator@{oscillator}!oscillator@{oscillator}}
+\subsubsection{\texorpdfstring{oscillator()}{oscillator()}}
+{\footnotesize\ttfamily oscillator\+::oscillator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructor \mbox{\Hypertarget{classoscillator_a17b258423ca052f1d873c40bd726f38a}\label{classoscillator_a17b258423ca052f1d873c40bd726f38a}} 
+\index{oscillator@{oscillator}!````~oscillator@{$\sim$oscillator}}
+\index{````~oscillator@{$\sim$oscillator}!oscillator@{oscillator}}
+\subsubsection{\texorpdfstring{$\sim$oscillator()}{~oscillator()}}
+{\footnotesize\ttfamily oscillator\+::$\sim$oscillator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classoscillator_a96348895fa640d490c96be06988d300c}\label{classoscillator_a96348895fa640d490c96be06988d300c}} 
+\index{oscillator@{oscillator}!generate\+Signal@{generate\+Signal}}
+\index{generate\+Signal@{generate\+Signal}!oscillator@{oscillator}}
+\subsubsection{\texorpdfstring{generate\+Signal()}{generateSignal()}}
+{\footnotesize\ttfamily void oscillator\+::generate\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Calculates next batch of signal \mbox{\Hypertarget{classoscillator_ae1011086527d1596f735bbf3d8fc2fa7}\label{classoscillator_ae1011086527d1596f735bbf3d8fc2fa7}} 
+\index{oscillator@{oscillator}!init@{init}}
+\index{init@{init}!oscillator@{oscillator}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void oscillator\+::init (\begin{DoxyParamCaption}\item[{const int}]{sample\+Rate,  }\item[{const int}]{buffer\+Size,  }\item[{const float}]{amplitude,  }\item[{const float}]{frequency }\end{DoxyParamCaption})}
+
+Initializer for current oscilator variables 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classoscillator_a5671a761666b50a469a4121ef0e0e864}\label{classoscillator_a5671a761666b50a469a4121ef0e0e864}} 
+\index{oscillator@{oscillator}!amplitude\+\_\+@{amplitude\+\_\+}}
+\index{amplitude\+\_\+@{amplitude\+\_\+}!oscillator@{oscillator}}
+\subsubsection{\texorpdfstring{amplitude\+\_\+}{amplitude\_}}
+{\footnotesize\ttfamily float oscillator\+::amplitude\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Amplitude \mbox{\Hypertarget{classoscillator_ab5c1b6a45c5d7026d91db8cbdd1e24ee}\label{classoscillator_ab5c1b6a45c5d7026d91db8cbdd1e24ee}} 
+\index{oscillator@{oscillator}!buffer\+Size\+\_\+@{buffer\+Size\+\_\+}}
+\index{buffer\+Size\+\_\+@{buffer\+Size\+\_\+}!oscillator@{oscillator}}
+\subsubsection{\texorpdfstring{buffer\+Size\+\_\+}{bufferSize\_}}
+{\footnotesize\ttfamily int oscillator\+::buffer\+Size\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Buffer size \mbox{\Hypertarget{classoscillator_acf622297ac31e0013eff3fe230a5d9c9}\label{classoscillator_acf622297ac31e0013eff3fe230a5d9c9}} 
+\index{oscillator@{oscillator}!frequency\+\_\+@{frequency\+\_\+}}
+\index{frequency\+\_\+@{frequency\+\_\+}!oscillator@{oscillator}}
+\subsubsection{\texorpdfstring{frequency\+\_\+}{frequency\_}}
+{\footnotesize\ttfamily float oscillator\+::frequency\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Frequency for signal \mbox{\Hypertarget{classoscillator_aa5a47eb31b518199eaebe930ecef6a24}\label{classoscillator_aa5a47eb31b518199eaebe930ecef6a24}} 
+\index{oscillator@{oscillator}!sample\+Rate\+\_\+@{sample\+Rate\+\_\+}}
+\index{sample\+Rate\+\_\+@{sample\+Rate\+\_\+}!oscillator@{oscillator}}
+\subsubsection{\texorpdfstring{sample\+Rate\+\_\+}{sampleRate\_}}
+{\footnotesize\ttfamily int oscillator\+::sample\+Rate\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Sample rate \mbox{\Hypertarget{classoscillator_ab8f77116d390662aa2e6ce1fa2acc54f}\label{classoscillator_ab8f77116d390662aa2e6ce1fa2acc54f}} 
+\index{oscillator@{oscillator}!signal\+\_\+@{signal\+\_\+}}
+\index{signal\+\_\+@{signal\+\_\+}!oscillator@{oscillator}}
+\subsubsection{\texorpdfstring{signal\+\_\+}{signal\_}}
+{\footnotesize\ttfamily float$\ast$ oscillator\+::signal\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+Actual oscilation signal 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{oscillator_8h}{oscillator.\+h}\item 
+oscillator.\+cpp\end{DoxyCompactItemize}

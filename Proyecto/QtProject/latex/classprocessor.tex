@@ -1,0 +1,109 @@
+\hypertarget{classprocessor}{}\section{processor Class Reference}
+\label{classprocessor}\index{processor@{processor}}
+
+
+{\ttfamily \#include $<$processor.\+h$>$}
+
+
+
+Inheritance diagram for processor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=146pt]{classprocessor__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classprocessor_acd50a60f927d1694433455e9f00d7ff3}{processor} ()
+\item 
+virtual \hyperlink{classprocessor_a1b31dd60915891a48e97a192d32919cb}{$\sim$processor} ()
+\item 
+virtual bool \hyperlink{classprocessor_ab320bfde3ea30e74e9055a7643113922}{init} (const int frame\+Rate, const int buffer\+Size)=0
+\item 
+virtual bool \hyperlink{classprocessor_a208b7490862424d1a487aa31b3520116}{process} (float $\ast$in, float $\ast$out)=0
+\item 
+virtual bool \hyperlink{classprocessor_aad3c0afc61e81dbf9cce91d358dca0bd}{shutdown} ()=0
+\item 
+virtual int \hyperlink{classprocessor_a1101feba5276acdadae9cd2d9b202421}{set\+Buffer\+Size} (const int buffer\+Size)=0
+\item 
+virtual int \hyperlink{classprocessor_afd94390f689bf421808cd413643befcf}{set\+Sample\+Rate} (const int sample\+Rate)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Pure abstract class defining interface for D\+SP of signal blocks 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classprocessor_acd50a60f927d1694433455e9f00d7ff3}\label{classprocessor_acd50a60f927d1694433455e9f00d7ff3}} 
+\index{processor@{processor}!processor@{processor}}
+\index{processor@{processor}!processor@{processor}}
+\subsubsection{\texorpdfstring{processor()}{processor()}}
+{\footnotesize\ttfamily processor\+::processor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor \mbox{\Hypertarget{classprocessor_a1b31dd60915891a48e97a192d32919cb}\label{classprocessor_a1b31dd60915891a48e97a192d32919cb}} 
+\index{processor@{processor}!````~processor@{$\sim$processor}}
+\index{````~processor@{$\sim$processor}!processor@{processor}}
+\subsubsection{\texorpdfstring{$\sim$processor()}{~processor()}}
+{\footnotesize\ttfamily virtual processor\+::$\sim$processor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Destructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classprocessor_ab320bfde3ea30e74e9055a7643113922}\label{classprocessor_ab320bfde3ea30e74e9055a7643113922}} 
+\index{processor@{processor}!init@{init}}
+\index{init@{init}!processor@{processor}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily virtual bool processor\+::init (\begin{DoxyParamCaption}\item[{const int}]{frame\+Rate,  }\item[{const int}]{buffer\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Initialization function for the current filter plan 
+
+Implemented in \hyperlink{classdspSystem_a57676105878d826fe28c9faf9bd83c3e}{dsp\+System}.
+
+\mbox{\Hypertarget{classprocessor_a208b7490862424d1a487aa31b3520116}\label{classprocessor_a208b7490862424d1a487aa31b3520116}} 
+\index{processor@{processor}!process@{process}}
+\index{process@{process}!processor@{processor}}
+\subsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily virtual bool processor\+::process (\begin{DoxyParamCaption}\item[{float $\ast$}]{in,  }\item[{float $\ast$}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Processing function 
+
+Implemented in \hyperlink{classdspSystem_addff0f24f52320d613d7303b2a15562f}{dsp\+System}.
+
+\mbox{\Hypertarget{classprocessor_a1101feba5276acdadae9cd2d9b202421}\label{classprocessor_a1101feba5276acdadae9cd2d9b202421}} 
+\index{processor@{processor}!set\+Buffer\+Size@{set\+Buffer\+Size}}
+\index{set\+Buffer\+Size@{set\+Buffer\+Size}!processor@{processor}}
+\subsubsection{\texorpdfstring{set\+Buffer\+Size()}{setBufferSize()}}
+{\footnotesize\ttfamily virtual int processor\+::set\+Buffer\+Size (\begin{DoxyParamCaption}\item[{const int}]{buffer\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Set buffer size 
+
+Implemented in \hyperlink{classdspSystem_aefaba04b05be939878a29de212c43d72}{dsp\+System}.
+
+\mbox{\Hypertarget{classprocessor_afd94390f689bf421808cd413643befcf}\label{classprocessor_afd94390f689bf421808cd413643befcf}} 
+\index{processor@{processor}!set\+Sample\+Rate@{set\+Sample\+Rate}}
+\index{set\+Sample\+Rate@{set\+Sample\+Rate}!processor@{processor}}
+\subsubsection{\texorpdfstring{set\+Sample\+Rate()}{setSampleRate()}}
+{\footnotesize\ttfamily virtual int processor\+::set\+Sample\+Rate (\begin{DoxyParamCaption}\item[{const int}]{sample\+Rate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Set frame rate 
+
+Implemented in \hyperlink{classdspSystem_ac6fe7760ea257a9763556752f2017120}{dsp\+System}.
+
+\mbox{\Hypertarget{classprocessor_aad3c0afc61e81dbf9cce91d358dca0bd}\label{classprocessor_aad3c0afc61e81dbf9cce91d358dca0bd}} 
+\index{processor@{processor}!shutdown@{shutdown}}
+\index{shutdown@{shutdown}!processor@{processor}}
+\subsubsection{\texorpdfstring{shutdown()}{shutdown()}}
+{\footnotesize\ttfamily virtual bool processor\+::shutdown (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Shutdown the processor 
+
+Implemented in \hyperlink{classdspSystem_aaeee5d8676285bbb2402739edabe5d09}{dsp\+System}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{processor_8h}{processor.\+h}\end{DoxyCompactItemize}

@@ -126,6 +126,9 @@ private:
      void update();
      void button_pressed(int i, int j);
      void button_released(int i, int j);
+     void on_buttonAC_clicked();
+     void on_buttonDel_clicked();
+     void on_buttonDesc_clicked();
 };
 
 

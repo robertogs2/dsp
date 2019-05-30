@@ -1,3 +1,7 @@
+/**
+ * \file   doscillator.h
+ */
+
 #ifndef DOSCILLATOR_H
 #define DOSCILLATOR_H
 

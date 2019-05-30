@@ -17,7 +17,7 @@
  */
 
 /**
- * \file   freqFilter.h
+ * \file   dspsystem.h
  *         Implements filtering in the frequency domain
  * \author Pablo Alvarado/Jose Miguel Barboza
  * \date   2010.12.12/2017.05.26
@@ -104,6 +104,9 @@ public:
   void setChainFlank(bool chainFlank);
   bool getChainFlank();
 
+  void setHanging(bool hanging);
+  bool getHanging();
+
   void addToChain(char c);
 protected:
 
@@ -136,11 +139,14 @@ protected:
 
   doscillator* osc_;
   
+  // Sequence variables
   std::string uChain_;
   int p_;
   int k_;
   bool chainActive_, chainFlank_;
 
+  // System variables
+  bool hanging_;
 };
 
 
