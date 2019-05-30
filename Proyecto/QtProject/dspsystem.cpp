@@ -126,12 +126,13 @@ bool dspSystem::process(float* in,float* out) {
         } // end if chain flank
         else{
           osc_->setActive(false);
+          osc_->generateSignal();
         }
         k_=0;
       } // end if trigger
       k_++;
     } // end for
-    tmpOut[i] = fsig[i];
+    tmpOut[i] = fsig[i]; //Here is the trick, it copies the value before it gets deleted
   } // end if chain
 
   //Copies the signal
