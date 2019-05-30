@@ -287,5 +287,7 @@ void MainWindow::on_buttonDesc_clicked(){
   else{
     ui->buttonDesc->setText(QString::fromStdString(constants::col));
   }
+  dsp_->setUChain("");
+  ui->labelDigits->setText("");
   dsp_->setHanging(!h);
 }
