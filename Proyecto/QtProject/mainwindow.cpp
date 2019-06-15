@@ -118,6 +118,10 @@ void MainWindow::on_button1_pressed(){
 }
 
 void MainWindow::on_button1_released(){
+    float f1[5] = {1,2,3,4,5};
+    float f2[2] = {8,9};
+    VectorOperations::shiftAndConcatenateVector(f1, f1, f2, 5, 2);
+    VectorOperations::printVector(f1, 5);
   button_released(0,0);
 }
 

@@ -2,7 +2,7 @@
 
 void VectorOperations::copyVector(float *vectorA, float *vectorB, int length){
     for(int i = 0; i < length; ++i){
-        vectorB[i] = vectorB[i];
+        vectorB[i] = vectorA[i];
     }
 }
 
@@ -46,4 +46,22 @@ void VectorOperations::printVector(float *vectorA, int length){
         std::cout << vectorA[i] <<std::endl;
     }
     std::cout << std::endl;
+}
+
+void VectorOperations::digitalizeVector(float *vectorA, float *vectorB, int length, float limit, float value){
+    for(int i = 0; i < length; ++i){
+        if(vectorA[i] >= limit) vectorB[i] = value;
+        else vectorB[i] = 0;
+    }
+}
+
+void VectorOperations::shiftAndConcatenateVector(float *vectorA, float *vectorB, float *vectorC, int lengthLarge, int lengthSmall){
+    int i = 0;
+    for(; i+lengthSmall < lengthLarge; ++i){
+        vectorB[i] = vectorA[i+lengthSmall];
+    }
+    for(int j = 0;i < lengthLarge;++i){
+        vectorB[i] = vectorC[j];
+        ++j;
+    }
 }
