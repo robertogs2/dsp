@@ -1,6 +1,10 @@
 #include "megafilter.h"
 
-MegaFilter::MegaFilter(int buffers, int bufferSize){
+MegaFilter::MegaFilter(){
+
+}
+
+void MegaFilter::init(int buffers, int bufferSize){
     _buffers = buffers;
     _bufferSize = bufferSize;
 

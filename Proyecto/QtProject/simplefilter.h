@@ -11,11 +11,11 @@
 #define SIMPLEFILTER_H
 
 #include "vectoroperations.h"
-
+#include <iostream>
 class SimpleFilter{
 public:
     SimpleFilter(int sizeX, int sizeY, int bufferSize);
-    void setCoefficients(float* coeffX, float* coeffY);
+    void setCoefficients(const float* coeffX, const float* coeffY);
     void filter(float* x, float* y);
 
     int _bufferSize;

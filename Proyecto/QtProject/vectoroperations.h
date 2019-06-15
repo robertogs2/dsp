@@ -5,7 +5,7 @@
 #include <iostream>
 class VectorOperations{
 public:
-    static void copyVector(float* vectorA, float* vectorB, int length);
+    static void copyVector(const float* vectorA, float* vectorB, int length);
     static void squareVector(float* vectorA, float* vectorB, int length);
     static void averageVector(float* vectorA, float* vectorB, int length, int m);
     static void digitalizeVector(float* vectorA, float* vectorB, int length, float limit, float value);

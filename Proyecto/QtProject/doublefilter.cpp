@@ -1,15 +1,20 @@
 #include "doublefilter.h"
 
-DoubleFilter::DoubleFilter(){
-
+DoubleFilter::DoubleFilter(int sizeX1, int sizeY1, int sizeX2, int sizeY2, int bufferSize){
+    _bufferSize = bufferSize;
+    _middleSignal = new float[bufferSize];
+    filter1_ = new SimpleFilter(sizeX1, sizeY1, bufferSize);
+    filter2_ = new SimpleFilter(sizeX2, sizeY2, bufferSize);
 }
 
 void DoubleFilter::filter(float *x, float *y){
-    filter1->filter(x, y);
-    filter2->filter(y, y);
+    std::cout << "filtering one" << std::endl;
+    filter1_->filter(x, _middleSignal);
+    std::cout << "filtering two" << std::endl;
+    filter2_->filter(_middleSignal, y);
 }
 
-void DoubleFilter::setCoefficient(float *coeffX0, float *coeffX1, float *coeffY0, float *coeffY1){
-    filter1->setCoefficients(coeffX0, coeffY0);
-    filter2->setCoefficients(coeffX1, coeffY1);
+void DoubleFilter::setCoefficient(const float *coeffX0, const float *coeffX1, const float *coeffY0, const float *coeffY1){
+    filter1_->setCoefficients(coeffX0, coeffY0);
+    filter2_->setCoefficients(coeffX1, coeffY1);
 }

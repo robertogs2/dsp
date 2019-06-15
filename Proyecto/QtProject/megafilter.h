@@ -8,7 +8,8 @@
 class MegaFilter
 {
 public:
-    MegaFilter(int buffers, int bufferSize);
+    MegaFilter();
+    void init(int buffers, int bufferSize);
     void setEmpiricalVariables(int movingAverageSamples, float digitalThreshold, int mininumHigh);
     void filter(float* x);
     bool analyze();

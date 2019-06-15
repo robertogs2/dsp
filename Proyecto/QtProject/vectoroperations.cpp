@@ -1,7 +1,7 @@
 #include "vectoroperations.h"
 
 // Not tested
-void VectorOperations::copyVector(float *vectorA, float *vectorB, int length){
+void VectorOperations::copyVector(const float *vectorA, float *vectorB, int length){
     for(int i = 0; i < length; ++i){
         vectorB[i] = vectorA[i];
     }
@@ -43,8 +43,9 @@ void VectorOperations::averageVector(float *vectorA, float *vectorB, int length,
 }
 
 void VectorOperations::printVector(float *vectorA, int length){
+    std :: cout << length << std::endl;
     for(int i = 0; i < length; ++i){
-        std::cout << vectorA[i] <<std::endl;
+        std::cout << vectorA[i] << " ";
     }
     std::cout << std::endl;
 }

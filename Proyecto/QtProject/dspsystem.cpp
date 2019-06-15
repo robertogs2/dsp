@@ -80,11 +80,33 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
 
   //System
   hanging_=false;
+  chainActive_ = false;
 
+  initFilters();
   return true;
 }
 
-void dspSystem::makeSound(float* tmpOut, float* fsig){
+void dspSystem::initFilters(){
+    _filterAmount = constants::filterAmount;
+    _megafilters = new MegaFilter[_filterAmount];
+    for(int i = 0; i < _filterAmount; ++i){
+        _megafilters[i].init(constants::filterBuffers, bufferSize_);
+    }
+
+    //697Hz filter
+    DoubleFilter* filter697 = new DoubleFilter(constants::sizeX1_697, constants::sizeY1_697, constants::sizeX2_697, constants::sizeY2_697, bufferSize_);
+    filter697->setCoefficient(constants::coeffX1_697, constants::coeffY1_697, constants::coeffX2_697, constants::coeffY2_697);
+    _megafilters->_filterUnit=filter697;
+
+}
+
+void dspSystem::filter(float *x){
+    for(int i = 0; i < _filterAmount; ++i){
+        _megafilters[i].filter(x);
+    }
+}
+
+void dspSystem::chainSound(float* tmpOut, float* fsig){
     int i = 0;
     bool trigger = false;
     for(; i < bufferSize_; ++i){
@@ -135,13 +157,15 @@ bool dspSystem::process(float* in,float* out) {
   float* fsig=osc_->getSignal();
 
   if(chainActive_){//We need to reproduce a chain
-    makeSound(tmpOut, fsig);
+    chainSound(tmpOut, fsig);
   } // end if chain
 
   //Copies the signal
   for(int i=0; i<bufferSize_;++i){
     tmpOut[i]=fsig[i];
   }
+  //VectorOperations::printVector(tmpIn,bufferSize_);
+  filter(tmpIn);
 
   // Signal with a oscilation
   cv_->filter(bufferSize_,volumeGain_,tmpOut,tmpOut);

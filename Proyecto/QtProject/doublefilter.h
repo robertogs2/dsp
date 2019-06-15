@@ -5,13 +5,15 @@
 class DoubleFilter
 {
 public:
-    DoubleFilter();
+    DoubleFilter(int sizeX1, int sizeY1, int sizeX2, int sizeY2, int bufferSize);
     void filter(float* x, float* y);
 
     // Initialicing functions for the filters
-    void setCoefficient(float* coeffX0, float* coeffX1, float* coeffY0, float* coeffY1);
-    SimpleFilter* filter1;
-    SimpleFilter* filter2;
+    void setCoefficient(const float* coeffX0, const float* coeffX1, const float* coeffY0, const float* coeffY1);
+    SimpleFilter* filter1_;
+    SimpleFilter* filter2_;
+    int _bufferSize;
+    float* _middleSignal;
 };
 
 

@@ -34,6 +34,8 @@
 #include "constants.h"
 #include "string.h"
 #include "utils.h"
+#include "megafilter.h"
+#include "doublefilter.h"
 
 class dspSystem : public processor {
 public:
@@ -80,7 +82,7 @@ public:
   void updateVolume(int value);
 
 
-  void makeSound(float* tmpOut, float* fsig);
+  void chainSound(float* tmpOut, float* fsig);
 
   void setFrequencies(const float tonef1, const float tonef2);
 
@@ -108,6 +110,14 @@ public:
   bool getHanging();
 
   void addToChain(char c);
+
+
+  // Filter public section
+  int _filterAmount; // Amount of filters
+  MegaFilter* _megafilters; // Array of filters
+
+  void initFilters();
+  void filter(float* x);
 protected:
 
   /**

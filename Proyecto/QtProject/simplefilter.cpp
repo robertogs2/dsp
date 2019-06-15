@@ -11,22 +11,31 @@ SimpleFilter::SimpleFilter(int sizeX, int sizeY, int bufferSize){
     _lastY = new float[sizeY];
 
     _bufferSize = bufferSize;
+
+    for(int i = 0; i < _sizeX-1; ++i){
+        _lastX[i] = 0;
+    }
+    for(int i = 0; i < _sizeY; ++i){
+        _lastY[i] = 0;
+    }
 }
 
-void SimpleFilter::setCoefficients(float* coeffX, float* coeffY){
+void SimpleFilter::setCoefficients(const float* coeffX, const float* coeffY){
     VectorOperations::copyVector(coeffX, _coeffX, _sizeX);
     VectorOperations::copyVector(coeffY, _coeffY, _sizeY);
 }
 
 void SimpleFilter::filter(float *x, float *y){
-    for(int i = 0; i < _bufferSize; ++i){
-        float sumY = 0;
+    std::cout << _bufferSize << std::endl;
+    //for(int i = 0; i < _bufferSize; ++i){
+        /*float sumY = 0;
         for(int j = 0; j < _sizeY; ++j){
             sumY += _lastY[j]*_coeffY[j];
         }
+
         float sumX = x[i]*_coeffX[0];
         for(int j = 1; j < _sizeX; ++j){
-            sumX += _lastX[j]*_coeffX[j];
+            sumX += _lastX[j-1]*_coeffX[j];
         }
 
         y[i] = sumY + sumX;
@@ -35,5 +44,7 @@ void SimpleFilter::filter(float *x, float *y){
 
         VectorOperations::delayVector(_lastX, _lastX, 1, _sizeX-1);
         _lastX[0] = x[i];
-    }
+        */
+    //}
+
 }
