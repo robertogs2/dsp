@@ -84,20 +84,7 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
   return true;
 }
 
-
-/**
- * Processing function
- */
-bool dspSystem::process(float* in,float* out) {
-
-  float* tmpIn = in;
-  float* tmpOut = out;
-
-  // Generates oscillation
-  osc_->generateSignal();
-  float* fsig=osc_->getSignal();
-
-  if(chainActive_){//We need to reproduce a chain
+void dspSystem::makeSound(float* tmpOut, float* fsig){
     int i = 0;
     bool trigger = false;
     for(; i < bufferSize_; ++i){
@@ -133,6 +120,22 @@ bool dspSystem::process(float* in,float* out) {
       k_++;
     } // end for
     tmpOut[i] = fsig[i]; //Here is the trick, it copies the value before it gets deleted
+}
+
+/**
+ * Processing function
+ */
+bool dspSystem::process(float* in,float* out) {
+
+  float* tmpIn = in;
+  float* tmpOut = out;
+
+  // Generates oscillation
+  osc_->generateSignal();
+  float* fsig=osc_->getSignal();
+
+  if(chainActive_){//We need to reproduce a chain
+    makeSound(tmpOut, fsig);
   } // end if chain
 
   //Copies the signal
