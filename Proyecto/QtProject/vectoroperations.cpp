@@ -65,3 +65,14 @@ void VectorOperations::shiftAndConcatenateVector(float *vectorA, float *vectorB,
         ++j;
     }
 }
+
+void VectorOperations::delayVector(float *vectorA, float *vectorB, int delay, int length){
+    int i = length-1;
+    for(; i-delay >= 0; --i){
+        vectorB[i] = vectorA[i-delay];
+    }
+    // Fills the rest with zeros
+    for(;i>=0;--i){
+        vectorB[i] = 0;
+    }
+}

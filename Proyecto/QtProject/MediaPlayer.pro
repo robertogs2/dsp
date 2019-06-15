@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     oscillator.cpp \
     doscillator.cpp \
     utils.cpp \
-    vectoroperations.cpp
+    vectoroperations.cpp \
+    simplefilter.cpp
 
 HEADERS  += mainwindow.h \
             jack.h \
@@ -35,6 +36,7 @@ HEADERS  += mainwindow.h \
     constants.h \
     doscillator.h \
     utils.h \
-    vectoroperations.h
+    vectoroperations.h \
+    simplefilter.h
 
 FORMS    += mainwindow.ui

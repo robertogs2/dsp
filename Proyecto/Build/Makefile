@@ -58,7 +58,8 @@ SOURCES       = ../QtProject/main.cpp \
 		../QtProject/oscillator.cpp \
 		../QtProject/doscillator.cpp \
 		../QtProject/utils.cpp \
-		../QtProject/vectoroperations.cpp moc_mainwindow.cpp
+		../QtProject/vectoroperations.cpp \
+		../QtProject/simplefilter.cpp moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		jack.o \
@@ -68,6 +69,7 @@ OBJECTS       = main.o \
 		doscillator.o \
 		utils.o \
 		vectoroperations.o \
+		simplefilter.o \
 		moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -154,7 +156,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../QtProject/constants.h \
 		../QtProject/doscillator.h \
 		../QtProject/utils.h \
-		../QtProject/vectoroperations.h ../QtProject/main.cpp \
+		../QtProject/vectoroperations.h \
+		../QtProject/simplefilter.h ../QtProject/main.cpp \
 		../QtProject/mainwindow.cpp \
 		../QtProject/jack.cpp \
 		../QtProject/dspsystem.cpp \
@@ -162,7 +165,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../QtProject/oscillator.cpp \
 		../QtProject/doscillator.cpp \
 		../QtProject/utils.cpp \
-		../QtProject/vectoroperations.cpp
+		../QtProject/vectoroperations.cpp \
+		../QtProject/simplefilter.cpp
 QMAKE_TARGET  = MediaPlayer
 DESTDIR       = 
 TARGET        = MediaPlayer
@@ -350,8 +354,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../QtProject/mainwindow.h ../QtProject/jack.h ../QtProject/processor.h ../QtProject/dspsystem.h ../QtProject/controlvolume.h ../QtProject/oscillator.h ../QtProject/constants.h ../QtProject/doscillator.h ../QtProject/utils.h ../QtProject/vectoroperations.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../QtProject/main.cpp ../QtProject/mainwindow.cpp ../QtProject/jack.cpp ../QtProject/dspsystem.cpp ../QtProject/controlvolume.cpp ../QtProject/oscillator.cpp ../QtProject/doscillator.cpp ../QtProject/utils.cpp ../QtProject/vectoroperations.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../QtProject/mainwindow.h ../QtProject/jack.h ../QtProject/processor.h ../QtProject/dspsystem.h ../QtProject/controlvolume.h ../QtProject/oscillator.h ../QtProject/constants.h ../QtProject/doscillator.h ../QtProject/utils.h ../QtProject/vectoroperations.h ../QtProject/simplefilter.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../QtProject/main.cpp ../QtProject/mainwindow.cpp ../QtProject/jack.cpp ../QtProject/dspsystem.cpp ../QtProject/controlvolume.cpp ../QtProject/oscillator.cpp ../QtProject/doscillator.cpp ../QtProject/utils.cpp ../QtProject/vectoroperations.cpp ../QtProject/simplefilter.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../QtProject/mainwindow.ui $(DISTDIR)/
 
 
@@ -468,6 +472,9 @@ utils.o: ../QtProject/utils.cpp ../QtProject/utils.h \
 
 vectoroperations.o: ../QtProject/vectoroperations.cpp ../QtProject/vectoroperations.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vectoroperations.o ../QtProject/vectoroperations.cpp
+
+simplefilter.o: ../QtProject/simplefilter.cpp ../QtProject/simplefilter.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o simplefilter.o ../QtProject/simplefilter.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
