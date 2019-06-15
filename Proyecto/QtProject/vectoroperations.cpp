@@ -1,5 +1,6 @@
 #include "vectoroperations.h"
 
+// Not tested
 void VectorOperations::copyVector(float *vectorA, float *vectorB, int length){
     for(int i = 0; i < length; ++i){
         vectorB[i] = vectorA[i];
@@ -48,6 +49,7 @@ void VectorOperations::printVector(float *vectorA, int length){
     std::cout << std::endl;
 }
 
+// Not tested
 void VectorOperations::digitalizeVector(float *vectorA, float *vectorB, int length, float limit, float value){
     for(int i = 0; i < length; ++i){
         if(vectorA[i] >= limit) vectorB[i] = value;
@@ -55,6 +57,7 @@ void VectorOperations::digitalizeVector(float *vectorA, float *vectorB, int leng
     }
 }
 
+// Moves vector to left and fills empty space with vectorC, vectorC.length = lengthSmall is needed
 void VectorOperations::shiftAndConcatenateVector(float *vectorA, float *vectorB, float *vectorC, int lengthLarge, int lengthSmall){
     int i = 0;
     for(; i+lengthSmall < lengthLarge; ++i){
@@ -66,6 +69,7 @@ void VectorOperations::shiftAndConcatenateVector(float *vectorA, float *vectorB,
     }
 }
 
+// Not tested
 void VectorOperations::delayVector(float *vectorA, float *vectorB, int delay, int length){
     int i = length-1;
     for(; i-delay >= 0; --i){

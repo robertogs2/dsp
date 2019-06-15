@@ -5,7 +5,7 @@
 
 class SimpleFilter{
 public:
-    SimpleFilter(int sizeX, int sizeY, bufferSize);
+    SimpleFilter(int sizeX, int sizeY, int bufferSize);
     void setCoefficients(float* coeffX, float* coeffY);
     void filter(float* x, float* y);
 

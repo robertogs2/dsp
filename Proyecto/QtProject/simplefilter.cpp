@@ -13,12 +13,12 @@ SimpleFilter::SimpleFilter(int sizeX, int sizeY, int bufferSize){
     _bufferSize = bufferSize;
 }
 
-SimpleFilter::setCoefficients(float *coeffX, float *coeffY){
+void SimpleFilter::setCoefficients(float* coeffX, float* coeffY){
     VectorOperations::copyVector(coeffX, _coeffX, _sizeX);
     VectorOperations::copyVector(coeffY, _coeffY, _sizeY);
 }
 
-SimpleFilter::filter(float *x, float *y){
+void SimpleFilter::filter(float *x, float *y){
     for(int i = 0; i < _bufferSize; ++i){
         float sumY = 0;
         for(int j = 0; j < _sizeY; ++j){
