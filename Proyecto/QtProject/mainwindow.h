@@ -35,6 +35,7 @@
 #include "dspsystem.h"
 #include "constants.h"
 #include "utils.h"
+#include "vectoroperations.h"
 
 namespace Ui {
 class MainWindow;
