@@ -1,3 +1,12 @@
+/**
+ * \file   simplefilter.h
+ *         Implements filtering in the frequency domain using difference equations
+ * \author Roberto Gutierrez
+ * \date   2019.06.15
+ *
+ * $Id: simplefilter.cpp $
+ */
+
 #ifndef SIMPLEFILTER_H
 #define SIMPLEFILTER_H
 
@@ -12,9 +21,9 @@ public:
     int _bufferSize;
     int _sizeY; // Filter memory for Y
     int _sizeX; //Filter memory for X
-    float* _coeffX; // Coefficients for X, counting 0
-    float* _coeffY; // Coefficients for Y
-    float* _lastX; // Last values for X
+    float* _coeffX; // Coefficients for X, counting 0, for current value
+    float* _coeffY; // Coefficients for Y, startin for y(n-1)
+    float* _lastX; // Last values for X, sizeX-1
     float* _lastY; // Last values for Y
 };
 

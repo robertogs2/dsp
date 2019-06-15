@@ -35,6 +35,5 @@ void SimpleFilter::filter(float *x, float *y){
 
         VectorOperations::delayVector(_lastX, _lastX, 1, _sizeX-1);
         _lastX[0] = x[i];
-
     }
 }

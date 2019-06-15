@@ -80,7 +80,7 @@ public:
   void updateVolume(int value);
 
 
-  void makeSound();
+  void makeSound(float* out);
 
   void setFrequencies(const float tonef1, const float tonef2);
 
