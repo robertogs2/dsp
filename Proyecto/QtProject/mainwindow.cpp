@@ -220,7 +220,7 @@ void MainWindow::on_buttonS_released(){
     dsp_->setToneActive(true);
     dsp_->setChainActive(true);
     dsp_->setChainFlank(true);
-    dsp_->setPChain(0);
+    dsp_->setPChain(-1);
     ui->labelDigits->setText("");
   }
 }

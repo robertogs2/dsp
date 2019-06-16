@@ -81,3 +81,12 @@ void VectorOperations::delayVector(float *vectorA, float *vectorB, int delay, in
         vectorB[i] = 0;
     }
 }
+
+int VectorOperations::countOnes(float* vectorA, int length){
+    int counter = 0;
+    for(int i = 0; i < length; ++i){
+        counter += vectorA[i]==1;
+    }
+    return counter;
+}
+

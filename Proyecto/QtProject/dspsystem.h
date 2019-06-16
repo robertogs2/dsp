@@ -111,7 +111,7 @@ public:
 
   void addToChain(char c);
 
-
+  doscillator* osc_;
   // Filter public section
   int _filterAmount; // Amount of filters
   MegaFilter* _megafilters; // Array of filters
@@ -147,7 +147,7 @@ protected:
    * Oscilator variables
    */
 
-  doscillator* osc_;
+
   
   // Sequence variables
   std::string uChain_;

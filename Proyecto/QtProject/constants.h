@@ -37,7 +37,7 @@ public:
     // General
     static const int movingAverageSamples = 1000;
     static const int filterAmount = 8;
-    static const int filterBuffers = 3;
+    static const int filterBuffers = 2;
 
     // Side frequencies
     // 697 Hz
@@ -56,7 +56,7 @@ public:
 
 
     // Threshold and such
-    static float constexpr threshold_697 = 0.01;
+    static float constexpr threshold_697 = 0.002;
 
 };
 
