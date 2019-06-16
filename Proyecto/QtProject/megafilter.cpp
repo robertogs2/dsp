@@ -36,5 +36,5 @@ int MegaFilter::analyze(){
     _states[0] = _states[1];
     _states[1] = _states[2];
     _states[2] = hit;
-    return ones*hit;
+    return hit ? ones : 0;
 }

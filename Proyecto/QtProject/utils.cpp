@@ -53,3 +53,38 @@ void utils::getFrequency(const char c, float& frequencyLeft, float& frequencyUp)
 char utils::getChar(int i, int j){
     return constants::digits[j+4*i];
 }
+
+std::string utils::filterNumber(std::string input){
+    int i = 0;
+    char lastChar = 0;
+    std::string pivot = "";
+    std::string result = "";
+    for(char c : input){
+        if(c != lastChar){
+            pivot += c;
+        }
+        lastChar = c;
+    }
+    char d;
+    if(pivot.length() > 5) d = '5';
+    else d = '1';
+    for(char c : pivot){
+        result += c;
+        if(c == d){
+            result += d;
+        }
+    }
+    return result;
+
+}
+
+std::string utils::called(std::string input){
+
+    if (input.find("#911") != std::string::npos) {
+        return "#911";
+    }
+    else if(input.find(constants::number) != std::string::npos) {
+        return constants::number;
+    }
+    else return "";
+}

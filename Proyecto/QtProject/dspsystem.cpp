@@ -152,7 +152,10 @@ bool dspSystem::process(float* in,float* out) {
     tmpOut[i]=fsig[i];
     }
     //VectorOperations::printVector(tmpIn,bufferSize_);
-    filter(tmpIn);
+    if(hanging_){
+      filter(tmpIn);
+    }
+    
 
     // Signal with a oscilation
     cv_->filter(bufferSize_,volumeGain_,tmpOut,tmpOut);
@@ -223,8 +226,8 @@ void dspSystem::initFilters(){
 void dspSystem::filter(float *x){
 
     static int state = 0;
-    static bool prev[8];
-    static bool current[8];
+    static int prev[8];
+    static int current[8];
 
     int limit = _filterAmount;
     int iFound = -1;
@@ -235,51 +238,34 @@ void dspSystem::filter(float *x){
         prev[i] = current[i];
     }
 
-    // Filter left frequencies
-    for(int i = 0; i < limit/2 ; ++i){
+    // Filter all frequencies
+    for(int i = 0; i < limit ; ++i){
       _megafilters[i].filter(x);
-      auto m = _megafilters[i].analyze();
-      //if(m>0) std::cout << "Value: " <<  m << std::endl;
-      if(m){
-          current[i] = true;
-         //std::cout << "found at " << i << std::endl;
-      }
-      else{
-          current[i] = false;
-      }
-    }
-
-    // Filter upper frequencies
-    for(int i = limit/2; i < limit ; ++i){
-      _megafilters[i].filter(x);
-      auto m = _megafilters[i].analyze();
-      //if(m>0) std::cout << "Value: " <<  m << std::endl;
-      if(m){
-          jFound = i;
-          current[i] = true;
-          //std::cout << "found at " << i << std::endl;
-      }
-      else{
-          current[i] = false;
-      }
+      int m = _megafilters[i].analyze();
+      current[i] = m;
+      //std::cout << i << ": " << current[i] << std::endl;
     }
 
     // Checks for past and current
-    for(int i = 0; i < _filterAmount/2; ++i){
-        if(prev[i] || current[i]){
-            //current[i] = 0;
-            //std::cout << "Found at i: " << i << std::endl;
-            iFound = i;
-        }
+    int maxI = 0;
+    for(int i = 0; i < limit/2; ++i){
+      int tempMax = std::max(prev[i], current[i]);
+      if((tempMax>0) && (tempMax>maxI)){
+        iFound = i;
+        maxI = current[i];
+      }
     }
     // Checks for past and current
-    for(int i = _filterAmount/2; i < _filterAmount; ++i){
-        if(prev[i] || current[i]){
-            //current[i] = 0;
-            //std::cout << "Found at j: " << i-4 << std::endl;
-            jFound = i;
-        }
+    int maxJ = 0;
+    for(int i = limit/2; i < limit; ++i){
+      int tempMax = std::max(prev[i], current[i]);
+      if((tempMax>0) && (tempMax>maxJ)){
+        jFound = i;
+        maxJ = current[i];
+      }
     }
+
+    //std::cout << "iF: " << iFound << ", jF: " << jFound << std::endl;
 
     // Logic for chaining
     if(iFound != -1 && jFound != -1){
@@ -291,14 +277,16 @@ void dspSystem::filter(float *x){
     else{
      state++;
      if(state > 5 && currentNumber.length() > 0){
-         std::cout << "Detected number: " << currentNumber << std::endl;
+         std::cout << "Current number: " << currentNumber << std::endl;
+         std::string numberFiltered = utils::filterNumber(currentNumber);
+         std::cout << "Detected number:" << numberFiltered  << std::endl;
+         std::string calledNumber = utils::called(numberFiltered);
+         if(calledNumber.length() > 0){
+             std::cout << "Called from: " << calledNumber << std::endl;
+         }
          currentNumber = "";
          state = 0;
      }
-    }
-    if(iFound != -1 || jFound != -1){
-      //std::cout << std::endl;
-      //std::cout << std::endl;
     }
     
 }
