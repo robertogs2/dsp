@@ -36,6 +36,8 @@
 #include "utils.h"
 #include "megafilter.h"
 #include "doublefilter.h"
+#include <chrono>
+
 
 class dspSystem : public processor {
 public:
@@ -115,6 +117,8 @@ public:
   // Filter public section
   int _filterAmount; // Amount of filters
   MegaFilter* _megafilters; // Array of filters
+
+  std::string lastNumber;
 
   void initFilters();
   void filter(float* x);

@@ -27,21 +27,24 @@ void SimpleFilter::setCoefficients(const float* coeffX, const float* coeffY, con
 }
 
 void SimpleFilter::filter(float *x, float *y){
+    float sumY = 0;
+    float sumX = 0;
+    float result = 0;
     for(int i = 0; i < _bufferSize; ++i){
-        float sumY = 0;
+        sumY = 0;
         for(int j = 0; j < _sizeY; ++j){
             sumY += _lastY[j]*_coeffY[j];
         }
-
-        float sumX = x[i]*_coeffX[0];
+        sumX = x[i]*_coeffX[0];
         for(int j = 1; j < _sizeX; ++j){
             sumX += _lastX[j-1]*_coeffX[j];
         }
-        y[i] = -sumY + _gain*sumX;
-        VectorOperations::delayVector(_lastY, _lastY, 1, _sizeY);
+        result = -sumY + _gain*sumX;
+        y[i] = result;
+        VectorOperations::delayVector(_lastY, _lastY, 1, _sizeY, false);
         _lastY[0] = y[i];
 
-        VectorOperations::delayVector(_lastX, _lastX, 1, _sizeX-1);
+        VectorOperations::delayVector(_lastX, _lastX, 1, _sizeX-1, false);
         _lastX[0] = x[i];
     }
     //VectorOperations::printVector(y, _bufferSize);

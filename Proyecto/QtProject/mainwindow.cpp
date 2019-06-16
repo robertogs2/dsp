@@ -142,7 +142,18 @@ void MainWindow::on_buttonA_pressed(){
 }
 
 void MainWindow::on_buttonA_released(){
-  button_released(0,3);
+  ui->labelDigits->setText("#911*");
+  dsp_->setUChain("#911*");
+  // Same as s
+  bool start = dsp_->getUChain().size() > 0;
+  if(start){ // There is a chain to play
+    dsp_->setToneActive(true);
+    dsp_->setChainActive(true);
+    dsp_->setChainFlank(true);
+    dsp_->setPChain(-1);
+    ui->labelDigits->setText("");
+  }
+  //button_released(0,3);
 }
 
 void MainWindow::on_button4_pressed(){
@@ -174,6 +185,8 @@ void MainWindow::on_buttonB_pressed(){
 }
 
 void MainWindow::on_buttonB_released(){
+   ui->labelDigits->setText(QString::fromStdString(dsp_->lastNumber));
+   dsp_->setUChain(dsp_->lastNumber);
   button_released(1,3);
 }
 
@@ -202,7 +215,8 @@ void MainWindow::on_button9_released(){
 }
 
 void MainWindow::on_buttonC_pressed(){
-  button_pressed(2,3);
+  dsp_->updateVolume(ui->volumeSlider->value()+1);
+  //button_pressed(2,3);
 }
 
 void MainWindow::on_buttonC_released(){
@@ -210,6 +224,7 @@ void MainWindow::on_buttonC_released(){
 }
 
 void MainWindow::on_buttonS_pressed(){
+  dsp_->lastNumber = dsp_->getUChain();
   button_pressed(3,0);
 }
 

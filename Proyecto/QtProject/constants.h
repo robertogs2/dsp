@@ -30,13 +30,15 @@ public:
     inline static const std::string desc = "Descolgar";
     inline static const std::string col = "Colgar";
 
+    // Number
+    inline static const std::string number = "26557321";
 
 
     // Filter constants
 
     // General
     static const int movingAverageSamples = 1000;
-    static const int minimunHigh = 1650;
+    static const int minimunHigh = 1250;
     static const int filterAmount = 8;
     static const int filterBuffers = 2;
 
@@ -158,14 +160,14 @@ public:
 
 
     // Threshold and such
-    static float constexpr threshold_697 = 0.01; //0
-    static float constexpr threshold_770 = 0.01; //1
-    static float constexpr threshold_852 = 0.01; //2 correct
-    static float constexpr threshold_941 = 0.01; //3
-    static float constexpr threshold_1209 = 0.01;//4
-    static float constexpr threshold_1336 = 0.01;//5
-    static float constexpr threshold_1477 = 0.01;//6
-    static float constexpr threshold_1633 = 0.01;//7
+    static float constexpr threshold_697 = 0.001; //0
+    static float constexpr threshold_770 = 0.001; //1
+    static float constexpr threshold_852 = 0.001; //2
+    static float constexpr threshold_941 = 0.001; //3
+    static float constexpr threshold_1209 = 0.001;//4
+    static float constexpr threshold_1336 = 0.0002;//5
+    static float constexpr threshold_1477 = 0.001;//6
+    static float constexpr threshold_1633 = 0.001;//7
 
 };
 

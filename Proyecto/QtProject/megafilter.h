@@ -12,7 +12,7 @@ public:
     void init(int buffers, int bufferSize);
     void setEmpiricalVariables(int movingAverageSamples, float digitalThreshold, int mininumHigh);
     void filter(float* x);
-    bool analyze();
+    int analyze();
 
     int _buffers;
     int _bufferSize;
@@ -26,7 +26,7 @@ public:
     float* _tempSignal2;
     DoubleFilter* _filterUnit;
 
-    bool _states[3];
+    int _states[3];
 
 };
 

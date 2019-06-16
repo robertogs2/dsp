@@ -83,8 +83,84 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
   chainActive_ = false;
 
   initFilters();
+
   return true;
 }
+
+
+
+void dspSystem::chainSound(float* tmpOut, float* fsig){
+    int i = 0;
+    bool trigger = false;
+    for(; i < bufferSize_; ++i){
+      // Triggering code
+      trigger = k_ == constants::limit40;
+      if(trigger){ // Happens once every time there is a change
+        chainFlank_ = !chainFlank_;
+        if(chainFlank_){
+          osc_->setActive(true);
+          p_++; // Increase index for processing
+          if(p_ > uChain_.size()){ // Happens only when there is nothing more to process
+            setChainActive(false);
+            osc_->setActive(false);
+            setUChain("");          //Resets the chain
+            std::cout << "finish" << std::endl;
+            //osc_->generateSignal();
+            //fsig=osc_->getSignal();
+            break;
+          }
+          // Updates frequencies for the oscillator
+          float f1, f2;
+          utils::getFrequency(uChain_[p_], f1, f2);
+          osc_->setFrequency(f1, f2);
+          osc_->generateSignal();
+          fsig=osc_->getSignal();
+        } // end if chain flank
+        else{
+          osc_->setActive(false);
+          osc_->generateSignal();
+        }
+        k_=0;
+      } // end if trigger
+      k_++;
+    } // end for
+    tmpOut[i] = fsig[i]; //Here is the trick, it copies the value before it gets deleted
+}
+
+/**
+ * Processing function
+ */
+bool dspSystem::process(float* in,float* out) {
+    // Using time point and system_clock
+    std::chrono::time_point<std::chrono::system_clock> start, end;
+    start = std::chrono::system_clock::now();
+
+    float* tmpIn = in;
+    float* tmpOut = out;
+
+    // Generates oscillation
+    osc_->generateSignal();
+    float* fsig=osc_->getSignal();
+
+    if(chainActive_){//We need to reproduce a chain
+    chainSound(tmpOut, fsig);
+    } // end if chain
+
+    //Copies the signal
+    for(int i=0; i<bufferSize_;++i){
+    tmpOut[i]=fsig[i];
+    }
+    //VectorOperations::printVector(tmpIn,bufferSize_);
+    filter(tmpIn);
+
+    // Signal with a oscilation
+    cv_->filter(bufferSize_,volumeGain_,tmpOut,tmpOut);
+    end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end - start;
+    //std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
+    return true;
+}
+
 
 void dspSystem::initFilters(){
     _filterAmount = constants::filterAmount;
@@ -144,78 +220,29 @@ void dspSystem::initFilters(){
 }
 
 void dspSystem::filter(float *x){
-    int limit = 1;//_filterAmount;//, need to fix
-    for(int i = 0; i < limit ; ++i){
+    int limit = _filterAmount;
+    static int iFound = -1;
+    int jFound = -1;
+    for(int i = 0; i < limit/2 ; ++i){
       _megafilters[i].filter(x);
-      if(_megafilters[i].analyze()) std::cout << "found at " << i << std::endl;
+      if(_megafilters[i].analyze()){
+          iFound = i;
+          //std::cout << "found at " << i << std::endl;
+      }
     }
-}
-
-void dspSystem::chainSound(float* tmpOut, float* fsig){
-    int i = 0;
-    bool trigger = false;
-    for(; i < bufferSize_; ++i){
-      // Triggering code
-      trigger = k_ == constants::limit40;
-      if(trigger){ // Happens once every time there is a change
-        chainFlank_ = !chainFlank_;
-        if(chainFlank_){
-          osc_->setActive(true);
-          p_++; // Increase index for processing
-          if(p_ > uChain_.size()){ // Happens only when there is nothing more to process
-            setChainActive(false);
-            osc_->setActive(false);
-            setUChain("");          //Resets the chain
-            std::cout << "finish" << std::endl;
-            //osc_->generateSignal();
-            //fsig=osc_->getSignal();
-            break;
-          }
-          // Updates frequencies for the oscillator
-          float f1, f2;
-          utils::getFrequency(uChain_[p_], f1, f2);
-          osc_->setFrequency(f1, f2);
-          osc_->generateSignal();
-          fsig=osc_->getSignal();
-        } // end if chain flank
-        else{
-          osc_->setActive(false);
-          osc_->generateSignal();
-        }
-        k_=0;
-      } // end if trigger
-      k_++;
-    } // end for
-    tmpOut[i] = fsig[i]; //Here is the trick, it copies the value before it gets deleted
-}
-
-/**
- * Processing function
- */
-bool dspSystem::process(float* in,float* out) {
-
-  float* tmpIn = in;
-  float* tmpOut = out;
-
-  // Generates oscillation
-  osc_->generateSignal();
-  float* fsig=osc_->getSignal();
-
-  if(chainActive_){//We need to reproduce a chain
-    chainSound(tmpOut, fsig);
-  } // end if chain
-
-  //Copies the signal
-  for(int i=0; i<bufferSize_;++i){
-    tmpOut[i]=fsig[i];
-  }
-  //VectorOperations::printVector(tmpIn,bufferSize_);
-  filter(tmpIn);
-
-  // Signal with a oscilation
-  cv_->filter(bufferSize_,volumeGain_,tmpOut,tmpOut);
-
-  return true;
+    for(int i = limit/2; i < limit ; ++i){
+      _megafilters[i].filter(x);
+      if(_megafilters[i].analyze()) {
+          jFound = i;
+          //std::cout << "found at " << i << std::endl;
+      }
+    }
+    if(iFound != -1 && jFound != -1){
+        char c = utils::getChar(iFound, jFound-4);
+        std::cout << "FOUND: " << c << std::endl;
+    }
+    /*_megafilters[4].filter(x);
+    if(_megafilters[4].analyze());*/
 }
 
 /**
