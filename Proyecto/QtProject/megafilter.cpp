@@ -29,7 +29,11 @@ void MegaFilter::filter(float* x){
 
 bool MegaFilter::analyze(){
     VectorOperations::squareVector(_filteredSignal, _tempSignal1, _buffers*_bufferSize);
+
     VectorOperations::averageVector(_tempSignal1, _tempSignal2, _buffers*_bufferSize, _movingAverageSamples);
     VectorOperations::digitalizeVector(_tempSignal2, _tempSignal1, _buffers*_bufferSize, _digitalThreshold, 1);
+    int amount = VectorOperations::countOnes(_tempSignal1, _buffers*_bufferSize);
+    std::cout << amount << std::endl;
+    //VectorOperations::printVector(_tempSignal1, _buffers*_bufferSize);
     // Analyze _tempSignal1 to check when it gets a hit
 }

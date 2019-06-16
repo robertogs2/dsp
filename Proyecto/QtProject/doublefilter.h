@@ -9,7 +9,7 @@ public:
     void filter(float* x, float* y);
 
     // Initialicing functions for the filters
-    void setCoefficient(const float* coeffX0, const float* coeffX1, const float* coeffY0, const float* coeffY1);
+    void setCoefficient(const float* coeffX0, const float* coeffX1, const float* coeffY0, const float* coeffY1, const float gain1, const float gain2);
     SimpleFilter* filter1_;
     SimpleFilter* filter2_;
     int _bufferSize;

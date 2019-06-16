@@ -43,7 +43,7 @@ void VectorOperations::averageVector(float *vectorA, float *vectorB, int length,
 }
 
 void VectorOperations::printVector(float *vectorA, int length){
-    std :: cout << length << std::endl;
+    //std :: cout << length << std::endl;
     for(int i = 0; i < length; ++i){
         std::cout << vectorA[i] << " ";
     }

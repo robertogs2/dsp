@@ -8,13 +8,13 @@ DoubleFilter::DoubleFilter(int sizeX1, int sizeY1, int sizeX2, int sizeY2, int b
 }
 
 void DoubleFilter::filter(float *x, float *y){
-    std::cout << "filtering one" << std::endl;
+    //std::cout << "filtering one" << std::endl;
     filter1_->filter(x, _middleSignal);
-    std::cout << "filtering two" << std::endl;
+    //std::cout << "filtering two" << std::endl;
     filter2_->filter(_middleSignal, y);
 }
 
-void DoubleFilter::setCoefficient(const float *coeffX0, const float *coeffX1, const float *coeffY0, const float *coeffY1){
-    filter1_->setCoefficients(coeffX0, coeffY0);
-    filter2_->setCoefficients(coeffX1, coeffY1);
+void DoubleFilter::setCoefficient(const float *coeffX0, const float *coeffY0, const float *coeffX1, const float *coeffY1, const float gain1, const float gain2){
+    filter1_->setCoefficients(coeffX0, coeffY0, gain1);
+    filter2_->setCoefficients(coeffX1, coeffY1, gain2);
 }

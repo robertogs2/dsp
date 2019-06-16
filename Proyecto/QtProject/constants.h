@@ -41,18 +41,22 @@ public:
 
     // Side frequencies
     // 697 Hz
-    float gain_697 = 0.0014948343;
+    static float constexpr gain1_697 = 0.0014948343;
+    static float constexpr gain2_697 = 0.0014948343;
 
     static const int sizeX1_697 = 3;
-    static constexpr inline float coeffX1_697[3] ={1, 0, -1};
+    static constexpr inline float coeffX1_697[3] = {1, 0, -1};
     static const int sizeY1_697 = 2;
-    static constexpr inline float coeffY1_697[2] = {-1.98831761064, 0.998417227816};
+    static constexpr inline float coeffY1_697[2] = {-1.988317610643, 0.998417227816};
 
     static const int sizeX2_697 = 3;
-    static constexpr inline float coeffX2_697[3] ={1, 0, -1};
+    static constexpr inline float coeffX2_697[3] = {1, 0, -1};
     static const int sizeY2_697 = 2;
     static constexpr inline float coeffY2_697[2] = {-1.98886276558, 0.998457206963};
 
+
+    // Threshold and such
+    static float constexpr threshold_697 = 0.01;
 
 };
 

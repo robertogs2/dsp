@@ -17,9 +17,9 @@ public:
     int _buffers;
     int _bufferSize;
 
-    int _movingAverageSamples;
-    float _digitalThreshold;
-    int _mininumHigh;
+    int _movingAverageSamples; // Samples for average
+    float _digitalThreshold; // threshold for energy
+    int _mininumHigh; // minimun amount of samples to be one to consider
 
     float* _filteredSignal;
     float* _tempSignal1;

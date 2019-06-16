@@ -95,15 +95,23 @@ void dspSystem::initFilters(){
 
     //697Hz filter
     DoubleFilter* filter697 = new DoubleFilter(constants::sizeX1_697, constants::sizeY1_697, constants::sizeX2_697, constants::sizeY2_697, bufferSize_);
-    filter697->setCoefficient(constants::coeffX1_697, constants::coeffY1_697, constants::coeffX2_697, constants::coeffY2_697);
-    _megafilters->_filterUnit=filter697;
+    filter697->setCoefficient(constants::coeffX1_697, constants::coeffY1_697, constants::coeffX2_697, constants::coeffY2_697, constants::gain1_697, constants::gain2_697);
+    _megafilters[0]._filterUnit=filter697;
+    _megafilters[0].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_697,100);
 
 }
 
 void dspSystem::filter(float *x){
-    for(int i = 0; i < _filterAmount; ++i){
-        _megafilters[i].filter(x);
-    }
+    //static int count  = 0;
+    int limit = 1; // _filterAmount, need to fix
+    //if(count++ < 10000000000){
+        for(int i = 0; i < limit ; ++i){
+            _megafilters[i].filter(x);
+            _megafilters[i].analyze();
+        }
+    //}
+
+
 }
 
 void dspSystem::chainSound(float* tmpOut, float* fsig){

@@ -15,7 +15,7 @@
 class SimpleFilter{
 public:
     SimpleFilter(int sizeX, int sizeY, int bufferSize);
-    void setCoefficients(const float* coeffX, const float* coeffY);
+    void setCoefficients(const float* coeffX, const float* coeffY, const float gain);
     void filter(float* x, float* y);
 
     int _bufferSize;
@@ -25,6 +25,7 @@ public:
     float* _coeffY; // Coefficients for Y, startin for y(n-1)
     float* _lastX; // Last values for X, sizeX-1
     float* _lastY; // Last values for Y
+    float _gain;
 };
 
 #endif // SIPLEFILTER_H
