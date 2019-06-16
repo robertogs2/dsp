@@ -101,7 +101,7 @@ void dspSystem::chainSound(float* tmpOut, float* fsig){
         if(chainFlank_){
           osc_->setActive(true);
           p_++; // Increase index for processing
-          if(p_ > uChain_.size()){ // Happens only when there is nothing more to process
+          if(p_ >= uChain_.size()){ // Happens only when there is nothing more to process
             setChainActive(false);
             osc_->setActive(false);
             setUChain("");          //Resets the chain
@@ -268,7 +268,7 @@ void dspSystem::filter(float *x){
     for(int i = 0; i < _filterAmount/2; ++i){
         if(prev[i] || current[i]){
             //current[i] = 0;
-            std::cout << "Found at i: " << i << std::endl;
+            //std::cout << "Found at i: " << i << std::endl;
             iFound = i;
         }
     }
@@ -276,7 +276,7 @@ void dspSystem::filter(float *x){
     for(int i = _filterAmount/2; i < _filterAmount; ++i){
         if(prev[i] || current[i]){
             //current[i] = 0;
-            std::cout << "Found at j: " << i-4 << std::endl;
+            //std::cout << "Found at j: " << i-4 << std::endl;
             jFound = i;
         }
     }
@@ -284,21 +284,21 @@ void dspSystem::filter(float *x){
     // Logic for chaining
     if(iFound != -1 && jFound != -1){
         char c = utils::getChar(iFound, jFound-4);
-        std::cout << "FOUND: " << c << std::endl;
+        //std::cout << "FOUND: " << c << std::endl;
         currentNumber += c;
         state = 0;
     }
     else{
      state++;
-     if(state > 3 && currentNumber.length() > 0){
+     if(state > 5 && currentNumber.length() > 0){
          std::cout << "Detected number: " << currentNumber << std::endl;
          currentNumber = "";
          state = 0;
      }
     }
     if(iFound != -1 || jFound != -1){
-      std::cout << std::endl;
-      std::cout << std::endl;
+      //std::cout << std::endl;
+      //std::cout << std::endl;
     }
     
 }

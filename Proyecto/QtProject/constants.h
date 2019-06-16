@@ -168,14 +168,15 @@ public:
     static float constexpr threshold_1477 = 0.0001;//6
     static float constexpr threshold_1633 = 0.0001;//7
 
-    static const int minimunHigh_697 = 800;//1850;
-    static const int minimunHigh_770 = 800;//1400;
-    static const int minimunHigh_852 = 800;//1400;
-    static const int minimunHigh_941 = 800;//1100;
-    static const int minimunHigh_1209 = 800;//1700;
-    static const int minimunHigh_1336 = 800;//1750;
-    static const int minimunHigh_1477 = 800;//1850;
-    static const int minimunHigh_1633 = 800;//1700;
+    static const int minimunHigh_697 = 1725;//1850;
+    static const int minimunHigh_770 = 1450;//1400;
+    static const int minimunHigh_852 = 1450;//1400;
+    static const int minimunHigh_941 = 1100;//1100;
+
+    static const int minimunHigh_1209 = 1700;//1700;
+    static const int minimunHigh_1336 = 1740;//1750;
+    static const int minimunHigh_1477 = 1850;//1850;
+    static const int minimunHigh_1633 = 1700;//1700;
 
 };
 

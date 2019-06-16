@@ -31,9 +31,10 @@ int MegaFilter::analyze(){
     int ones = VectorOperations::averageDigitalizeCounterVector(_tempSignal1, _bufferSize*_buffers, _movingAverageSamples, _digitalThreshold);
 
     // Checks for a hit
+    
+    bool hit = (ones > _mininumHigh) && !(_states[2]); // two consecutive not allowed
+    _states[0] = _states[1];
     _states[1] = _states[2];
-    _states[2] = ones;
-    bool hit = (ones > _mininumHigh) && (_states[0] == false); // two consecutive not allowed
-    _states[0] = hit;
+    _states[2] = hit;
     return ones*hit;
 }
