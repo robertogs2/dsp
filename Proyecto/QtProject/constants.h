@@ -36,7 +36,7 @@ public:
 
     // General
     static const int movingAverageSamples = 1000;
-    static const int minimunHigh = 1900;
+    static const int minimunHigh = 1650;
     static const int filterAmount = 8;
     static const int filterBuffers = 2;
 
@@ -55,6 +55,47 @@ public:
     static const int sizeY2_697 = 2;
     static constexpr inline float coeffY2_697[2] = {-1.98886276558, 0.998457206963};
 
+    // 770 Hz
+    static constexpr float gain1_770 = 0.003326779638;
+    static constexpr float gain2_770 = 0.003326779638;
+
+    static const int sizeX1_770 = 3;
+    static constexpr inline float coeffX1_770[3] = {1, 0, -1};
+    static const int sizeY1_770 = 2;
+    static constexpr inline float coeffY1_770[2] = {-1.983281193331,  0.995984875273};
+
+    static const int sizeX2_770 = 3;
+    static constexpr inline float coeffX2_770[3] = {1, 0, -1};
+    static const int sizeY2_770 = 2;
+    static constexpr inline float coeffY2_770[2] = {-1.984899050628,  0.996210410153};
+
+    // 852 Hz
+    static constexpr float gain1_852 = 0.00332677963;
+    static constexpr float gain2_852 = 0.00332677963;
+
+    static const int sizeX1_852 = 3;
+    static constexpr inline float coeffX1_852[3] = {1, 0, -1};
+    static const int sizeY1_852 = 2;
+    static constexpr inline float coeffY1_852[2] = {-1.9805297492016 ,  0.99599582446};
+
+    static const int sizeX2_852 = 3;
+    static constexpr inline float coeffX2_852[3] = {1, 0, -1};
+    static const int sizeY2_852 = 2;
+    static constexpr inline float coeffY2_852[2] = {-1.9822732712603,  0.9961994586010};
+
+    // 941 Hz
+    static constexpr float gain1_941 = 0.003326779638;
+    static constexpr float gain2_941 = 0.003326779638;
+
+    static const int sizeX1_941 = 3;
+    static constexpr inline float coeffX1_941[3] = {1, 0, -1};
+    static const int sizeY1_941 = 2;
+    static constexpr inline float coeffY1_941[2] = {-1.9772353455719,  0.9960055572224};
+
+    static const int sizeX2_941 = 3;
+    static constexpr inline float coeffX2_941[3] = {1, 0, -1};
+    static const int sizeY2_941 = 2;
+    static constexpr inline float coeffY2_941[2] = {-1.979119326072,  0.996189723950605};
 
     // Upper frequencies
     // 1209 Hz
@@ -71,9 +112,60 @@ public:
     static const int sizeY2_1209 = 2;
     static constexpr inline float coeffY2_1209[2] = {-1.96538879380776765337, 0.9960262546975657826};
 
+    // 1336 Hz
+    static constexpr float gain1_1336 = 0.003326779638621;
+    static constexpr float gain2_1336 = 0.003326779638621;
+
+    static const int sizeX1_1336 = 3;
+    static constexpr inline float coeffX1_1336[3] = {1, 0, -1};
+    static const int sizeY1_1336 = 2;
+    static constexpr inline float coeffY1_1336[2] = {-1.958770234308357061081,  0.996033184567360119};
+
+    static const int sizeX2_1336 = 3;
+    static constexpr inline float coeffX2_1336[3] = {1, 0, -1};
+    static const int sizeY2_1336 = 2;
+    static constexpr inline float coeffY2_1336[2] = {-1.96130510192716167594, 0.99616209226370922014};
+
+
+    // 1477 Hz
+    static constexpr float gain1_1477 = 0.002994686472327;
+    static constexpr float gain2_1477 = 0.002994686472327;
+
+    static const int sizeX1_1477 = 3;
+    static constexpr inline float coeffX1_1477[3] = {1, 0, -1};
+    static const int sizeY1_1477 = 2;
+    static constexpr inline float coeffY1_1477[2] = {-1.951345715501094701949,  0.9964399904583554068};
+
+    static const int sizeX2_1477 = 3;
+    static constexpr inline float coeffX2_1477[3] = {1, 0, -1};
+    static const int sizeY2_1477 = 2;
+    static constexpr inline float coeffY2_1477[2] = {-1.9538274781289741710565,  0.9965343784331675003};
+
+
+    // 1633 Hz
+    static constexpr float gain1_1633 = 0.003326779638621;
+    static constexpr float gain2_1633 = 0.003326779638621;
+
+    static const int sizeX1_1633 = 3;
+    static constexpr inline float coeffX1_1633[3] = {1, 0, -1};
+    static const int sizeY1_1633 = 2;
+    static constexpr inline float coeffY1_1633[2] = {-1.9407886179805524662356,  0.9960452282621359287};
+
+    static const int sizeX2_1633 = 3;
+    static constexpr inline float coeffX2_1633[3] = {1, 0, -1};
+    static const int sizeY2_1633 = 2;
+    static constexpr inline float coeffY2_1633[2] = {-1.94382546374363984753,  0.9961500471558724090215};
+
+
     // Threshold and such
-    static float constexpr threshold_697 = 0.002;
-    static float constexpr threshold_1209 = 0.002;
+    static float constexpr threshold_697 = 0.01; //0
+    static float constexpr threshold_770 = 0.01; //1
+    static float constexpr threshold_852 = 0.01; //2 correct
+    static float constexpr threshold_941 = 0.01; //3
+    static float constexpr threshold_1209 = 0.01;//4
+    static float constexpr threshold_1336 = 0.01;//5
+    static float constexpr threshold_1477 = 0.01;//6
+    static float constexpr threshold_1633 = 0.01;//7
 
 };
 

@@ -99,25 +99,56 @@ void dspSystem::initFilters(){
     _megafilters[0]._filterUnit=filter697;
     _megafilters[0].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_697,constants::minimunHigh);
 
+    //770Hz filter
+    DoubleFilter* filter770 = new DoubleFilter(constants::sizeX1_770, constants::sizeY1_770, constants::sizeX2_770, constants::sizeY2_770, bufferSize_);
+    filter770->setCoefficient(constants::coeffX1_770, constants::coeffY1_770, constants::coeffX2_770, constants::coeffY2_770, constants::gain1_770, constants::gain2_770);
+    _megafilters[1]._filterUnit=filter770;
+    _megafilters[1].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_770,constants::minimunHigh);
+
+    //852Hz filter
+    DoubleFilter* filter852 = new DoubleFilter(constants::sizeX1_852, constants::sizeY1_852, constants::sizeX2_852, constants::sizeY2_852, bufferSize_);
+    filter852->setCoefficient(constants::coeffX1_852, constants::coeffY1_852, constants::coeffX2_852, constants::coeffY2_852, constants::gain1_852, constants::gain2_852);
+    _megafilters[2]._filterUnit=filter852;
+    _megafilters[2].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_852,constants::minimunHigh);
+
+    //941Hz filter
+    DoubleFilter* filter941 = new DoubleFilter(constants::sizeX1_941, constants::sizeY1_941, constants::sizeX2_941, constants::sizeY2_941, bufferSize_);
+    filter941->setCoefficient(constants::coeffX1_941, constants::coeffY1_941, constants::coeffX2_941, constants::coeffY2_941, constants::gain1_941, constants::gain2_941);
+    _megafilters[3]._filterUnit=filter941;
+    _megafilters[3].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_941,constants::minimunHigh);
+
     //1209Hz filter
     DoubleFilter* filter1209 = new DoubleFilter(constants::sizeX1_1209, constants::sizeY1_1209, constants::sizeX2_1209, constants::sizeY2_1209, bufferSize_);
     filter1209->setCoefficient(constants::coeffX1_1209, constants::coeffY1_1209, constants::coeffX2_1209, constants::coeffY2_1209, constants::gain1_1209, constants::gain2_1209);
     _megafilters[4]._filterUnit=filter1209;
     _megafilters[4].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_1209,constants::minimunHigh);
 
+    //1336Hz filter
+    DoubleFilter* filter1336 = new DoubleFilter(constants::sizeX1_1336, constants::sizeY1_1336, constants::sizeX2_1336, constants::sizeY2_1336, bufferSize_);
+    filter1336->setCoefficient(constants::coeffX1_1336, constants::coeffY1_1336, constants::coeffX2_1336, constants::coeffY2_1336, constants::gain1_1336, constants::gain2_1336);
+    _megafilters[5]._filterUnit=filter1336;
+    _megafilters[5].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_1336,constants::minimunHigh);
+
+    //1477Hz filter
+    DoubleFilter* filter1477 = new DoubleFilter(constants::sizeX1_1477, constants::sizeY1_1477, constants::sizeX2_1477, constants::sizeY2_1477, bufferSize_);
+    filter1477->setCoefficient(constants::coeffX1_1477, constants::coeffY1_1477, constants::coeffX2_1477, constants::coeffY2_1477, constants::gain1_1477, constants::gain2_1477);
+    _megafilters[6]._filterUnit=filter1477;
+    _megafilters[6].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_1477,constants::minimunHigh);
+
+    //1633Hz filter
+    DoubleFilter* filter1633 = new DoubleFilter(constants::sizeX1_1633, constants::sizeY1_1633, constants::sizeX2_1633, constants::sizeY2_1633, bufferSize_);
+    filter1633->setCoefficient(constants::coeffX1_1633, constants::coeffY1_1633, constants::coeffX2_1633, constants::coeffY2_1633, constants::gain1_1633, constants::gain2_1633);
+    _megafilters[7]._filterUnit=filter1633;
+    _megafilters[7].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_1633,constants::minimunHigh);
+
 }
 
 void dspSystem::filter(float *x){
-    //static int count  = 0;
-    int limit = 1; // _filterAmount, need to fix
-    //if(count++ < 10000000000){
-        for(int i = 0; i < limit ; ++i){
-            _megafilters[4].filter(x);
-            _megafilters[4].analyze();
-        }
-    //}
-
-
+    int limit = 1;//_filterAmount;//, need to fix
+    for(int i = 0; i < limit ; ++i){
+      _megafilters[i].filter(x);
+      if(_megafilters[i].analyze()) std::cout << "found at " << i << std::endl;
+    }
 }
 
 void dspSystem::chainSound(float* tmpOut, float* fsig){

@@ -21,28 +21,29 @@ void MegaFilter::setEmpiricalVariables(int movingAverageSamples, float digitalTh
 }
 
 void MegaFilter::filter(float* x){
-    float* y = new float[_bufferSize];
-    _filterUnit->filter(x, y);
+    // Shift first to make space
+    VectorOperations::shiftVector(_filteredSignal, _filteredSignal, _buffers*_bufferSize, _bufferSize);
+
+    // Filter the signal to the pointer of the end
+    //_filterUnit->filter(x, _filteredSignal+(_buffers-1)*_bufferSize);
+
+    //float* y = new float[_bufferSize];
+
+    _filterUnit->filter(x, _tempSignal1);
     // Remove older chunk, move and insert newest
-    VectorOperations::shiftAndConcatenateVector(_filteredSignal, _filteredSignal, y, _buffers*_bufferSize, _bufferSize);
-    delete y;
+    VectorOperations::shiftAndConcatenateVector(_filteredSignal, _filteredSignal, _tempSignal1, _buffers*_bufferSize, _bufferSize);
+    //delete y;
 }
 
 bool MegaFilter::analyze(){
     VectorOperations::squareVector(_filteredSignal, _tempSignal1, _buffers*_bufferSize);
-    VectorOperations::averageVector(_tempSignal1, _tempSignal2, _buffers*_bufferSize, _movingAverageSamples);
-    VectorOperations::digitalizeVector(_tempSignal2, _tempSignal1, _buffers*_bufferSize, _digitalThreshold, 1);
-    VectorOperations::printVector(_tempSignal2, _buffers*_bufferSize);
-    int ones = VectorOperations::countOnes(_tempSignal1, _buffers*_bufferSize);
-    //std::cout << ones << std::endl;
+    int ones = VectorOperations::averageDigitalizeCounterVector(_tempSignal1, _bufferSize*_buffers, _movingAverageSamples, _digitalThreshold);
+    std::cout << ones << std::endl;
 
-    _states[0] = _states[1];
+    // Checks for a hit
     _states[1] = _states[2];
     _states[2] = ones >= _mininumHigh;
-
-    bool hit = _states[1] && (_states[0] ^ _states[2]); // two consecutive, but not in the middle
-    if(hit) std::cout << "found one" << std::endl;
+    bool hit = (_states[1] && _states[2]) && !_states[0]; // two consecutive, but not in the middle
+    _states[0] = hit;
     return hit;
-
-    // Analyze _tempSignal1 to check when it gets a hit
 }

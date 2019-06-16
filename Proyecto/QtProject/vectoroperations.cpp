@@ -51,11 +51,16 @@ void VectorOperations::printVector(float *vectorA, int length){
 }
 
 // Not tested
-void VectorOperations::digitalizeVector(float *vectorA, float *vectorB, int length, float limit, float value){
+int VectorOperations::digitalizeVector(float *vectorA, float *vectorB, int length, float limit, float value){
+    int count = 0;
     for(int i = 0; i < length; ++i){
-        if(vectorA[i] >= limit) vectorB[i] = value;
+        if(vectorA[i] >= limit){
+            vectorB[i] = value;
+            count++;
+        }
         else vectorB[i] = 0;
     }
+    return count;
 }
 
 // Moves vector to left and fills empty space with vectorC, vectorC.length = lengthSmall is needed
@@ -67,6 +72,14 @@ void VectorOperations::shiftAndConcatenateVector(float *vectorA, float *vectorB,
     for(int j = 0;i < lengthLarge;++i){
         vectorB[i] = vectorC[j];
         ++j;
+    }
+}
+
+// Moves vector to left and fills empty space with nothing, lengthSmall is the shift
+void VectorOperations::shiftVector(float *vectorA, float *vectorB, int length, int amount){
+    int i = 0;
+    for(; i+amount < length; ++i){
+        vectorB[i] = vectorA[i+amount];
     }
 }
 
@@ -88,5 +101,35 @@ int VectorOperations::countOnes(float* vectorA, int length){
         counter += vectorA[i]==1;
     }
     return counter;
+}
+
+int VectorOperations::averageDigitalizeCounterVector(float* vectorA, int length, int m, float limit){
+    int globalCounter = 0;
+    // Leave number odd evertime
+    if(m & 1 == 0){
+        m = --m;
+    }
+    int n = (m-1) >> 1; // Samples to each side to get
+
+    for(int i = 0; i < length; ++i){
+        int counter = 0;
+        float sum = 0;
+        // Sum to the left
+        for(int k = i-1; k >= std::max(i-n, 0); --k){
+            //std::cout << k << std::endl;
+            sum += vectorA[k];
+            ++counter;
+        }
+        // Center
+        sum += vectorA[i];
+        ++counter;
+        // Sum to the right
+        for(int k = i+1; k <= std::min(i+n, length-1); ++k){
+            sum += vectorA[k];
+            ++counter;
+        }
+        globalCounter += (sum/counter) >= limit;
+    }
+    return globalCounter;
 }
 
