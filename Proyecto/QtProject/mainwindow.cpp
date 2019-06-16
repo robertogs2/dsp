@@ -238,6 +238,12 @@ void MainWindow::on_buttonS_released(){
     dsp_->setPChain(-1);
     ui->labelDigits->setText("");
   }
+  else{
+    dsp_->setToneActive(false);
+    dsp_->setChainActive(false);
+    dsp_->setChainFlank(false);
+    dsp_->setPChain(-1);
+  }
 }
 
 void MainWindow::on_button0_pressed(){
@@ -265,7 +271,7 @@ void MainWindow::on_buttonD_released(){
 }
 
 void MainWindow::button_pressed(int i, int j){
-   std::cout << "pressing" << std::endl;
+  std::cout << "pressing" << std::endl;
   if(dsp_->getHanging()){
       // Activates the oscillation while it is runnings
     dsp_->setToneActive(true);

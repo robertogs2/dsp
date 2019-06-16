@@ -119,7 +119,8 @@ public:
   MegaFilter* _megafilters; // Array of filters
 
   std::string lastNumber;
-
+  std::string currentNumber;
+  
   void initFilters();
   void filter(float* x);
 protected:

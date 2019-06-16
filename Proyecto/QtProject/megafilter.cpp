@@ -30,14 +30,10 @@ int MegaFilter::analyze(){
     VectorOperations::squareVector(_filteredSignal, _tempSignal1, _buffers*_bufferSize);
     int ones = VectorOperations::averageDigitalizeCounterVector(_tempSignal1, _bufferSize*_buffers, _movingAverageSamples, _digitalThreshold);
 
-    //std::cout << VectorOperations::average(_tempSignal1, _buffers*_bufferSize) << std::endl;
-
     // Checks for a hit
     _states[1] = _states[2];
     _states[2] = ones;
-    int average = (_states[1] + _states[2])/2;
-    //std::cout << average << std::endl;
-    bool hit = (average > _mininumHigh) && _states[0] != 1; // two consecutive not allowed
+    bool hit = (ones > _mininumHigh) && (_states[0] == false); // two consecutive not allowed
     _states[0] = hit;
-    return hit*ones;
+    return ones*hit;
 }
