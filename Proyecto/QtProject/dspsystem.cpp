@@ -97,7 +97,13 @@ void dspSystem::initFilters(){
     DoubleFilter* filter697 = new DoubleFilter(constants::sizeX1_697, constants::sizeY1_697, constants::sizeX2_697, constants::sizeY2_697, bufferSize_);
     filter697->setCoefficient(constants::coeffX1_697, constants::coeffY1_697, constants::coeffX2_697, constants::coeffY2_697, constants::gain1_697, constants::gain2_697);
     _megafilters[0]._filterUnit=filter697;
-    _megafilters[0].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_697,100);
+    _megafilters[0].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_697,constants::minimunHigh);
+
+    //1209Hz filter
+    DoubleFilter* filter1209 = new DoubleFilter(constants::sizeX1_1209, constants::sizeY1_1209, constants::sizeX2_1209, constants::sizeY2_1209, bufferSize_);
+    filter1209->setCoefficient(constants::coeffX1_1209, constants::coeffY1_1209, constants::coeffX2_1209, constants::coeffY2_1209, constants::gain1_1209, constants::gain2_1209);
+    _megafilters[4]._filterUnit=filter1209;
+    _megafilters[4].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_1209,constants::minimunHigh);
 
 }
 
@@ -106,8 +112,8 @@ void dspSystem::filter(float *x){
     int limit = 1; // _filterAmount, need to fix
     //if(count++ < 10000000000){
         for(int i = 0; i < limit ; ++i){
-            _megafilters[i].filter(x);
-            _megafilters[i].analyze();
+            _megafilters[4].filter(x);
+            _megafilters[4].analyze();
         }
     //}
 

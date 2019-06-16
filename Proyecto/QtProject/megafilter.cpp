@@ -11,6 +11,7 @@ void MegaFilter::init(int buffers, int bufferSize){
     _filteredSignal = new float[_buffers*_bufferSize];
     _tempSignal1 = new float[_buffers*_bufferSize];
     _tempSignal2 = new float[_buffers*_bufferSize];
+    _states;
 }
 
 void MegaFilter::setEmpiricalVariables(int movingAverageSamples, float digitalThreshold, int mininumHigh){
@@ -31,8 +32,17 @@ bool MegaFilter::analyze(){
     VectorOperations::squareVector(_filteredSignal, _tempSignal1, _buffers*_bufferSize);
     VectorOperations::averageVector(_tempSignal1, _tempSignal2, _buffers*_bufferSize, _movingAverageSamples);
     VectorOperations::digitalizeVector(_tempSignal2, _tempSignal1, _buffers*_bufferSize, _digitalThreshold, 1);
-    int amount = VectorOperations::countOnes(_tempSignal1, _buffers*_bufferSize);
-    std::cout << amount << std::endl;
-    //VectorOperations::printVector(_tempSignal1, _buffers*_bufferSize);
+    VectorOperations::printVector(_tempSignal2, _buffers*_bufferSize);
+    int ones = VectorOperations::countOnes(_tempSignal1, _buffers*_bufferSize);
+    //std::cout << ones << std::endl;
+
+    _states[0] = _states[1];
+    _states[1] = _states[2];
+    _states[2] = ones >= _mininumHigh;
+
+    bool hit = _states[1] && (_states[0] ^ _states[2]); // two consecutive, but not in the middle
+    if(hit) std::cout << "found one" << std::endl;
+    return hit;
+
     // Analyze _tempSignal1 to check when it gets a hit
 }

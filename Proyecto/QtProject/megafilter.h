@@ -25,6 +25,9 @@ public:
     float* _tempSignal1;
     float* _tempSignal2;
     DoubleFilter* _filterUnit;
+
+    bool _states[3];
+
 };
 
 #endif // MEGAFILTER_H

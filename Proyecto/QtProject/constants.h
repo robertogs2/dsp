@@ -36,13 +36,14 @@ public:
 
     // General
     static const int movingAverageSamples = 1000;
+    static const int minimunHigh = 1900;
     static const int filterAmount = 8;
     static const int filterBuffers = 2;
 
     // Side frequencies
     // 697 Hz
-    static float constexpr gain1_697 = 0.0014948343;
-    static float constexpr gain2_697 = 0.0014948343;
+    static constexpr float gain1_697 = 0.0014948343;
+    static constexpr float gain2_697 = 0.0014948343;
 
     static const int sizeX1_697 = 3;
     static constexpr inline float coeffX1_697[3] = {1, 0, -1};
@@ -55,8 +56,24 @@ public:
     static constexpr inline float coeffY2_697[2] = {-1.98886276558, 0.998457206963};
 
 
+    // Upper frequencies
+    // 1209 Hz
+    static constexpr float gain1_1209 = 0.00332677963862064;
+    static constexpr float gain2_1209 = 0.00332677963862064;
+
+    static const int sizeX1_1209 = 3;
+    static constexpr inline float coeffX1_1209[3] = {1, 0, -1};
+    static const int sizeY1_1209 = 2;
+    static constexpr inline float coeffY1_1209[2] = {-1.967711204258091, 0.9961690230785906};
+
+    static const int sizeX2_1209 = 3;
+    static constexpr inline float coeffX2_1209[3] = {1, 0, -1};
+    static const int sizeY2_1209 = 2;
+    static constexpr inline float coeffY2_1209[2] = {-1.96538879380776765337, 0.9960262546975657826};
+
     // Threshold and such
     static float constexpr threshold_697 = 0.002;
+    static float constexpr threshold_1209 = 0.002;
 
 };
 
