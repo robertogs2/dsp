@@ -168,9 +168,9 @@ public:
     static float constexpr threshold_1477 = 0.0001;//6
     static float constexpr threshold_1633 = 0.0001;//7
 
-    static const int minimunHigh_697 = 1725;//1850;
-    static const int minimunHigh_770 = 1460;//1400;
-    static const int minimunHigh_852 = 1400;//1400;
+    static const int minimunHigh_697 = 1560;//1850;
+    static const int minimunHigh_770 = 1500;//1400;
+    static const int minimunHigh_852 = 1650;//1400;
     static const int minimunHigh_941 = 1150;//1100;
 
     static const int minimunHigh_1209 = 1700;//1700;

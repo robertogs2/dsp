@@ -243,7 +243,6 @@ void dspSystem::filter(float *x){
       _megafilters[i].filter(x);
       int m = _megafilters[i].analyze();
       current[i] = m;
-      //std::cout << i << ": " << current[i] << std::endl;
     }
 
     // Checks for past and current
@@ -252,7 +251,7 @@ void dspSystem::filter(float *x){
       int tempMax = std::max(prev[i], current[i]);
       if((tempMax>0) && (tempMax>maxI)){
         iFound = i;
-        maxI = current[i];
+        maxI = tempMax;
       }
     }
     // Checks for past and current
@@ -261,11 +260,9 @@ void dspSystem::filter(float *x){
       int tempMax = std::max(prev[i], current[i]);
       if((tempMax>0) && (tempMax>maxJ)){
         jFound = i;
-        maxJ = current[i];
+        maxJ = tempMax;
       }
     }
-
-    //std::cout << "iF: " << iFound << ", jF: " << jFound << std::endl;
 
     // Logic for chaining
     if(iFound != -1 && jFound != -1){
@@ -279,10 +276,10 @@ void dspSystem::filter(float *x){
      if(state > 5 && currentNumber.length() > 0){
          std::cout << "Current number: " << currentNumber << std::endl;
          std::string numberFiltered = utils::filterNumber(currentNumber);
-         std::cout << "Detected number:" << numberFiltered  << std::endl;
+         std::cout << "Reduced number:" << numberFiltered  << std::endl;
          std::string calledNumber = utils::called(numberFiltered);
          if(calledNumber.length() > 0){
-             std::cout << "Called from: " << calledNumber << std::endl;
+             std::cout << "Getting called to: " << calledNumber << std::endl;
          }
          currentNumber = "";
          state = 0;
