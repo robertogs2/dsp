@@ -16,6 +16,9 @@ public:
     static float average(float* vectorA, int length);
     static void printVector(float* vectorA, int length);
 
+    static float max(float *vectorA, int length);
+    static void scale(float *vectorA, float* vectorB, int length, float scale);
+
     static int averageDigitalizeCounterVector(float* vectorA, int length, int m, float limit);
 };
 

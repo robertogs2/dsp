@@ -54,7 +54,6 @@ void dspSystem::updateVolume(int value){
     * Updating volume value
     */
     volumeGain_=value;
-    //osc_->setFrequency(volumeGain_*constants::slope+constants::minFrequency); // Linear frequency changing
 }
 
 /**
@@ -155,6 +154,7 @@ bool dspSystem::process(float* in,float* out) {
     if(chainActive_){
       filter(tmpIn);
       utils::writeFileLines("../Data/input.txt", tmpIn, bufferSize_);
+      std::cout << std::endl;
     }
 
    // VectorOperations::printVector(tmpIn, bufferSize_);
@@ -248,6 +248,11 @@ void dspSystem::filter(float *x){
       current[i] = m;
     }
 
+    // print values
+    for(int i = 0; i < limit ; ++i){
+      std::cout << "a: " << prev[i] << "b: " << current[i] << std::endl; 
+    }
+
     // Checks for past and current
     int maxI = 0;
     for(int i = 0; i < limit/2; ++i){
@@ -255,6 +260,7 @@ void dspSystem::filter(float *x){
       if((tempMax>0) && (tempMax>maxI)){
         iFound = i;
         maxI = tempMax;
+        current[i] = 0;
       }
     }
     // Checks for past and current
@@ -264,19 +270,20 @@ void dspSystem::filter(float *x){
       if((tempMax>0) && (tempMax>maxJ)){
         jFound = i;
         maxJ = tempMax;
+        current[i] = 0;
       }
     }
 
     // Logic for chaining
     if(iFound != -1 && jFound != -1){
         char c = utils::getChar(iFound, jFound-4);
-        //std::cout << "FOUND: " << c << std::endl;
+        std::cout << "FOUND: " << c << std::endl;
         currentNumber += c;
         state = 0;
     }
     else{
      state++;
-     if(state > 5 && currentNumber.length() > 0){
+     if(state > 0 && currentNumber.length() > 0){
          std::cout << "Current number: " << currentNumber << std::endl;
          std::string numberFiltered = utils::filterNumber(currentNumber);
          std::cout << "Reduced number:" << numberFiltered  << std::endl;
@@ -345,6 +352,6 @@ void dspSystem::addToChain(char c){
 
 void dspSystem::setWriting(bool writing){
   for(int i = 0; i < _filterAmount/4; ++i){
-        _megafilters[i]._filterUnit->setWriting(writing);
+        _megafilters[0]._filterUnit->setWriting(writing);
     }
 }

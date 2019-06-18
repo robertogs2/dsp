@@ -10,7 +10,7 @@ def moving_average(a, n=3):
 x = []
 y = []
 
-file = input('File name:')
+file = 'out697'#input('File name:')
 file = '../Data/' + str(file) + '.txt'
 with open(file,'r') as csvfile:
 	i = 0;
@@ -26,7 +26,7 @@ y = moving_average(y, 1000)
 y_max = max(y)
 y = y/y_max
 t = 0.7
-count=0
+"""count=0
 for i in range(len(y)):
 	if y[i] > t:
 		y[i]=1
@@ -35,7 +35,7 @@ for i in range(len(y)):
 		y[i]=0
 
 print(count)
-
+"""
 plt.plot(y, label='Loaded from file!')
 plt.xlabel('x')
 plt.ylabel('y')

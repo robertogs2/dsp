@@ -68,7 +68,20 @@ float VectorOperations::average(float *vectorA, int length){
     return sum/length;
 }
 
-// Not tested
+float VectorOperations::max(float *vectorA, int length){
+    float max = 0;
+    for(int i = 0; i < length; ++i){
+        if(vectorA[i] > max) max=vectorA[i];
+    }
+    return max;
+}
+
+void VectorOperations::scale(float *vectorA, float* vectorB, int length, float scale){
+    for(int i = 0; i < length; ++i){
+        vectorB[i]=vectorA[i]*scale;
+    }
+}
+
 int VectorOperations::digitalizeVector(float *vectorA, float *vectorB, int length, float limit, float value){
     int count = 0;
     for(int i = 0; i < length; ++i){
