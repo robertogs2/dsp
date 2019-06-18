@@ -6,6 +6,7 @@ DoubleFilter::DoubleFilter(int sizeX1, int sizeY1, int sizeX2, int sizeY2, int b
     filter1_ = new SimpleFilter(sizeX1, sizeY1, bufferSize);
     filter2_ = new SimpleFilter(sizeX2, sizeY2, bufferSize);
     _tag = tag;
+    _writing = false;
 }
 
 void DoubleFilter::filter(float *x, float *y){

@@ -95,6 +95,8 @@ void utils::writeFileLines(std::string fileName, float* input, int size){
     if(myfile.is_open()){
         for(int i = 0; i < size; ++i){
             str = std::to_string(input[i]);
+            int commaPos = str.find(",");
+            str.replace(commaPos, 1, ".");
             myfile << str << std::endl;
         }
         myfile.close();

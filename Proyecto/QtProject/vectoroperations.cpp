@@ -14,31 +14,42 @@ void VectorOperations::squareVector(float *vectorA, float *vectorB, int length){
 }
 
 void VectorOperations::averageVector(float *vectorA, float *vectorB, int length, int m){
+    int globalCounter = 0;
     // Leave number odd evertime
-    if((m & 1) == 0){
-        m = --m;
+    if(m & 1 == 0){
+        m -= 1;
     }
-
     int n = (m-1) >> 1; // Samples to each side to get
 
-    for(int i = 0; i < length; ++i){
-        int counter = 0;
-        float sum = 0;
-        // Sum to the left
-        for(int k = i-1; k >= std::max(i-n, 0); --k){
-            //std::cout << k << std::endl;
-            sum += vectorA[k];
-            ++counter;
-        }
 
+    float sum = 0;
+    for(int i = 0; i <= n; ++i){
         sum += vectorA[i];
-        ++counter;
-        // Sum to the right
-        for(int k = i+1; k <= std::min(i+n, length-1); ++k){
-            sum += vectorA[k];
-            ++counter;
-        }
-        vectorB[i] =  sum/counter;
+    }
+    // Start iteration
+    int counter = n+1;
+    int i = 0;
+    while(i<=n){
+        globalCounter += (sum/counter) >= limit; // ONE RESULT
+        counter++;
+        sum += vectorA[i+n+1];
+        ++i;
+    }
+    ++i;
+    // Middle iteration
+    while(i+n<length){
+        sum -= vectorA[i-n-1];
+        sum += vectorA[i+n];
+        globalCounter += (sum/counter) >= limit; // ONE RESULT
+        ++i;
+    }
+
+    // End iteration
+    while(i<length){
+        counter--;
+        sum -= vectorA[i-n-1];
+        globalCounter += (sum/counter) >= limit; // ONE RESULT
+        ++i;
     }
 }
 

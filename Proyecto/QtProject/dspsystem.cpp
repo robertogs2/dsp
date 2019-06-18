@@ -344,7 +344,7 @@ void dspSystem::addToChain(char c){
 }
 
 void dspSystem::setWriting(bool writing){
-  for(int i = 0; i < _filterAmount; ++i){
+  for(int i = 0; i < _filterAmount/4; ++i){
         _megafilters[i]._filterUnit->setWriting(writing);
     }
 }
