@@ -14,7 +14,6 @@ void VectorOperations::squareVector(float *vectorA, float *vectorB, int length){
 }
 
 void VectorOperations::averageVector(float *vectorA, float *vectorB, int length, int m){
-    int globalCounter = 0;
     // Leave number odd evertime
     if(m & 1 == 0){
         m -= 1;
@@ -30,7 +29,7 @@ void VectorOperations::averageVector(float *vectorA, float *vectorB, int length,
     int counter = n+1;
     int i = 0;
     while(i<=n){
-        globalCounter += (sum/counter) >= limit; // ONE RESULT
+        vectorB[i] = sum/counter;
         counter++;
         sum += vectorA[i+n+1];
         ++i;
@@ -40,7 +39,7 @@ void VectorOperations::averageVector(float *vectorA, float *vectorB, int length,
     while(i+n<length){
         sum -= vectorA[i-n-1];
         sum += vectorA[i+n];
-        globalCounter += (sum/counter) >= limit; // ONE RESULT
+        vectorB[i] = sum/counter;
         ++i;
     }
 
@@ -48,7 +47,7 @@ void VectorOperations::averageVector(float *vectorA, float *vectorB, int length,
     while(i<length){
         counter--;
         sum -= vectorA[i-n-1];
-        globalCounter += (sum/counter) >= limit; // ONE RESULT
+        vectorB[i] = sum/counter;
         ++i;
     }
 }
