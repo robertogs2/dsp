@@ -145,18 +145,20 @@ bool dspSystem::process(float* in,float* out) {
     } // end if chain
 
     // Enables filters to save data while performing a call
-    setWriting(chainActive_);
+    //setWriting(chainActive_);
 
     //Copies the signal
     for(int i=0; i<bufferSize_;++i){
-    tmpOut[i]=fsig[i];
+      tmpOut[i]=fsig[i];
     }
     if(chainActive_){
-      filter(tmpIn);
-      utils::writeFileLines("../Data/input.txt", tmpIn, bufferSize_);
-      std::cout << std::endl;
+      
+      //utils::writeFileLines("../Data/input.txt", tmpIn, bufferSize_);
+      //std::cout << std::endl;
     }
 
+    filter(tmpIn);
+    
    // VectorOperations::printVector(tmpIn, bufferSize_);
 
     // Signal with a oscilation
@@ -250,7 +252,7 @@ void dspSystem::filter(float *x){
 
     // print values
     for(int i = 0; i < limit ; ++i){
-      std::cout << "a: " << prev[i] << "b: " << current[i] << std::endl; 
+      //std::cout << _megafilters[i]._filterUnit->_tag << " Filter prev: " << prev[i] << " ,current: " << current[i] << std::endl;
     }
 
     // Checks for past and current
@@ -260,7 +262,7 @@ void dspSystem::filter(float *x){
       if((tempMax>0) && (tempMax>maxI)){
         iFound = i;
         maxI = tempMax;
-        current[i] = 0;
+        //current[i] = 0;
       }
     }
     // Checks for past and current
@@ -270,7 +272,7 @@ void dspSystem::filter(float *x){
       if((tempMax>0) && (tempMax>maxJ)){
         jFound = i;
         maxJ = tempMax;
-        current[i] = 0;
+        //current[i] = 0;
       }
     }
 
@@ -280,13 +282,16 @@ void dspSystem::filter(float *x){
         std::cout << "FOUND: " << c << std::endl;
         currentNumber += c;
         state = 0;
+        current[iFound] = 0;
+        current[jFound] = 0;
     }
     else{
+
      state++;
-     if(state > 0 && currentNumber.length() > 0){
+     if(state > 4 && currentNumber.length() > 0){
          std::cout << "Current number: " << currentNumber << std::endl;
          std::string numberFiltered = utils::filterNumber(currentNumber);
-         std::cout << "Reduced number:" << numberFiltered  << std::endl;
+         //std::cout << "Reduced number:" << numberFiltered  << std::endl;
          std::string calledNumber = utils::called(numberFiltered);
          if(calledNumber.length() > 0){
              std::cout << "Getting called to: " << calledNumber << std::endl;
@@ -352,6 +357,6 @@ void dspSystem::addToChain(char c){
 
 void dspSystem::setWriting(bool writing){
   for(int i = 0; i < _filterAmount/4; ++i){
-        _megafilters[0]._filterUnit->setWriting(writing);
+        _megafilters[6]._filterUnit->setWriting(writing);
     }
 }

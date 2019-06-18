@@ -37,7 +37,7 @@ public:
     // Filter constants
 
     // General
-    static const int movingAverageSamples = 1000;
+    static const int movingAverageSamples = 500;
     static const int filterAmount = 8;
     static const int filterBuffers = 3;
 
@@ -159,23 +159,23 @@ public:
 
 
     // Threshold and such
-    static float constexpr threshold_697 = 0.7;//0
-    static float constexpr threshold_770 = 0.7;//1
-    static float constexpr threshold_852 = 0.7;//2
-    static float constexpr threshold_941 = 0.7;//3
-    static float constexpr threshold_1209 = 0.7;//4
-    static float constexpr threshold_1336 = 0.7;//5
-    static float constexpr threshold_1477 = 0.7;//6
-    static float constexpr threshold_1633 = 0.7;//7
+    static float constexpr threshold_697 = 0.6;//0
+    static float constexpr threshold_770 = 0.6;//1
+    static float constexpr threshold_852 = 0.6;//2
+    static float constexpr threshold_941 = 0.6;//3
+    static float constexpr threshold_1209 = 0.6;//4
+    static float constexpr threshold_1336 = 0.6;//5
+    static float constexpr threshold_1477 = 0.6;//6
+    static float constexpr threshold_1633 = 0.6;//7
 
-    static const int minimunHigh_697 = 800;//1850;
-    static const int minimunHigh_770 = 800;//1800;
-    static const int minimunHigh_852 = 800;//1800;
-    static const int minimunHigh_941 = 800;//1100;  
-    static const int minimunHigh_1209 = 800;//1700;
-    static const int minimunHigh_1336 = 800;//1750;
-    static const int minimunHigh_1477 = 800;//1850;
-    static const int minimunHigh_1633 = 800;//1700;
+    static const int minimunHigh_697 = 400;//1850;
+    static const int minimunHigh_770 = 400;//1800;
+    static const int minimunHigh_852 = 400;//1800;
+    static const int minimunHigh_941 = 400;//1100;  
+    static const int minimunHigh_1209 = 400;//1700;
+    static const int minimunHigh_1336 = 400;//1750;
+    static const int minimunHigh_1477 = 400;//1850;
+    static const int minimunHigh_1633 = 400;//1700;
 
 };
 
