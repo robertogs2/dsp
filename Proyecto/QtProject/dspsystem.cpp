@@ -106,8 +106,6 @@ void dspSystem::chainSound(float* tmpOut, float* fsig){
             osc_->setActive(false);
             setUChain("");          //Resets the chain
             std::cout << "finish" << std::endl;
-            //osc_->generateSignal();
-            //fsig=osc_->getSignal();
             break;
           }
           // Updates frequencies for the oscillator
@@ -144,18 +142,22 @@ bool dspSystem::process(float* in,float* out) {
     float* fsig=osc_->getSignal();
 
     if(chainActive_){//We need to reproduce a chain
-    chainSound(tmpOut, fsig);
+        chainSound(tmpOut, fsig);
     } // end if chain
+
+    // Enables filters to save data while performing a call
+    setWriting(chainActive_);
 
     //Copies the signal
     for(int i=0; i<bufferSize_;++i){
     tmpOut[i]=fsig[i];
     }
-    //VectorOperations::printVector(tmpIn,bufferSize_);
-    if(hanging_){
+    if(chainActive_){
       filter(tmpIn);
+      utils::writeFileLines("../Data/input.txt", tmpIn, bufferSize_);
     }
-    
+
+   // VectorOperations::printVector(tmpIn, bufferSize_);
 
     // Signal with a oscilation
     cv_->filter(bufferSize_,volumeGain_,tmpOut,tmpOut);
@@ -166,6 +168,7 @@ bool dspSystem::process(float* in,float* out) {
 }
 
 
+
 void dspSystem::initFilters(){
     _filterAmount = constants::filterAmount;
     _megafilters = new MegaFilter[_filterAmount];
@@ -174,49 +177,49 @@ void dspSystem::initFilters(){
     }
 
     //697Hz filter
-    DoubleFilter* filter697 = new DoubleFilter(constants::sizeX1_697, constants::sizeY1_697, constants::sizeX2_697, constants::sizeY2_697, bufferSize_);
+    DoubleFilter* filter697 = new DoubleFilter(constants::sizeX1_697, constants::sizeY1_697, constants::sizeX2_697, constants::sizeY2_697, bufferSize_, "697");
     filter697->setCoefficient(constants::coeffX1_697, constants::coeffY1_697, constants::coeffX2_697, constants::coeffY2_697, constants::gain1_697, constants::gain2_697);
     _megafilters[0]._filterUnit=filter697;
     _megafilters[0].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_697,constants::minimunHigh_697);
 
     //770Hz filter
-    DoubleFilter* filter770 = new DoubleFilter(constants::sizeX1_770, constants::sizeY1_770, constants::sizeX2_770, constants::sizeY2_770, bufferSize_);
+    DoubleFilter* filter770 = new DoubleFilter(constants::sizeX1_770, constants::sizeY1_770, constants::sizeX2_770, constants::sizeY2_770, bufferSize_, "770");
     filter770->setCoefficient(constants::coeffX1_770, constants::coeffY1_770, constants::coeffX2_770, constants::coeffY2_770, constants::gain1_770, constants::gain2_770);
     _megafilters[1]._filterUnit=filter770;
     _megafilters[1].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_770,constants::minimunHigh_770);
 
     //852Hz filter
-    DoubleFilter* filter852 = new DoubleFilter(constants::sizeX1_852, constants::sizeY1_852, constants::sizeX2_852, constants::sizeY2_852, bufferSize_);
+    DoubleFilter* filter852 = new DoubleFilter(constants::sizeX1_852, constants::sizeY1_852, constants::sizeX2_852, constants::sizeY2_852, bufferSize_, "852");
     filter852->setCoefficient(constants::coeffX1_852, constants::coeffY1_852, constants::coeffX2_852, constants::coeffY2_852, constants::gain1_852, constants::gain2_852);
     _megafilters[2]._filterUnit=filter852;
     _megafilters[2].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_852,constants::minimunHigh_852);
 
     //941Hz filter
-    DoubleFilter* filter941 = new DoubleFilter(constants::sizeX1_941, constants::sizeY1_941, constants::sizeX2_941, constants::sizeY2_941, bufferSize_);
+    DoubleFilter* filter941 = new DoubleFilter(constants::sizeX1_941, constants::sizeY1_941, constants::sizeX2_941, constants::sizeY2_941, bufferSize_, "941");
     filter941->setCoefficient(constants::coeffX1_941, constants::coeffY1_941, constants::coeffX2_941, constants::coeffY2_941, constants::gain1_941, constants::gain2_941);
     _megafilters[3]._filterUnit=filter941;
     _megafilters[3].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_941,constants::minimunHigh_941);
 
     //1209Hz filter
-    DoubleFilter* filter1209 = new DoubleFilter(constants::sizeX1_1209, constants::sizeY1_1209, constants::sizeX2_1209, constants::sizeY2_1209, bufferSize_);
+    DoubleFilter* filter1209 = new DoubleFilter(constants::sizeX1_1209, constants::sizeY1_1209, constants::sizeX2_1209, constants::sizeY2_1209, bufferSize_, "1209");
     filter1209->setCoefficient(constants::coeffX1_1209, constants::coeffY1_1209, constants::coeffX2_1209, constants::coeffY2_1209, constants::gain1_1209, constants::gain2_1209);
     _megafilters[4]._filterUnit=filter1209;
     _megafilters[4].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_1209,constants::minimunHigh_1209);
 
     //1336Hz filter
-    DoubleFilter* filter1336 = new DoubleFilter(constants::sizeX1_1336, constants::sizeY1_1336, constants::sizeX2_1336, constants::sizeY2_1336, bufferSize_);
+    DoubleFilter* filter1336 = new DoubleFilter(constants::sizeX1_1336, constants::sizeY1_1336, constants::sizeX2_1336, constants::sizeY2_1336, bufferSize_, "1336");
     filter1336->setCoefficient(constants::coeffX1_1336, constants::coeffY1_1336, constants::coeffX2_1336, constants::coeffY2_1336, constants::gain1_1336, constants::gain2_1336);
     _megafilters[5]._filterUnit=filter1336;
     _megafilters[5].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_1336,constants::minimunHigh_1336);
 
     //1477Hz filter
-    DoubleFilter* filter1477 = new DoubleFilter(constants::sizeX1_1477, constants::sizeY1_1477, constants::sizeX2_1477, constants::sizeY2_1477, bufferSize_);
+    DoubleFilter* filter1477 = new DoubleFilter(constants::sizeX1_1477, constants::sizeY1_1477, constants::sizeX2_1477, constants::sizeY2_1477, bufferSize_, "1477");
     filter1477->setCoefficient(constants::coeffX1_1477, constants::coeffY1_1477, constants::coeffX2_1477, constants::coeffY2_1477, constants::gain1_1477, constants::gain2_1477);
     _megafilters[6]._filterUnit=filter1477;
     _megafilters[6].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_1477,constants::minimunHigh_1477);
 
     //1633Hz filter
-    DoubleFilter* filter1633 = new DoubleFilter(constants::sizeX1_1633, constants::sizeY1_1633, constants::sizeX2_1633, constants::sizeY2_1633, bufferSize_);
+    DoubleFilter* filter1633 = new DoubleFilter(constants::sizeX1_1633, constants::sizeY1_1633, constants::sizeX2_1633, constants::sizeY2_1633, bufferSize_, "1633");
     filter1633->setCoefficient(constants::coeffX1_1633, constants::coeffY1_1633, constants::coeffX2_1633, constants::coeffY2_1633, constants::gain1_1633, constants::gain2_1633);
     _megafilters[7]._filterUnit=filter1633;
     _megafilters[7].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_1633,constants::minimunHigh_1633);
@@ -338,4 +341,10 @@ bool dspSystem::getHanging(){return hanging_;}
 
 void dspSystem::addToChain(char c){
   uChain_ += c;
+}
+
+void dspSystem::setWriting(bool writing){
+  for(int i = 0; i < _filterAmount; ++i){
+        _megafilters[i]._filterUnit->setWriting(writing);
+    }
 }

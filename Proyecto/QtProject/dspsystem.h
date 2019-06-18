@@ -123,6 +123,9 @@ public:
   
   void initFilters();
   void filter(float* x);
+
+  void setWriting(bool writing);
+  
 protected:
 
   /**

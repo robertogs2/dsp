@@ -1,5 +1,0 @@
-<map id="dspSystem" name="dspSystem">
-<area shape="rect" id="node2" href="$classprocessor.html" title="processor" alt="" coords="5,5,84,32"/>
-<area shape="rect" id="node3" href="$classdoscillator.html" title="doscillator" alt="" coords="108,5,189,32"/>
-<area shape="rect" id="node4" href="$classcontrolVolume.html" title="controlVolume" alt="" coords="213,5,319,32"/>
-</map>

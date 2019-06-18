@@ -88,3 +88,16 @@ std::string utils::called(std::string input){
     }
     else return "";
 }
+
+void utils::writeFileLines(std::string fileName, float* input, int size){
+    std::ofstream myfile(fileName.c_str(), std::ios_base::app | std::ios_base::out);
+    std::string str;
+    if(myfile.is_open()){
+        for(int i = 0; i < size; ++i){
+            str = std::to_string(input[i]);
+            myfile << str << std::endl;
+        }
+        myfile.close();
+    }
+    else std::cerr<<"Unable to open file";
+}
