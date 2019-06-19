@@ -18,14 +18,14 @@ public:
     void setCoefficients(const float* coeffX, const float* coeffY, const float gain);
     void filter(float* x, float* y);
 
-    int _bufferSize;
+    int _bufferSize; // Size of the input and output vector
     int _sizeY; // Filter memory for Y
     int _sizeX; //Filter memory for X
     float* _coeffX; // Coefficients for X, counting 0, for current value
     float* _coeffY; // Coefficients for Y, startin for y(n-1)
     float* _lastX; // Last values for X, sizeX-1
     float* _lastY; // Last values for Y
-    float _gain;
+    float _gain; // Gain for the filter
 };
 
 #endif // SIPLEFILTER_H

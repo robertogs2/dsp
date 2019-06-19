@@ -31,22 +31,29 @@ void SimpleFilter::filter(float *x, float *y){
     float sumX = 0;
     float result = 0;
     for(int i = 0; i < _bufferSize; ++i){
+        // First calculates the equation for y
         sumY = 0;
         for(int j = 0; j < _sizeY; ++j){
             sumY += _lastY[j]*_coeffY[j];
         }
+
+        // Calculate the equation for x
         sumX = x[i]*_coeffX[0];
         for(int j = 1; j < _sizeX; ++j){
             sumX += _lastX[j-1]*_coeffX[j];
         }
+
+        // Result is g*x-y
         result = -sumY + _gain*sumX;
         y[i] = result;
+
+        // Moves last values and removes the oldest for y
         VectorOperations::delayVector(_lastY, _lastY, 1, _sizeY, false);
         _lastY[0] = y[i];
 
+        // Moves last values and removes the oldest for x
         VectorOperations::delayVector(_lastX, _lastX, 1, _sizeX-1, false);
         _lastX[0] = x[i];
     }
-    //VectorOperations::printVector(y, _bufferSize);
 
 }
