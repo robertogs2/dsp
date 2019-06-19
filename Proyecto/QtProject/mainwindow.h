@@ -36,7 +36,7 @@
 #include "constants.h"
 #include "utils.h"
 #include "vectoroperations.h"
-
+class dspSystem;
 namespace Ui {
 class MainWindow;
 }
@@ -52,8 +52,10 @@ public:
 
     void addToList(QString str, bool calling);
 
-private:
     Ui::MainWindow *ui;
+
+private:
+
 
     int volumeGain;
     /**

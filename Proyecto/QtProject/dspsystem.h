@@ -28,6 +28,7 @@
 #ifndef DSPSYSTEM_H
 #define DSPSYSTEM_H
 
+#include "mainwindow.h"
 #include "processor.h"
 #include "controlvolume.h"
 #include "doscillator.h"
@@ -38,6 +39,7 @@
 #include "doublefilter.h"
 #include <chrono>
 
+class MainWindow;
 
 class dspSystem : public processor {
 public:
@@ -129,6 +131,9 @@ public:
 
   bool inCall;
   bool called;
+
+  MainWindow* mw_;
+  void setWindow(MainWindow* mw);
 protected:
 
   /**

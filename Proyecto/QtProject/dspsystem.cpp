@@ -90,7 +90,9 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
   return true;
 }
 
-
+void dspSystem::setWindow(MainWindow* mw){
+  mw_ = mw;
+}
 
 void dspSystem::chainSound(float* tmpOut, float* fsig){
     int i = 0;
@@ -281,6 +283,7 @@ void dspSystem::filter(float *x){
              if(calledNumber.length() > 0){
                  std::cout << "Getting called to: " << calledNumber << std::endl;
                  //call("#*");
+                 mw_->addToList(QString::fromStdString(calledNumber), false);
                  called = true;
              }
          }
