@@ -19,8 +19,8 @@
 /**
  * \file   dspsystem.cpp
  *         Implements filtering in the frequency domain
- * \author Pablo Alvarado/Jose Miguel Barboza
- * \date   2010.12.12/2017.05.26
+ * \author Pablo Alvarado/Jose Miguel Barboza/Roberto Gutierrez
+ * \date   2010.12.12/2017.05.26/2019.06.18
  *
  * $Id: equalizer.cpp $
  */
@@ -159,7 +159,7 @@ bool dspSystem::process(float* in,float* out) {
     return true;
 }
 
-
+// Initialices all the filters used in the process, loading its values from teh constants
 void dspSystem::initFilters(){
     _filterAmount = constants::filterAmount;
     _megafilters = new MegaFilter[_filterAmount];
@@ -266,13 +266,13 @@ void dspSystem::filter(float *x){
     }
 
     // Logic for chaining
-    if(iFound != -1 && jFound != -1){
+    if(iFound != -1 && jFound != -1){ // if both frequencies match
         char c = utils::getChar(iFound, jFound-4);
         currentNumber += c;
         state = 0;
     }
-    else{
-     state++;
+    else{// Not both match
+     state++; // Checks the amount of times without hits to see if its a call
      if(state > 5 && currentNumber.length() > 1){
          if(!inCall){ // Not in a call
              std::string numberFiltered = utils::filterNumber(currentNumber);
@@ -285,6 +285,7 @@ void dspSystem::filter(float *x){
              }
          }
          else{
+          // checks if new number is a hang
             std::string numberFiltered = utils::filterNumber(currentNumber);
             if(numberFiltered == "#*"){
                 called = false;
@@ -297,6 +298,8 @@ void dspSystem::filter(float *x){
     }
     
 }
+
+// Calls a number sequence
 
 void dspSystem::call(std::string number){
   setUChain(number);
