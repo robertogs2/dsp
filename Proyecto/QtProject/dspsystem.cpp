@@ -105,7 +105,7 @@ void dspSystem::chainSound(float* tmpOut, float* fsig){
             setChainActive(false);
             osc_->setActive(false);
             setUChain("");          //Resets the chain
-            std::cout << "finish" << std::endl;
+            //std::cout << "finish" << std::endl;
             //osc_->generateSignal();
             //fsig=osc_->getSignal();
             break;
@@ -274,9 +274,9 @@ void dspSystem::filter(float *x){
     else{
      state++;
      if(state > 5 && currentNumber.length() > 0){
-         std::cout << "Current number: " << currentNumber << std::endl;
+         //std::cout << "Current number: " << currentNumber << std::endl;
          std::string numberFiltered = utils::filterNumber(currentNumber);
-         std::cout << "Reduced number:" << numberFiltered  << std::endl;
+         //std::cout << "Reduced number:" << numberFiltered  << std::endl;
          std::string calledNumber = utils::called(numberFiltered);
          if(calledNumber.length() > 0){
              std::cout << "Getting called to: " << calledNumber << std::endl;
