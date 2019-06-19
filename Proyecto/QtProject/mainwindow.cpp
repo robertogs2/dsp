@@ -319,3 +319,10 @@ void MainWindow::on_buttonDesc_clicked(){
     dsp_->inCall = false;
   }
 }
+
+void MainWindow::on_buttonCon_clicked(){
+  if(dsp_->called){
+    dsp->call("#*");
+    dsp->inCall=true;
+  }
+}

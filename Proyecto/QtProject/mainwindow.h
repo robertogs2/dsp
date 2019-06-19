@@ -130,6 +130,7 @@ private:
      void on_buttonAC_clicked();
      void on_buttonDel_clicked();
      void on_buttonDesc_clicked();
+     void on_buttonCon_clicked();
 };
 
 

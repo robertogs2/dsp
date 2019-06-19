@@ -84,6 +84,7 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
 
   initFilters();
   inCall = false;
+  called = false;
   currentNumber = "";
 
   return true;
@@ -279,13 +280,14 @@ void dspSystem::filter(float *x){
              std::string calledNumber = utils::called(numberFiltered);
              if(calledNumber.length() > 0){
                  std::cout << "Getting called to: " << calledNumber << std::endl;
-                 call("#*");
-                 inCall = true;
+                 //call("#*");
+                 called = true;
              }
          }
          else{
             std::string numberFiltered = utils::filterNumber(currentNumber);
             if(numberFiltered == "#*"){
+                called = false;
                 inCall = false;
             }
          }

@@ -127,6 +127,7 @@ public:
   void call(std::string number);
 
   bool inCall;
+  bool called;
 protected:
 
   /**
