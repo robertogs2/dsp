@@ -35,7 +35,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = MediaPlayer1.0.0
-DISTDIR = /home/roberto/Documents/GitHub/DSP/Proyecto/Build/.tmp/MediaPlayer1.0.0
+DISTDIR = /home/alejandro/Documents/GitHub/DSP/Proyecto/Build/.tmp/MediaPlayer1.0.0
 LINK          = g++
 LFLAGS        = 
 LIBS          = $(SUBLIBS) -lfftw3f -ljack -lsndfile -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -105,8 +105,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_input_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_kms_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimedia.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri \
@@ -216,8 +214,6 @@ Makefile: ../QtProject/MediaPlayer.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/lin
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_input_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_kms_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimedia.pri \
-		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri \
@@ -297,8 +293,6 @@ Makefile: ../QtProject/MediaPlayer.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/lin
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_input_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_kms_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri:
-/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimedia.pri:
-/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri:
@@ -405,11 +399,14 @@ moc_mainwindow.cpp: ../QtProject/dspsystem.h \
 		../QtProject/doscillator.h \
 		../QtProject/constants.h \
 		../QtProject/utils.h \
+		../QtProject/megafilter.h \
+		../QtProject/doublefilter.h \
+		../QtProject/simplefilter.h \
 		../QtProject/vectoroperations.h \
 		../QtProject/mainwindow.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/roberto/Documents/GitHub/DSP/Proyecto/QtProject -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../QtProject/mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/alejandro/Documents/GitHub/DSP/Proyecto/QtProject -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../QtProject/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -437,6 +434,9 @@ main.o: ../QtProject/main.cpp ../QtProject/mainwindow.h \
 		../QtProject/doscillator.h \
 		../QtProject/constants.h \
 		../QtProject/utils.h \
+		../QtProject/megafilter.h \
+		../QtProject/doublefilter.h \
+		../QtProject/simplefilter.h \
 		../QtProject/vectoroperations.h \
 		../QtProject/oscillator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../QtProject/main.cpp
@@ -448,6 +448,9 @@ mainwindow.o: ../QtProject/mainwindow.cpp ../QtProject/mainwindow.h \
 		../QtProject/doscillator.h \
 		../QtProject/constants.h \
 		../QtProject/utils.h \
+		../QtProject/megafilter.h \
+		../QtProject/doublefilter.h \
+		../QtProject/simplefilter.h \
 		../QtProject/vectoroperations.h \
 		ui_mainwindow.h \
 		../QtProject/jack.h
@@ -462,7 +465,11 @@ dspsystem.o: ../QtProject/dspsystem.cpp ../QtProject/dspsystem.h \
 		../QtProject/controlvolume.h \
 		../QtProject/doscillator.h \
 		../QtProject/constants.h \
-		../QtProject/utils.h
+		../QtProject/utils.h \
+		../QtProject/megafilter.h \
+		../QtProject/doublefilter.h \
+		../QtProject/simplefilter.h \
+		../QtProject/vectoroperations.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dspsystem.o ../QtProject/dspsystem.cpp
 
 controlvolume.o: ../QtProject/controlvolume.cpp ../QtProject/controlvolume.h
@@ -487,11 +494,14 @@ simplefilter.o: ../QtProject/simplefilter.cpp ../QtProject/simplefilter.h \
 
 megafilter.o: ../QtProject/megafilter.cpp ../QtProject/megafilter.h \
 		../QtProject/doublefilter.h \
+		../QtProject/simplefilter.h \
 		../QtProject/vectoroperations.h \
 		../QtProject/constants.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o megafilter.o ../QtProject/megafilter.cpp
 
-doublefilter.o: ../QtProject/doublefilter.cpp ../QtProject/doublefilter.h
+doublefilter.o: ../QtProject/doublefilter.cpp ../QtProject/doublefilter.h \
+		../QtProject/simplefilter.h \
+		../QtProject/vectoroperations.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o doublefilter.o ../QtProject/doublefilter.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 

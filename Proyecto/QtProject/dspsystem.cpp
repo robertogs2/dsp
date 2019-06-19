@@ -364,3 +364,7 @@ bool dspSystem::getHanging(){return hanging_;}
 void dspSystem::addToChain(char c){
   uChain_ += c;
 }
+
+void dspSystem::setChain(std::string str){
+    uChain_ = str;
+}

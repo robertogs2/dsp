@@ -50,6 +50,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void addToList(QString str, bool calling);
+
 private:
     Ui::MainWindow *ui;
 
@@ -131,6 +133,7 @@ private:
      void on_buttonDel_clicked();
      void on_buttonDesc_clicked();
      void on_buttonCon_clicked();
+     void on_listWidget_clicked(const QModelIndex &index);
 };
 
 

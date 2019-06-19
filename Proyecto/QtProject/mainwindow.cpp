@@ -144,6 +144,7 @@ void MainWindow::on_buttonA_pressed(){
 void MainWindow::on_buttonA_released(){
   ui->labelDigits->setText("#911*");
   dsp_->setUChain("#911*");
+  addToList("911", true);
   // Same as s
   bool start = dsp_->getUChain().size() > 0;
   if(start){ // There is a chain to play
@@ -236,6 +237,9 @@ void MainWindow::on_buttonS_released(){
     dsp_->setChainActive(true);
     dsp_->setChainFlank(true);
     dsp_->setPChain(-1);
+    QString str = ui->labelDigits->text();
+    str.chop(1);
+    addToList(str, true);
     ui->labelDigits->setText("");
   }
   else{
@@ -325,4 +329,26 @@ void MainWindow::on_buttonCon_clicked(){
     dsp_->call("#*");
     dsp_->inCall=true;
   }
+}
+
+
+void MainWindow::on_listWidget_clicked(const QModelIndex &index)
+{
+    QString str = ui->listWidget->currentItem()->text();
+    ui->labelDigits->setText(str);
+    dsp_->setChain(str.toStdString());
+}
+
+void MainWindow::addToList(QString str, bool calling){
+    QListWidgetItem* item = new QListWidgetItem(str);
+    if (calling){
+        item->setBackground(QColor("#6fe28f"));
+    } else {
+        item->setBackground(QColor("#d86868"));
+    }
+    ui->listWidget->addItem(item);
+    if(ui->listWidget->count() > 10){
+        QListWidgetItem* item = ui->listWidget->takeItem(0);
+        delete item;
+    }
 }

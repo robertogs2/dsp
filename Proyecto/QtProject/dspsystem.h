@@ -112,6 +112,7 @@ public:
   bool getHanging();
 
   void addToChain(char c);
+  void setChain(std::string str);
 
   doscillator* osc_;
   // Filter public section
