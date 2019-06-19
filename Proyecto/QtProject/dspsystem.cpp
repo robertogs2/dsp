@@ -54,7 +54,7 @@ void dspSystem::updateVolume(int value){
     * Updating volume value
     */
     volumeGain_=value;
-    //osc_->setFrequency(volumeGain_*constants::slope+constants::minFrequency); // Linear frequency changing
+    std::cout << "Updating volumen to " << value << std::endl;
 }
 
 /**
@@ -83,6 +83,7 @@ bool dspSystem::init(const int sampleRate,const int bufferSize) {
   chainActive_ = false;
 
   initFilters();
+  inCall = false;
   currentNumber = "";
 
   return true;
@@ -95,19 +96,16 @@ void dspSystem::chainSound(float* tmpOut, float* fsig){
     bool trigger = false;
     for(; i < bufferSize_; ++i){
       // Triggering code
-      trigger = k_ == constants::limit40;
+      trigger = k_ >= constants::limit40;
       if(trigger){ // Happens once every time there is a change
         chainFlank_ = !chainFlank_;
         if(chainFlank_){
           osc_->setActive(true);
           p_++; // Increase index for processing
-          if(p_ >= uChain_.size()){ // Happens only when there is nothing more to process
+          if(p_ >= int(uChain_.size())){ // Happens only when there is nothing more to process
             setChainActive(false);
             osc_->setActive(false);
             setUChain("");          //Resets the chain
-            //std::cout << "finish" << std::endl;
-            //osc_->generateSignal();
-            //fsig=osc_->getSignal();
             break;
           }
           // Updates frequencies for the oscillator
@@ -132,9 +130,6 @@ void dspSystem::chainSound(float* tmpOut, float* fsig){
  * Processing function
  */
 bool dspSystem::process(float* in,float* out) {
-    // Using time point and system_clock
-    std::chrono::time_point<std::chrono::system_clock> start, end;
-    start = std::chrono::system_clock::now();
 
     float* tmpIn = in;
     float* tmpOut = out;
@@ -144,24 +139,22 @@ bool dspSystem::process(float* in,float* out) {
     float* fsig=osc_->getSignal();
 
     if(chainActive_){//We need to reproduce a chain
-    chainSound(tmpOut, fsig);
+      chainSound(tmpOut, fsig);
     } // end if chain
 
     //Copies the signal
     for(int i=0; i<bufferSize_;++i){
-    tmpOut[i]=fsig[i];
+        tmpOut[i]=fsig[i];
     }
-    //VectorOperations::printVector(tmpIn,bufferSize_);
+
     if(hanging_){
+      //_lowPassFilter->filter(tmpIn, tmpIn);
       filter(tmpIn);
     }
     
 
     // Signal with a oscilation
     cv_->filter(bufferSize_,volumeGain_,tmpOut,tmpOut);
-    end = std::chrono::system_clock::now();
-    std::chrono::duration<double> elapsed_seconds = end - start;
-    //std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
     return true;
 }
 
@@ -221,6 +214,13 @@ void dspSystem::initFilters(){
     _megafilters[7]._filterUnit=filter1633;
     _megafilters[7].setEmpiricalVariables(constants::movingAverageSamples,constants::threshold_1633,constants::minimunHigh_1633);
 
+
+    // Low pass filter
+
+    DoubleFilter* lpFilter = new DoubleFilter(constants::sizeX1_lp, constants::sizeY1_lp, constants::sizeX2_lp, constants::sizeY2_lp, bufferSize_);
+    lpFilter->setCoefficient(constants::coeffX1_lp, constants::coeffY1_lp, constants::coeffX2_lp, constants::coeffY2_lp, constants::gain1_lp, constants::gain2_lp);
+    _lowPassFilter = lpFilter;
+    
 }
 
 void dspSystem::filter(float *x){
@@ -267,25 +267,45 @@ void dspSystem::filter(float *x){
     // Logic for chaining
     if(iFound != -1 && jFound != -1){
         char c = utils::getChar(iFound, jFound-4);
-        //std::cout << "FOUND: " << c << std::endl;
         currentNumber += c;
         state = 0;
     }
     else{
      state++;
-     if(state > 5 && currentNumber.length() > 0){
-         std::cout << "Current number: " << currentNumber << std::endl;
-         std::string numberFiltered = utils::filterNumber(currentNumber);
-         //std::cout << "Reduced number:" << numberFiltered  << std::endl;
-         std::string calledNumber = utils::called(numberFiltered);
-         if(calledNumber.length() > 0){
-             std::cout << "Getting called to: " << calledNumber << std::endl;
+     if(state > 5 && currentNumber.length() > 1){
+         if(!inCall){ // Not in a call
+             std::string numberFiltered = utils::filterNumber(currentNumber);
+             std::cout << "Current number:" << numberFiltered  << std::endl;
+             std::string calledNumber = utils::called(numberFiltered);
+             if(calledNumber.length() > 0){
+                 std::cout << "Getting called to: " << calledNumber << std::endl;
+                 call("#*");
+                 inCall = true;
+             }
+         }
+         else{
+            std::string numberFiltered = utils::filterNumber(currentNumber);
+            if(numberFiltered == "#*"){
+                inCall = false;
+            }
          }
          currentNumber = "";
          state = 0;
      }
     }
     
+}
+
+void dspSystem::call(std::string number){
+  setUChain(number);
+  // Same as s
+  bool start = getUChain().size() > 0;
+  if(start){ // There is a chain to play
+    setToneActive(true);
+    setChainActive(true);
+    setChainFlank(true);
+    setPChain(-1);
+  }
 }
 
 /**

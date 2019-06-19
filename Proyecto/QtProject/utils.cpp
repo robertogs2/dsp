@@ -70,7 +70,10 @@ std::string utils::filterNumber(std::string input){
     else d = '1';
     for(char c : pivot){
         result += c;
-        if(c == d){
+        if(d == '5' && (c == '9' || c == '4' || c == '8')){
+            int a = 0;
+        }
+        else if(c == d){
             result += d;
         }
     }

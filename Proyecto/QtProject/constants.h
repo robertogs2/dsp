@@ -31,7 +31,7 @@ public:
     inline static const std::string col = "Colgar";
 
     // Number
-    inline static const std::string number = "26557321";
+    inline static const std::string number = "#26557321";
 
 
     // Filter constants
@@ -158,18 +158,33 @@ public:
     static constexpr inline float coeffY2_1633[2] = {-1.94382546374363984753,  0.9961500471558724090215};
 
 
-    // Threshold and such
-    static float constexpr threshold_697 = 0.001;//0
-    static float constexpr threshold_770 = 0.001;//1
-    static float constexpr threshold_852 = 0.001;//2
-    static float constexpr threshold_941 = 0.001;//3
-    static float constexpr threshold_1209 = 0.0001;//4
-    static float constexpr threshold_1336 = 0.0001;//5
-    static float constexpr threshold_1477 = 0.0001;//6
-    static float constexpr threshold_1633 = 0.0001;//7
+    // Low pass filter
+    static constexpr float gain1_lp = 0.0170626018152377965;
+    static constexpr float gain2_lp = 0.0046480817562244290;
 
-    static const int minimunHigh_697 = 1560;//1850;
-    static const int minimunHigh_770 = 1500;//1400;
+    static const int sizeX1_lp = 3;
+    static constexpr inline float coeffX1_lp[3] = {1,2,1};
+    static const int sizeY1_lp = 2;
+    static constexpr inline float coeffY1_lp[2] = {-1.847912846742939763, 0.924491063203351837};
+
+    static const int sizeX2_lp = 3;
+    static constexpr inline float coeffX2_lp[3] = {1,2,1};
+    static const int sizeY2_lp = 2;
+    static constexpr inline float coeffY2_lp[2] = {-1.80380014096181584, 0.82466107499216845};
+
+
+    // Threshold and such
+    static float constexpr threshold_697 = 0.01;//0
+    static float constexpr threshold_770 = 0.03;//1
+    static float constexpr threshold_852 = 0.01;//2
+    static float constexpr threshold_941 = 0.01;//3
+    static float constexpr threshold_1209 = 0.001;//4
+    static float constexpr threshold_1336 = 0.001;//5
+    static float constexpr threshold_1477 = 0.001;//6
+    static float constexpr threshold_1633 = 0.001;//7
+
+    static const int minimunHigh_697 = 1660;//1850;
+    static const int minimunHigh_770 = 1600;//1400;
     static const int minimunHigh_852 = 1650;//1400;
     static const int minimunHigh_941 = 1150;//1100;
 

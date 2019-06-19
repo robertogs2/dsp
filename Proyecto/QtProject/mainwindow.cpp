@@ -138,7 +138,7 @@ void MainWindow::on_button3_released(){
 }
 
 void MainWindow::on_buttonA_pressed(){
-  button_pressed(0,3);
+  //button_pressed(0,3);
 }
 
 void MainWindow::on_buttonA_released(){
@@ -215,6 +215,7 @@ void MainWindow::on_button9_released(){
 }
 
 void MainWindow::on_buttonC_pressed(){
+  ui->volumeSlider->setValue(ui->volumeSlider->value()+1);
   dsp_->updateVolume(ui->volumeSlider->value()+1);
   //button_pressed(2,3);
 }
@@ -229,7 +230,6 @@ void MainWindow::on_buttonS_pressed(){
 }
 
 void MainWindow::on_buttonS_released(){
-  //button_released(3,0);
   bool start = dsp_->getUChain().size() > 0;
   if(start){ // There is a chain to play
     dsp_->setToneActive(true);
@@ -263,7 +263,9 @@ void MainWindow::on_buttonN_released(){
 }
 
 void MainWindow::on_buttonD_pressed(){
-  button_pressed(3,3);
+  ui->volumeSlider->setValue(ui->volumeSlider->value()-1);
+  dsp_->updateVolume(ui->volumeSlider->value()-1);
+  //button_pressed(3,3);
 }
 
 void MainWindow::on_buttonD_released(){
@@ -312,4 +314,8 @@ void MainWindow::on_buttonDesc_clicked(){
   dsp_->setUChain("");
   ui->labelDigits->setText("");
   dsp_->setHanging(!h);
+  if(dsp_->inCall){
+    dsp_->call("#*");
+    dsp_->inCall = false;
+  }
 }

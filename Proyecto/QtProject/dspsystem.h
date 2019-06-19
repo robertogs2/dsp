@@ -117,12 +117,16 @@ public:
   // Filter public section
   int _filterAmount; // Amount of filters
   MegaFilter* _megafilters; // Array of filters
+  DoubleFilter* _lowPassFilter;
 
   std::string lastNumber;
   std::string currentNumber;
   
   void initFilters();
   void filter(float* x);
+  void call(std::string number);
+
+  bool inCall;
 protected:
 
   /**
