@@ -32,6 +32,7 @@
 #include "constants.h"
 #include <string>
 #include <iostream>
+#include <QDateTime>
 
 #undef _DSP_DEBUG
 #define _DSP_DEBUG
@@ -335,11 +336,13 @@ void MainWindow::on_buttonCon_clicked(){
 void MainWindow::on_listWidget_clicked(const QModelIndex &index)
 {
     QString str = ui->listWidget->currentItem()->text();
+    str.chop(8);
     ui->labelDigits->setText(str);
     dsp_->setChain(str.toStdString());
 }
 
 void MainWindow::addToList(QString str, bool calling){
+    str.append(" - " + QDateTime::currentDateTime().toString("HH:mm"));
     QListWidgetItem* item = new QListWidgetItem(str);
     if (calling){
         item->setBackground(QColor("#6fe28f"));
