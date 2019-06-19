@@ -84,6 +84,8 @@ MainWindow::MainWindow(QWidget *parent) :
       ++it;
     }
 
+    dsp_->setWindow(this);
+
 }
 
 
