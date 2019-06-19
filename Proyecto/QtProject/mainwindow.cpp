@@ -322,7 +322,7 @@ void MainWindow::on_buttonDesc_clicked(){
 
 void MainWindow::on_buttonCon_clicked(){
   if(dsp_->called){
-    dsp->call("#*");
-    dsp->inCall=true;
+    dsp_->call("#*");
+    dsp_->inCall=true;
   }
 }
