@@ -43,7 +43,7 @@ int MegaFilter::analyze(){
     float max = VectorOperations::max(_tempSignal2, totalSize);
 
     // If max value is significant 
-    if(max > (0.1)) {
+    if(max > (0.05)) {
         // Scale the vector
         VectorOperations::scale(_tempSignal2, _tempSignal2, totalSize, 1/max);
 
@@ -51,7 +51,7 @@ int MegaFilter::analyze(){
         VectorOperations::digitalizeVector(_tempSignal2, _tempSignal2, totalSize, _digitalThreshold, 1);
 
         // Cant start or end as a high, remove infinite signal
-        if(_tempSignal2[0] == 1 || _tempSignal2[totalSize-1] == 1){
+        if(false && _tempSignal2[0] == 1 &&  _tempSignal2[totalSize-1] == 1){
             _states[2] = false;
         }
         else{
@@ -66,12 +66,13 @@ int MegaFilter::analyze(){
                 delta += std::abs(prev-current);
                 prev = current;
             }
-            std::cout << _filterUnit->_tag <<  " with Count:  " << count << ", Delta: " << delta << " and max: " << max <<std::endl;
+            //std::cout << _filterUnit->_tag <<  " with Count:  " << count << ", Delta: " << delta << " and max: " << max <<std::endl;
             // Existance of a single signal in the block
-            if(delta < 10){
+            if(delta != 1 && delta < 10){
                 // Count in range of pulse
-                if(count > _mininumHigh && count < 2000){
-                    _states[2] = true;
+                if(count > _mininumHigh && count < 2800){
+                    std::cout << _filterUnit->_tag <<  " with Count:  " << count << ", Delta: " << delta << " and max: " << max <<std::endl;
+                    _states[2] = true && !_states[1];
                 }
                 else{
                     _states[2] = false;

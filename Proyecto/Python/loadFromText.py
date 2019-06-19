@@ -24,7 +24,7 @@ with open(file,'r') as csvfile:
 
 y = moving_average(y, 1000)
 y_max = max(y)
-#y = y/y_max
+y = y/y_max
 t = 0.7
 """count=0
 for i in range(len(y)):

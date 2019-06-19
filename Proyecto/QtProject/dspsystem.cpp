@@ -129,6 +129,7 @@ void dspSystem::chainSound(float* tmpOut, float* fsig){
  * Processing function
  */
 bool dspSystem::process(float* in,float* out) {
+    std::cout << std::endl;
     // Using time point and system_clock
     std::chrono::time_point<std::chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
@@ -279,7 +280,7 @@ void dspSystem::filter(float *x){
     // Logic for chaining
     if(iFound != -1 && jFound != -1){
         char c = utils::getChar(iFound, jFound-4);
-        std::cout << "FOUND: " << c << std::endl;
+        //std::cout << "FOUND: " << c << std::endl;
         currentNumber += c;
         state = 0;
         current[iFound] = 0;
