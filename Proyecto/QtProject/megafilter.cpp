@@ -44,6 +44,7 @@ int MegaFilter::analyze(){
 
     // If max value is significant 
     if(max > (0.05)) {
+        std::cout << "Max passed for " << _filterUnit->_tag << std::endl;
         // Scale the vector
         VectorOperations::scale(_tempSignal2, _tempSignal2, totalSize, 1/max);
 
