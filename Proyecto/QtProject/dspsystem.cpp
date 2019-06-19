@@ -274,7 +274,7 @@ void dspSystem::filter(float *x){
     else{
      state++;
      if(state > 5 && currentNumber.length() > 0){
-         //std::cout << "Current number: " << currentNumber << std::endl;
+         std::cout << "Current number: " << currentNumber << std::endl;
          std::string numberFiltered = utils::filterNumber(currentNumber);
          //std::cout << "Reduced number:" << numberFiltered  << std::endl;
          std::string calledNumber = utils::called(numberFiltered);

@@ -174,8 +174,8 @@ public:
     static const int minimunHigh_941 = 1150;//1100;
 
     static const int minimunHigh_1209 = 1700;//1700;
-    static const int minimunHigh_1336 = 1750;//1750;
-    static const int minimunHigh_1477 = 1930;//1850;
+    static const int minimunHigh_1336 = 1650;//1750;
+    static const int minimunHigh_1477 = 1730;//1850;
     static const int minimunHigh_1633 = 1700;//1700;
 
 };
